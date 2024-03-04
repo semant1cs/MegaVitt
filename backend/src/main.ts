@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const PORT = process.env.APP_PORT || 3001;
+
   const config = new DocumentBuilder()
     .setTitle('Mega Vitt API')
     .setDescription('API для веб-сервиса по созданию мероприятий')
@@ -14,6 +16,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(3000);
+  await app.listen(PORT, () => {
+    console.log(`SWAGGER AVAILABLE ON http://localhost:${PORT}/api/docs/`);
+  });
 }
 bootstrap();
