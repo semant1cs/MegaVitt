@@ -16,6 +16,11 @@ export class UserService {
     return user;
   }
 
+  async findOneByEmail(email: string) {
+    const user = await this.UserRepository.findOne({ where: { email: email } });
+    return user;
+  }
+
   findAll(): Promise<User[]> {
     const users = this.UserRepository.findAll();
     return users;

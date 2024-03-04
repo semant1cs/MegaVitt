@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import User from './user.model';
+import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -17,6 +19,7 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(LocalAuthGuard)
   getAllUsers(): Promise<User[]> {
     return this.userService.findAll();
   }
