@@ -13,7 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
     forwardRef(() => UserModule),
     forwardRef(() => PassportModule),
     JwtModule.register({
-      secret: process.env.JWT_KEY,
+      secret: 'asdasdasdsa',
       signOptions: { expiresIn: '24h' },
     }),
   ],
