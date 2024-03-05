@@ -8,7 +8,7 @@ interface UserCreationAttributes {
 }
 
 @Table({ tableName: 'users' })
-export default class User extends Model<User> {
+export default class User extends Model<User, UserCreationAttributes> {
   @Column({
     type: DataType.UUID,
     unique: true,
