@@ -10,7 +10,7 @@ interface TicketCreationAttributes {
 @Table({ tableName: 'ticket' })
 export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING,
     unique: true,
     primaryKey: true,
     allowNull: false,
@@ -23,7 +23,7 @@ export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
   id: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING,
     defaultValue: UUIDV4,
   })
   @ApiProperty({

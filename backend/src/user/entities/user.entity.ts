@@ -10,7 +10,7 @@ interface UserCreationAttributes {
 @Table({ tableName: 'users' })
 export default class User extends Model<User, UserCreationAttributes> {
   @Column({
-    type: DataType.UUID,
+    type: DataType.STRING,
     unique: true,
     primaryKey: true,
     allowNull: false,
@@ -36,10 +36,31 @@ export default class User extends Model<User, UserCreationAttributes> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
+  })
+  @ApiProperty({
+    example: 'username',
+    description: 'Никнейм пользователя',
+  })
+  username: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
   })
   @ApiProperty({
     example: '12345678asd',
     description: 'Пароль пользователя',
   })
   password: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  @ApiProperty({
+    example: 'ADMIN',
+    description: 'Роль пользователя',
+  })
+  role: string;
 }
