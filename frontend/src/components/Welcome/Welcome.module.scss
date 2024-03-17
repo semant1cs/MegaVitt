@@ -1,1 +1,14 @@
 @import "../../assets/globalStyles/vars.scss";
+
+.container{
+  padding: 50px;
+  background-color: grey;
+
+  &__input{
+    border: 5px solid black;
+
+    &:focus{
+      border: 5px solid yellow;
+    }
+  }
+}
