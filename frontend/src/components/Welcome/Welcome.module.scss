@@ -4,6 +4,10 @@
   padding: 50px;
   background-color: grey;
 
+  &__wrapper{
+    background-color: green;
+  }
+
   &__input{
     border: 5px solid black;
 

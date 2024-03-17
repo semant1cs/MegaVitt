@@ -6,14 +6,6 @@ const Welcome: React.FC<WelcomeContainerProps> = props => {
 
     const [form, setForm] = React.useState({urlConditions: [{value: ""}]});
 
-    const setFormCallback = React.useCallback((newForm: TForm) => {
-        setForm(() => newForm)
-    }, [])
-
-    const setUrlConditionsCallback = React.useCallback((newCond: { value: string }[]) => {
-        setForm((prev: TForm) => ({...prev, urlConditions: newCond}))
-    }, [])
-
     const setTextCallback = React.useCallback((index: number, newValue: string) => {
         setForm((prev: TForm) => {
             const cond = structuredClone(prev.urlConditions)
@@ -23,16 +15,11 @@ const Welcome: React.FC<WelcomeContainerProps> = props => {
     }, [])
 
     const addElement = React.useCallback(() => {
-        setForm((prev: TForm) => ({
-            ...prev,
-            urlConditions: [...form.urlConditions, {value: "Новый"}]
-        }))
+        setForm((prev: TForm) => ({...prev, urlConditions: [...prev.urlConditions, {value: "Новый"}]}))
     }, [])
 
-    return (<WelcomeView setTextCallback={setTextCallback} urlConditions={form.urlConditions}
-                         setFormCallback={setFormCallback}
-                         form={form}
-                         setUrlConditionsCallback={setUrlConditionsCallback}
+    return (<WelcomeView setTextCallback={setTextCallback}
+                         urlConditions={form.urlConditions}
                          addElement={addElement} {...props}/>);
 };
 

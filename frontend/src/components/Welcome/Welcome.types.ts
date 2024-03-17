@@ -1,25 +1,23 @@
+
 export type WelcomeContainerProps = {}
 
 export type TForm = {
-    urlConditions: { value: string }[]
+    urlConditions: TCondition[]
+}
+
+export type TCondition = {
+    value: string
 }
 
 export type WelcomeViewProps = WelcomeContainerProps & {
     setTextCallback: (index: number, newValue: string) => void;
     addElement: () => void;
-    urlConditions: { value: string }[]
-    setFormCallback: (form: TForm) => void;
-    setUrlConditionsCallback: (newCond: { value: string }[]) => void;
-    form: TForm;
+    urlConditions: TCondition[]
 }
 
 export type FieldsProps = {
-    condition: { value: string };
-    urlConditions: WelcomeViewProps["urlConditions"];
-    setUrlConditionsCallback: WelcomeViewProps["setUrlConditionsCallback"];
+    condition: TCondition;
     index: number;
     setTextCallback: WelcomeViewProps["setTextCallback"];
     addElement: WelcomeViewProps["addElement"];
-    setFormCallback: WelcomeViewProps["setFormCallback"];
-    form: WelcomeViewProps["form"]
 }
