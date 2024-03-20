@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {Routes, Route, useLocation, Navigate} from "react-router-dom";
-import Welcome from "../components/Welcome/Welcome.container";
+import Welcome from "@components/Welcome/Welcome.container";
 
 type RouteType = {
     path: string,
