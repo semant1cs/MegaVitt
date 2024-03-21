@@ -1,6 +1,7 @@
-import {ApiProperty} from '@nestjs/swagger';
-import {UUIDV4} from 'sequelize';
-import {DataType, Column, Model, Table} from 'sequelize-typescript';
+import { ApiProperty } from '@nestjs/swagger';
+import { UUIDV4 } from 'sequelize';
+import { DataType, Column, Model, Table, HasMany, ForeignKey } from 'sequelize-typescript';
+import Participant from '../../participant/entities/participant.entity';
 
 interface EventCreationAttributes {
   name: string;
@@ -18,8 +19,18 @@ export default class Event extends Model<Event, EventCreationAttributes> {
   id: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  @ApiProperty({
+    example: 'Презентация',
+    description: 'Название мероприятия'
+  })
+  name: string;
+
+  @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   })
   @ApiProperty({
     example: 'true',
@@ -29,17 +40,19 @@ export default class Event extends Model<Event, EventCreationAttributes> {
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 0
   })
   @ApiProperty({
     example: '123',
-    description: 'Количество участников'
+    description: 'Количество участников',
   })
   participant_count: number;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 0
   })
   @ApiProperty({
     example: '12345',
@@ -49,66 +62,25 @@ export default class Event extends Model<Event, EventCreationAttributes> {
 
   @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   })
   @ApiProperty({
     example: 'true',
-    description: 'Билеты обязательны или нет'
+    description: 'Билеты обязательны или нет',
   })
   is_tickets_required: boolean;
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 0
   })
   @ApiProperty({
     example: '12345',
-    description: 'Цена билета'
+    description: 'Цена билета',
   })
   ticket_cost: number;
 
-  // @Column({
-  //   type: DataType.STRING,
-  //   unique: true,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   defaultValue: UUIDV4,
-  // })
-  // name: string;
-  //
-  // @Column({
-  //   type: DataType.STRING,
-  //   unique: true,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   defaultValue: UUIDV4,
-  // })
-  // build_ref: string;
-  //
-  // @Column({
-  //   type: DataType.STRING,
-  //   unique: true,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   defaultValue: UUIDV4,
-  // })
-  // link: string;
-  //
-  // @Column({
-  //   type: DataType.STRING,
-  //   unique: true,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   defaultValue: UUIDV4,
-  // })
-  // owner_id: string;
-  //
-  // @Column({
-  //   type: DataType.STRING,
-  //   unique: true,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   defaultValue: UUIDV4,
-  // })
-  // event: string;
+  @HasMany(() => Participant)
+  participants: Participant[];
 }
