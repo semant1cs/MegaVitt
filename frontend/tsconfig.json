@@ -8,20 +8,19 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react-jsx",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@views/*": ["src/views/*"],
-      "@layout/*": ["src/layout/*"],
-      "@ui/*": ["src/ui/*"],
-      "@store/*": ["src/store/*"],
-      "@services/*": ["src/services/*"],
-      "@reactStyles/*": ["src/assets/globalStyles/*"]
+      "@components/*": ["./src/components/*"],
+      "@views/*": ["./src/views/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@store/*": ["./src/store/*"],
+      "@services/*": ["./src/services/*"],
+      "@reactStyles/*": ["./src/assets/globalStyles/*"]
     },
 
     /* Linting */
