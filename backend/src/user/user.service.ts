@@ -12,9 +12,14 @@ export class UserService {
 
   async findOneById(id: string) {
     const user = await this.UserRepository.findOne({ where: { id: id } });
-    if (user)
-      return user
-    throw new HttpException("Пользователя не существует", 400)
+    if (user) return user;
+    throw new HttpException('Пользователя не существует', 400);
+  }
+
+  async findOneByEmail(email: string) {
+    const user = await this.UserRepository.findOne({ where: { email: email } });
+    if (user) return user;
+    throw new HttpException('Пользователя не существует', 400);
   }
 
   findAll(): Promise<User[]> {
