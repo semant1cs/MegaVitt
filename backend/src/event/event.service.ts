@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import Event from './entities/event.entity';
+import { InjectModel } from '@nestjs/sequelize';
+import { raw } from 'express';
 
 @Injectable()
 export class EventService {
-  create(createEventDto: CreateEventDto) {
-    return 'This action adds a new event';
+  constructor(@InjectModel(Event) private _eventRepository: typeof Event) {}
+  async create(createEventDto: CreateEventDto) {
+    const newEvent = await this._eventRepository.create(createEventDto);
+    return newEvent;
   }
 
-  findAll() {
-    return `This action returns all event`;
+  async findAll() {
+    return await this._eventRepository.findAll();
   }
 
   findOne(id: number) {

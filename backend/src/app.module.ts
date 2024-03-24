@@ -6,6 +6,11 @@ import { AuthModule } from './auth/auth.module';
 import { ParticipantModule } from './participant/participant.module';
 import { EventModule } from './event/event.module';
 import { TicketModule } from './ticket/ticket.module';
+import { SiteModule } from './site/site.module';
+import Event from './event/entities/event.entity';
+import User from './user/entities/user.entity';
+import Ticket from './ticket/entities/ticket.entity';
+import Participant from './participant/entities/participant.entity';
 
 @Module({
   imports: [
@@ -19,7 +24,7 @@ import { TicketModule } from './ticket/ticket.module';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [Event, User, Ticket, Participant],
       autoLoadModels: true,
     }),
     UserModule,
@@ -27,8 +32,10 @@ import { TicketModule } from './ticket/ticket.module';
     ParticipantModule,
     EventModule,
     TicketModule,
+    SiteModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+}

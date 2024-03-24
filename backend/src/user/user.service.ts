@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import User from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -7,17 +7,22 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UserService {
   constructor(@InjectModel(User) private UserRepository: typeof User) {}
   async create(dto: CreateUserDto): Promise<User> {
-    const newUser = await this.UserRepository.create(dto);
-    return newUser;
+    return await this.UserRepository.create(dto);
   }
 
   async findOneById(id: string) {
     const user = await this.UserRepository.findOne({ where: { id: id } });
-    return user;
+    if (user) return user;
+    throw new HttpException('Пользователя не существует', 400);
+  }
+
+  async findOneByEmail(email: string) {
+    const user = await this.UserRepository.findOne({ where: { email: email } });
+    if (user) return user;
+    throw new HttpException('Пользователя не существует', 400);
   }
 
   findAll(): Promise<User[]> {
-    const users = this.UserRepository.findAll();
-    return users;
+    return this.UserRepository.findAll();
   }
 }

@@ -1,11 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
-import { DataType, Column, Model } from 'sequelize-typescript';
+import { DataType, Column, Model, Table, HasMany, ForeignKey } from 'sequelize-typescript';
+import Participant from '../../participant/entities/participant.entity';
 
 interface EventCreationAttributes {
   name: string;
 }
 
+@Table({ tableName: 'event' })
 export default class Event extends Model<Event, EventCreationAttributes> {
   @Column({
     type: DataType.STRING,
@@ -18,46 +20,67 @@ export default class Event extends Model<Event, EventCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    defaultValue: UUIDV4,
+    allowNull: false
+  })
+  @ApiProperty({
+    example: 'Презентация',
+    description: 'Название мероприятия'
   })
   name: string;
 
   @Column({
-    type: DataType.STRING,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    defaultValue: UUIDV4,
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   })
-  build_ref: string;
+  @ApiProperty({
+    example: 'true',
+    description: 'Участники обязательны или нет'
+  })
+  is_participant_required: boolean;
 
   @Column({
-    type: DataType.STRING,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    defaultValue: UUIDV4,
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
   })
-  link: string;
+  @ApiProperty({
+    example: '123',
+    description: 'Количество участников',
+  })
+  participant_count: number;
 
   @Column({
-    type: DataType.STRING,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    defaultValue: UUIDV4,
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
   })
-  owner_id: string;
+  @ApiProperty({
+    example: '12345',
+    description: 'Лимит участников на событии'
+  })
+  participant_limit: number;
 
   @Column({
-    type: DataType.STRING,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    defaultValue: UUIDV4,
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   })
-  event: string;
+  @ApiProperty({
+    example: 'true',
+    description: 'Билеты обязательны или нет',
+  })
+  is_tickets_required: boolean;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  @ApiProperty({
+    example: '12345',
+    description: 'Цена билета',
+  })
+  ticket_cost: number;
+
+  @HasMany(() => Participant)
+  participants: Participant[];
 }
