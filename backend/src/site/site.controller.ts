@@ -1,4 +1,4 @@
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SiteService } from './site.service';
 import { CreateSiteDto } from './dto/create-site.dto';
@@ -10,6 +10,7 @@ export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
   @Post()
+  @ApiBearerAuth()
   create(@Body() createSiteDto: CreateSiteDto) {
     return this.siteService.create(createSiteDto);
   }
@@ -25,11 +26,13 @@ export class SiteController {
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateSiteDto: UpdateSiteDto) {
     return this.siteService.update(+id, updateSiteDto);
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   remove(@Param('id') id: string) {
     return this.siteService.remove(+id);
   }
