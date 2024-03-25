@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User) private UserRepository: typeof User) {}
+
   async create(dto: CreateUserDto): Promise<User> {
     return await this.UserRepository.create(dto);
   }
@@ -19,7 +20,6 @@ export class UserService {
   async findOneByEmail(email: string) {
     const user = await this.UserRepository.findOne({ where: { email: email } });
     if (user) return user;
-    throw new HttpException('Пользователя не существует', 400);
   }
 
   findAll(): Promise<User[]> {
