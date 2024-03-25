@@ -36,7 +36,6 @@ export default class User extends Model<User, UserCreationAttributes> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true,
   })
   @ApiProperty({
     example: 'username',
@@ -53,14 +52,4 @@ export default class User extends Model<User, UserCreationAttributes> {
     description: 'Пароль пользователя',
   })
   password: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  @ApiProperty({
-    example: 'ADMIN',
-    description: 'Роль пользователя',
-  })
-  role: string;
 }
