@@ -28,11 +28,11 @@ export class AuthService {
   async SignIn(signInDto: SignInDto) {
     const { email, password, username } = signInDto;
 
-    if (await this.IsUserExists(email)) {
-      console.log(1);
+    const isUserExists = await this.IsUserExists(email);
+
+    if (isUserExists) {
       throw new HttpException('Пользователь с такой почтой уже существует', 400);
     } else {
-      console.log(2);
       await this.userService.create({ email: email, password: password, username: username });
       return this.Login({ email: email, password: password });
     }
