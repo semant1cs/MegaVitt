@@ -23,7 +23,7 @@ import { PassportModule } from '@nestjs/passport';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '24h' },
+      signOptions: { expiresIn: '30m' },
     }),
   ],
   exports: [AuthService],
