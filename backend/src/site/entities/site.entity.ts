@@ -51,6 +51,25 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   link: string;
 
+  @Column({
+    type: DataType.STRING,
+    //allowNull: false,
+  })
+  @ApiProperty({
+    example: 'Ссылка на сайта',
+    description: 'МойСайт.русский',
+  })
+  event_id: string;
+  @Column({
+    type: DataType.STRING,
+    //allowNull: false,
+  })
+  @ApiProperty({
+    example: 'Ссылка на сайта',
+    description: 'МойСайт.русский',
+  })
+  site_id: string;
+
   @ForeignKey(() => User)
   owner_id: string;
 
