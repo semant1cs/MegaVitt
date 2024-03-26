@@ -54,6 +54,6 @@ export default class User extends Model<User, UserCreationAttributes> {
   })
   password: string;
 
-  @HasMany(()=> Site)
+  @HasMany(() => Site)
   sites: Site[];
 }

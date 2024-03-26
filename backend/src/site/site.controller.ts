@@ -1,5 +1,5 @@
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
 import { SiteService } from './site.service';
 import { CreateSiteDto } from './dto/create-site.dto';
 import { UpdateSiteDto } from './dto/update-site.dto';
@@ -11,8 +11,8 @@ export class SiteController {
 
   @Post()
   @ApiBearerAuth()
-  create(@Body() createSiteDto: CreateSiteDto) {
-    return this.siteService.create(createSiteDto);
+  create(@Body() createSiteDto: CreateSiteDto, @Request() req) {
+    return this.siteService.create(createSiteDto, req.user);
   }
 
   @Get()

@@ -35,7 +35,7 @@ export default class Participant extends Model<Participant, ParticipantCreationA
     type: DataType.STRING,
     unique: true
   })
-  user_id: string;
+  event_id: string;
 
   @BelongsTo(() => Event)
   event: Event;

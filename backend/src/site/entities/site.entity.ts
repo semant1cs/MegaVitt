@@ -7,6 +7,7 @@ import Event from '../../event/entities/event.entity';
 
 interface SiteCreationAttributes {
   name: string;
+  owner_id: string;
 }
 
 @Table({ tableName: 'site' })
@@ -32,7 +33,7 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    //allowNull: false,
   })
   @ApiProperty({
     example: 'Ссылка на билд сайта',
@@ -42,7 +43,7 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    //allowNull: false,
   })
   @ApiProperty({
     example: 'Ссылка на сайта',
@@ -51,14 +52,11 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   link: string;
 
   @ForeignKey(() => User)
-  @Column({
-    type: DataType.STRING,
-  })
   owner_id: string;
 
   @BelongsTo(() => User)
   owner: User;
 
-  @HasOne(()=> Event)
-  event: Event;
+  // @HasOne(()=> Event)
+  // event: Event;
 }

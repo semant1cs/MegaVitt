@@ -85,11 +85,11 @@ export default class Event extends Model<Event, EventCreationAttributes> {
   @HasMany(() => Participant)
   participants: Participant[];
 
-  @ForeignKey(()=> Site)
-  @Column({
-    type: DataType.STRING
-  })
-  site_id: string;
-  @BelongsTo(()=> Site)
-  site: Site;
+  // @ForeignKey(()=> Site)
+  // @Column({
+  //   type: DataType.STRING
+  // })
+  // site_id: string;
+  // @BelongsTo(()=> Site)
+  // site: Site;
 }
