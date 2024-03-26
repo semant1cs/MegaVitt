@@ -1,7 +1,8 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table, HasOne } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 import { ApiProperty } from '@nestjs/swagger';
 import User from '../../user/entities/user.entity';
+import Event from '../../event/entities/event.entity';
 
 
 interface SiteCreationAttributes {
@@ -58,5 +59,6 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   @BelongsTo(() => User)
   owner: User;
 
-
+  @HasOne(()=> Event)
+  event: Event;
 }

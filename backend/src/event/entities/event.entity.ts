@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
-import { DataType, Column, Model, Table, HasMany, ForeignKey } from 'sequelize-typescript';
+import { DataType, Column, Model, Table, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Participant from '../../participant/entities/participant.entity';
+import Site from '../../site/entities/site.entity';
 
 interface EventCreationAttributes {
   name: string;
@@ -83,4 +84,12 @@ export default class Event extends Model<Event, EventCreationAttributes> {
 
   @HasMany(() => Participant)
   participants: Participant[];
+
+  @ForeignKey(()=> Site)
+  @Column({
+    type: DataType.STRING
+  })
+  site_id: string;
+  @BelongsTo(()=> Site)
+  site: Site;
 }
