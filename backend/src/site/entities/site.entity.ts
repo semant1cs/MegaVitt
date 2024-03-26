@@ -4,7 +4,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import User from '../../user/entities/user.entity';
 import Event from '../../event/entities/event.entity';
 
-
 interface SiteCreationAttributes {
   name: string;
 }
@@ -50,15 +49,9 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   link: string;
 
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.STRING,
-  })
-  owner_id: string;
-
   @BelongsTo(() => User)
-  owner: User;
+  user: User[];
 
-  @HasOne(()=> Event)
-  event: Event;
+  @ForeignKey(() => User)
+  user_id: string;
 }

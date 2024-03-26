@@ -4,11 +4,12 @@ import { UpdateSiteDto } from './dto/update-site.dto';
 
 @Injectable()
 export class SiteService {
+  constructor() {}
   public create(createSiteDto: CreateSiteDto) {
     return 'This action adds a new site';
   }
 
-  public  findAll() {
+  public findAll() {
     return `This action returns all site`;
   }
 
