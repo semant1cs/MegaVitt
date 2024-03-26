@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import Site from '../../site/entities/site.entity';
 
 interface UserCreationAttributes {
   email: string;
@@ -52,4 +53,7 @@ export default class User extends Model<User, UserCreationAttributes> {
     description: 'Пароль пользователя',
   })
   password: string;
+
+  @HasMany(()=> Site)
+  sites: Site[];
 }
