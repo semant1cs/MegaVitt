@@ -1,6 +1,8 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 import { ApiProperty } from '@nestjs/swagger';
+import User from '../../user/entities/user.entity';
+
 
 interface SiteCreationAttributes {
   name: string;
@@ -46,6 +48,15 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
     description: 'МойСайт.русский',
   })
   link: string;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.STRING,
+  })
+  owner_id: string;
+
+  @BelongsTo(() => User)
+  owner: User;
 
 
 }
