@@ -7,7 +7,7 @@ const AuthenticationView: FC<TAuthenticationViewProps> = props => {
   return (
     <>
       <LayoutHeader></LayoutHeader>
-      <LayoutBody>{props.changeCurrentPage("signIn")}</LayoutBody>
+      <LayoutBody>{props.getCurrentPage()}</LayoutBody>
     </>
   );
 };

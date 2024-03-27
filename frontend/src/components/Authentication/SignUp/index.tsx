@@ -1,7 +1,1 @@
-import { FC } from "react";
-
-const SignUp: FC = () => {
-  return <div></div>;
-};
-
-export default SignUp;
+export { SignUpContainer as default } from "./SignUp.container";

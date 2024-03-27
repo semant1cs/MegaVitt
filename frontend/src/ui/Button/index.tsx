@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 
 type TButtonProps = {
-  className: string;
+  className?: string;
   onClick: () => void;
 };
 

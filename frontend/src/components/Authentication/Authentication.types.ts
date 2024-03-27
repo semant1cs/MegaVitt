@@ -2,16 +2,32 @@ import { ReactNode } from "react";
 
 export type TCurrentPage = "signIn" | "signUp";
 
-export type TAuthenticationContainerProps = {};
-
-export type TAuthenticationViewProps = TAuthenticationContainerProps & {
-  changeCurrentPage: (page: TCurrentPage) => ReactNode;
+export type TAuthenticationForm = {
+  username?: string;
+  email: string;
+  password: string;
 };
 
 export type TCommonPageProps = {
-  changeCurrentPage: (page: TCurrentPage) => ReactNode;
+  form: TAuthenticationForm;
+  changeCurrentPage: (page: TCurrentPage) => void;
+  handleSaveForm: (form: TAuthenticationForm) => void;
 };
 
-export type TSignUpProps = TCommonPageProps & {};
+export type TAuthenticationContainerProps = {};
+
+export type TAuthenticationViewProps = TAuthenticationContainerProps & {
+  getCurrentPage: () => ReactNode;
+};
+
+export type TSignUpContainerProps = TCommonPageProps & {};
+export type TSignUpViewProps = {
+  form: TAuthenticationForm;
+  handleSaveForm: () => void;
+  setEmail: (email: string) => void;
+  setUserName: (userName: string) => void;
+  setPassword: (password: string) => void;
+  changeCurrentPage: (page: TCurrentPage) => void;
+};
 
 export type TSignInProps = TCommonPageProps & {};
