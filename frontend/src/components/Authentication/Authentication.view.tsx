@@ -6,12 +6,8 @@ import LayoutBody from "@layout/Body";
 const AuthenticationView: FC<TAuthenticationViewProps> = props => {
   return (
     <>
-      <LayoutHeader>
-
-      </LayoutHeader>
-      <LayoutBody>
-        
-      </LayoutBody>
+      <LayoutHeader></LayoutHeader>
+      <LayoutBody>{props.changeCurrentPage("signIn")}</LayoutBody>
     </>
   );
 };
