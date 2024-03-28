@@ -23,7 +23,7 @@ const AppRouter: React.FC = () => {
   ];
 
   const location = useLocation();
-  const isAuth = true;
+  const isAuth = localStorage.getItem("userToken");
 
   return (
     isAuth ?

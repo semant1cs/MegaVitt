@@ -1,0 +1,16 @@
+@import "@reactStyles/vars.scss";
+
+// TOASTER
+
+.toaster {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(#000000, 0);
+
+  &__body {
+    width: 10%;
+    height: 10%;
+    background-color: white;
+  }
+}

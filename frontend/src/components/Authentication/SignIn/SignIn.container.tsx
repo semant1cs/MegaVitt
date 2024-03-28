@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import type { TAuthenticationForm, TSignUpContainerProps } from "../Authentication.types";
-import SignUpView from "./SignUp.view";
+import type { TAuthenticationForm, TSignInContainerProps } from "../Authentication.types";
+import SignInView from "./SignIn.view";
 
 /** Контейнерная компонента для отдачи вьюхи <SignUpView /> */
-const SignUpContainer: FC<TSignUpContainerProps> = props => {
+const SignInContainer: FC<TSignInContainerProps> = props => {
   const setterForm = props.form;
 
   const [initialState, setInitialState] = useState<TAuthenticationForm>(setterForm);
@@ -28,11 +28,6 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
     return confirmationMessage;
   }
 
-  /** Колбек для изменения никнейма пользователя `userName` */
-  const setUsername = useCallback((username: string) => {
-    setForm(prev => ({ ...prev, username }));
-  }, []);
-
   /** Колбек для изменения почты пользователя `email` */
   const setEmail = useCallback((email: string) => {
     setForm(prev => ({ ...prev, email }));
@@ -49,15 +44,14 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
   }
 
   return (
-    <SignUpView
+    <SignInView
       form={form}
       setEmail={setEmail}
       setPassword={setPassword}
-      setUsername={setUsername}
       handleSaveForm={handleSaveForm}
       changeCurrentPage={props.changeCurrentPage}
     />
   );
 };
 
-export { SignUpContainer };
+export { SignInContainer };

@@ -1,33 +1,14 @@
-import { FC } from "react";
-import type { TSignUpViewProps } from "../Authentication.types";
 import TextFieldContainer from "@ui/TextField/TextFieldContainer";
 import TextFieldLabel from "@ui/TextField/TextFieldLabel";
 import TextField from "@ui/TextField";
 import TextFieldInner from "@ui/TextField/TextFieldInner";
 import Button from "@ui/Button";
+import type { TSignInViewProps } from "../Authentication.types";
+import { FC } from "react";
 
-/** Вьюха для отображения страницы регистрации */
-const SignUpView: FC<TSignUpViewProps> = ({
-  form,
-  setEmail,
-  setPassword,
-  setUsername,
-  handleSaveForm,
-  changeCurrentPage,
-}) => {
+const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleSaveForm, changeCurrentPage }) => {
   return (
     <div>
-      <TextFieldContainer>
-        <TextFieldLabel>Имя пользователя</TextFieldLabel>
-
-        <TextFieldInner>
-          <TextField
-            value={form?.username || ""}
-            onChange={event => setUsername(event.target.value)}
-          />
-        </TextFieldInner>
-      </TextFieldContainer>
-
       <TextFieldContainer>
         <TextFieldLabel>Электронная почта</TextFieldLabel>
 
@@ -50,15 +31,15 @@ const SignUpView: FC<TSignUpViewProps> = ({
         </TextFieldInner>
       </TextFieldContainer>
 
-      <Button onClick={handleSaveForm}>Зарегистрироваться</Button>
+      <Button onClick={handleSaveForm}>Войти</Button>
 
       <div>
-        <span>Уже есть аккаунт?</span>
+        <Button onClick={() => changeCurrentPage("signUp")}>Зарегистрироваться</Button>
 
-        <Button onClick={() => changeCurrentPage("signIn")}>Войти</Button>
+        <Button onClick={() => {}}>Забыли пароль?</Button>
       </div>
     </div>
   );
 };
 
-export default SignUpView;
+export default SignInView;

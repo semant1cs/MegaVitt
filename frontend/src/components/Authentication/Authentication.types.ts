@@ -25,9 +25,16 @@ export type TSignUpViewProps = {
   form: TAuthenticationForm;
   handleSaveForm: () => void;
   setEmail: (email: string) => void;
-  setUserName: (userName: string) => void;
+  setUsername: (username: string) => void;
   setPassword: (password: string) => void;
   changeCurrentPage: (page: TCurrentPage) => void;
 };
 
-export type TSignInProps = TCommonPageProps & {};
+export type TSignInContainerProps = TCommonPageProps & {};
+export type TSignInViewProps = {
+  form: TAuthenticationForm;
+  handleSaveForm: () => void;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  changeCurrentPage: (page: TCurrentPage) => void;
+};
