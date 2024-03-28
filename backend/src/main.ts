@@ -8,6 +8,7 @@ async function bootstrap() {
   const PORT = process.env.APP_PORT || 3001;
 
   const config = new DocumentBuilder().setTitle('Mega Vitt API').setVersion('0.1').build();
+  app.enableCors();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
