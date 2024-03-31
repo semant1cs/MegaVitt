@@ -8,7 +8,7 @@ const TextField: FC<TTextField> = props => {
       type={props.type}
       value={props.value}
       onChange={props.onChange}
-      className={[styles.textField, props.className].join(" ")}
+      className={[styles.textField, props.variant === "light" ? styles.light : styles.dark, props.className].join(" ")}
     />
   );
 };

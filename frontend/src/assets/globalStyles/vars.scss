@@ -1,7 +1,28 @@
 /** Медиа стили экранов */
 
 $lg: 1440px;
-$md: 768px;
-$sm: 480px;
+$md: 1024px;
+$sm: 768px;
+$xs: 480px;
+
+/** Цвета */
+
+$background-primary: #2f3543;
+$background-secondary: #27292f;
+$background-white: #eef2f5;
+
+$grayscale-0: #fff;
+$grayscale-100: #d1d1d1;
+$grayscale-500: #525866;
+$grayscale-800: #222222;
+$grayscale-1000: #1e1e1e;
+
+$primary-0: #c2e8ff;
+$primary-100: #7da0ca;
+$primary-200: #537fb0;
+$primary-400: #507eaf;
+$primary-500: #0060e6;
+$primary-800: #022658;
+$primary-1000: #000f24;
 
 /** Миксины */

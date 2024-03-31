@@ -13,6 +13,8 @@ export default defineConfig({
       "@store": "/src/store",
       "@services": "/src/services/",
       "@reactStyles": "/src/assets/globalStyles",
+      "@images": "/src/assets/images",
+      "@svg": "/src/assets/svg",
     },
   },
 });

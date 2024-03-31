@@ -1,2 +1,40 @@
 @import "@reactStyles/vars.scss";
 
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $background-white;
+}
+
+.signUp,
+.signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  width: 456px;
+  border-radius: 4px;
+  background-color: $grayscale-800;
+  padding: 25px;
+
+  .logo {
+    color: $primary-500;
+    font-size: 24px;
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+  }
+}

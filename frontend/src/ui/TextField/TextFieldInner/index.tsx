@@ -10,7 +10,11 @@ const TextFieldInner: FC<PropsWithChildren<TTextFieldInner>> = ({ children, clas
     return child;
   });
 
-  return <div className={[styles.container, className].join(" ")}>{childrenWithProps}</div>;
+  return (
+    <div className={[styles.inner, props.variant === "light" ? styles.light : styles.dark, className].join(" ")}>
+      {childrenWithProps}
+    </div>
+  );
 };
 
 export default TextFieldInner;

@@ -5,7 +5,7 @@ import { observable } from "mobx";
 
 const backAPIURL = import.meta.env.VITE_BASE_URL_AUTH;
 
-class AuthService{
+class AuthService {
   async signUp(form: TAuthenticationForm) {
     try {
       const response = await axios.post(

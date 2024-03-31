@@ -6,17 +6,47 @@
 }
 
 .label {
+  font-size: 14px;
 
+  &.light {
+    color: $grayscale-100;
+  }
+
+  &.dark {
+    color: $grayscale-800;
+  }
 }
 
 .hint {
+  font-size: 14px;
 
+  &.light {
+    color: $grayscale-100;
+  }
+
+  &.dark {
+    color: $grayscale-800;
+  }
 }
 
 .inner {
+  &.light {
+    border-bottom: 1px solid $grayscale-100;
+  }
 
+  &.dark {
+    border-bottom: 1px solid $grayscale-800;
+  }
 }
 
-.textField{
-    
+.textField {
+  font-size: 16px;
+
+  &.light {
+    color: $grayscale-0;
+  }
+ 
+  &.dark {
+    color: $grayscale-1000;
+  }
 }

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { NavigateFunction } from "react-router-dom";
 
 export type TCurrentPage = "signIn" | "signUp";
 
@@ -11,7 +12,6 @@ export type TAuthenticationForm = {
 export type TCommonPageProps = {
   form: TAuthenticationForm;
   changeCurrentPage: (page: TCurrentPage) => void;
-  handleSaveForm: (form: TAuthenticationForm) => void;
 };
 
 export type TAuthenticationContainerProps = {};

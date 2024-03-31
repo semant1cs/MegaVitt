@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import AppRouter from "./router";
 import { BrowserRouter } from "react-router-dom";
 import "@reactStyles/global.scss";
+import "@reactStyles/icons.scss";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

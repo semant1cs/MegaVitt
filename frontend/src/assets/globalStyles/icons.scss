@@ -1,0 +1,23 @@
+@import "@reactStyles/vars.scss";
+
+.user-icon {
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDIxQzE5IDE3LjEzNCAxNS44NjYgMTQgMTIgMTRDOC4xMzQwMSAxNCA1IDE3LjEzNCA1IDIxTTEyIDExQzkuNzkwODYgMTEgOCA5LjIwOTE0IDggN0M4IDQuNzkwODYgOS43OTA4NiAzIDEyIDNDMTQuMjA5MSAzIDE2IDQuNzkwODYgMTYgN0MxNiA5LjIwOTE0IDE0LjIwOTEgMTEgMTIgMTFaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=");
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDIxQzE5IDE3LjEzNCAxNS44NjYgMTQgMTIgMTRDOC4xMzQwMSAxNCA1IDE3LjEzNCA1IDIxTTEyIDExQzkuNzkwODYgMTEgOCA5LjIwOTE0IDggN0M4IDQuNzkwODYgOS43OTA4NiAzIDEyIDNDMTQuMjA5MSAzIDE2IDQuNzkwODYgMTYgN0MxNiA5LjIwOTE0IDE0LjIwOTEgMTEgMTIgMTFaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=");
+}
+
+.user-icon {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  mask-repeat: no-repeat;
+  -webkit-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  background-color: $grayscale-0;
+  background-position: center;
+  -webkit-position: no-repeat;
+  -webkit-mask-position: center;
+  transition: all 0.3s ease;
+  display: block;
+  -webkit-mask-size: 100%;
+}

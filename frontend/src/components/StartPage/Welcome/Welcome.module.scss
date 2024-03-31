@@ -1,0 +1,29 @@
+@import "@reactStyles/vars.scss";
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 40px;
+
+  &__title {
+    color: $grayscale-0;
+    font-size: 40px;
+    width: 475px;
+  }
+
+  &__button {
+  }
+}
+
+.image {
+  width: fit-content;
+  height: fit-content;
+}

@@ -1,13 +1,12 @@
 import { FC } from "react";
 import type { TAuthenticationViewProps } from "./Authentication.types";
-import LayoutHeader from "@layout/Header";
 import LayoutBody from "@layout/Body";
+import styles from "./Authentication.module.scss";
 
 const AuthenticationView: FC<TAuthenticationViewProps> = props => {
   return (
     <>
-      <LayoutHeader></LayoutHeader>
-      <LayoutBody>{props.getCurrentPage()}</LayoutBody>
+      <LayoutBody className={styles.auth}>{props.getCurrentPage()}</LayoutBody>
     </>
   );
 };
