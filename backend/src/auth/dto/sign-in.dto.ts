@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UserRegisterRequestSchema } from 'contracts';
+import { createZodDto } from 'nestjs-zod';
 
-export class SignInDto {
+export class SignInDto extends createZodDto(UserRegisterRequestSchema) {
   @ApiProperty({ example: 'admin@example.com', description: 'Email пользователя' })
   readonly email: string;
 

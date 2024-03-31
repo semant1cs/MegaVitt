@@ -1,9 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Public } from 'src/auth/decorators/public.decorator';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -11,7 +10,6 @@ import { Public } from 'src/auth/decorators/public.decorator';
 export class UserController {
   constructor(private userService: UserService) {}
   @Post()
-  @Public()
   createUser(@Body() dto: CreateUserDto) {
     return this.userService.create(dto);
   }
