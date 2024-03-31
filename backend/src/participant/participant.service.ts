@@ -4,23 +4,23 @@ import { UpdateParticipantDto } from './dto/update-participant.dto';
 
 @Injectable()
 export class ParticipantService {
-  create(createParticipantDto: CreateParticipantDto) {
+  public create(createParticipantDto: CreateParticipantDto) {
     return 'This action adds a new participant';
   }
 
-  findAll() {
+  public findAll() {
     return `This action returns all participant`;
   }
 
-  findOne(id: number) {
+  public findOne(id: number) {
     return `This action returns a #${id} participant`;
   }
 
-  update(id: number, updateParticipantDto: UpdateParticipantDto) {
+  public update(id: number, updateParticipantDto: UpdateParticipantDto) {
     return `This action updates a #${id} participant`;
   }
 
-  remove(id: number) {
+  public remove(id: number) {
     return `This action removes a #${id} participant`;
   }
 }

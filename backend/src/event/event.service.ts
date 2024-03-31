@@ -8,20 +8,20 @@ import { raw } from 'express';
 @Injectable()
 export class EventService {
   constructor(@InjectModel(Event) private _eventRepository: typeof Event) {}
-  async create(createEventDto: CreateEventDto) {
+  public async create(createEventDto: CreateEventDto) {
     const newEvent = await this._eventRepository.create(createEventDto);
     return newEvent;
   }
 
-  async findAll() {
+  public async findAll() {
     return await this._eventRepository.findAll();
   }
 
-  findOne(id: number) {
+  public findOne(id: number) {
     return `This action returns a #${id} event`;
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
+  public update(id: number, updateEventDto: UpdateEventDto) {
     return `This action updates a #${id} event`;
   }
 

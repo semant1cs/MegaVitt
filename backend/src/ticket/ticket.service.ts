@@ -4,19 +4,19 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 
 @Injectable()
 export class TicketService {
-  create(createTicketDto: CreateTicketDto) {
+  public create(createTicketDto: CreateTicketDto) {
     return 'This action adds a new ticket';
   }
 
-  findAll() {
+  public findAll() {
     return `This action returns all ticket`;
   }
 
-  findOne(id: number) {
+  public findOne(id: number) {
     return `This action returns a #${id} ticket`;
   }
 
-  update(id: number, updateTicketDto: UpdateTicketDto) {
+  public update(id: number, updateTicketDto: UpdateTicketDto) {
     return `This action updates a #${id} ticket`;
   }
 
