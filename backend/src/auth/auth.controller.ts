@@ -5,6 +5,7 @@ import { Controller, HttpStatus, Post, HttpCode, Body, Get, Request } from '@nes
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { SignInDto } from './dto/sign-in.dto';
+import { UserLoginResponse, UserRegisterResponse } from 'contracts';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -14,15 +15,15 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @Public()
-  login(@Body() logInDto: LoginDto) {
-    return this.authService.Login(logInDto);
+  login(@Body() dto: LoginDto): Promise<UserLoginResponse> {
+    return this.authService.Login(dto);
   }
 
   @Post('signIn')
   @HttpCode(HttpStatus.OK)
   @Public()
-  signIn(@Body() SignInDto: SignInDto) {
-    return this.authService.SignIn(SignInDto);
+  signIn(@Body() dto: SignInDto): Promise<UserRegisterResponse> {
+    return this.authService.SignIn(dto);
   }
 
   @Get('profile')
