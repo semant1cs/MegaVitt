@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 import { NavigateFunction } from "react-router-dom";
+import { UserLoginRequest, UserLoginResponse } from "zod-contracts";
+// в UserLoginRequest описывается объект, который должен приходить для запроса на логин
+// в UserLoginResponse описывается то, что приходит в ответе на запрос
 
 export type TCurrentPage = "signIn" | "signUp";
 
