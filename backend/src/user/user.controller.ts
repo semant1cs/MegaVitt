@@ -2,8 +2,7 @@ import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { ZodValidationPipe } from 'src/pipes/validation.pipe';
-import { CreateUserDto, createUserSchema } from './user.pipe';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -11,7 +10,6 @@ import { CreateUserDto, createUserSchema } from './user.pipe';
 export class UserController {
   constructor(private userService: UserService) {}
   @Post()
-  @UsePipes(new ZodValidationPipe(createUserSchema))
   createUser(@Body() dto: CreateUserDto) {
     return this.userService.create(dto);
   }
