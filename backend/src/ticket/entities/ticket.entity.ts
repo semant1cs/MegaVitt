@@ -7,7 +7,7 @@ interface TicketCreationAttributes {
   password: string;
 }
 
-@Table({ tableName: 'ticket' })
+@Table({ tableName: 'tickets' })
 export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
   @Column({
     type: DataType.STRING,
