@@ -22,7 +22,7 @@ import { PassportModule } from '@nestjs/passport';
     forwardRef(() => PassportModule),
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET_KEY,
+      secret: jwtConstants.secret_key,
       signOptions: { expiresIn: '30m' },
     }),
   ],
