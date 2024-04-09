@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import User from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import Role from 'src/role/entities/role.entity';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @Injectable()
 export class UserService {
@@ -18,14 +19,26 @@ export class UserService {
 
     if (role === null) throw new HttpException('Роль обычного пользователя не задана (user)', HttpStatus.BAD_REQUEST);
 
-    return this.addRole(user, role);
+    return this.setRole(user, role);
   }
 
-  private async addRole(user: User, role: Role) {
+  private async setRole(user: User, role: Role) {
     await user.$set('roles', [role.id]);
     user.roles = [role];
 
     return user;
+  }
+
+  private async addRole(user: User, role: Role) {
+    await user.$add('roles', [role.id]);
+    return user;
+  }
+
+  public async giveRole(dto: AddRoleDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    const role = await this.roleService.getRoleByName(dto.value);
+    if (role && user) return await this.addRole(user, role);
+    throw new HttpException('Пользователь или роль не найдены', HttpStatus.NOT_FOUND);
   }
 
   public async findOneById(id: string) {
