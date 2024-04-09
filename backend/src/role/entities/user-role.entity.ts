@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UUIDV4 } from 'sequelize';
 import { Column, DataType, Model, Table, ForeignKey } from 'sequelize-typescript';
 import Role from './role.entity';
 import User from 'src/user/entities/user.entity';
+import { UUIDV4 } from 'sequelize';
 
 @Table({ tableName: 'user-roles', createdAt: false, updatedAt: false })
 export default class UserRole extends Model<UserRole> {
@@ -11,6 +11,7 @@ export default class UserRole extends Model<UserRole> {
     unique: true,
     primaryKey: true,
     allowNull: false,
+    defaultValue: UUIDV4,
   })
   @ApiProperty({
     example: '488f36c1-d856-456a-b3bd-6bba5fba64f4',
