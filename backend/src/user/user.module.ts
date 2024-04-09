@@ -6,11 +6,16 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from 'src/auth/auth.module';
 import Role from 'src/role/entities/role.entity';
 import UserRole from 'src/role/entities/user-role.entity';
+import { RoleModule } from 'src/role/role.module';
 
 @Module({
   controllers: [UserController],
   providers: [UserService],
-  imports: [SequelizeModule.forFeature([User, Role, UserRole]), forwardRef(() => AuthModule)],
+  imports: [
+    SequelizeModule.forFeature([User, Role, UserRole]),
+    forwardRef(() => AuthModule),
+    forwardRef(() => RoleModule),
+  ],
   exports: [UserService],
 })
 export class UserModule {}
