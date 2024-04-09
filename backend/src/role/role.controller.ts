@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -12,5 +12,10 @@ export class RoleController {
   @ApiBearerAuth()
   createRole(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.create(createRoleDto);
+  }
+
+  @Get('/:value')
+  getByValue(@Param('value') value: string) {
+    return this.roleService.getRoleByName(value);
   }
 }
