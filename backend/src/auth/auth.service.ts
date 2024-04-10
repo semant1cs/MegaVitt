@@ -3,6 +3,7 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './../user/user.service';
 import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { comparePassword, encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
     const { email, password } = signInDto;
     const user = await this.userService.findOneByEmail(email);
 
-    if (user?.password !== password) {
+    if (!comparePassword(password, user?.password)) {
       throw new UnauthorizedException();
     }
     const payload = { username: user.email, sub: user.id };
@@ -32,7 +33,8 @@ export class AuthService {
     if (isUserExists) {
       throw new HttpException('Пользователь с такой почтой уже существует', 400);
     } else {
-      await this.userService.create({ email: email, password: password, username: username });
+      const hashedPassword = encodePassword(password);
+      await this.userService.create({ email: email, password: hashedPassword, username: username });
       return this.signIn({ email: email, password: password });
     }
   }
