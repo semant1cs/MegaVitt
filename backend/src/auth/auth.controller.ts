@@ -16,14 +16,14 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Public()
   signIn(@Body() dto: SignInDto): Promise<UserLoginResponse> {
-    return this.authService.Login(dto);
+    return this.authService.signIn(dto);
   }
 
   @Post('signUp')
   @HttpCode(HttpStatus.OK)
   @Public()
   signUp(@Body() dto: SignUpDto): Promise<UserRegisterResponse> {
-    return this.authService.SignIn(dto);
+    return this.authService.signUp(dto);
   }
 
   @Get('profile')

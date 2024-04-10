@@ -11,7 +11,7 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async Login(signInDto: SignInDto) {
+  async signIn(signInDto: SignInDto) {
     const { email, password } = signInDto;
     const user = await this.userService.findOneByEmail(email);
 
@@ -24,7 +24,7 @@ export class AuthService {
     return { access_token: access_token };
   }
 
-  async SignIn(signUpDto: SignUpDto) {
+  async signUp(signUpDto: SignUpDto) {
     const { email, password, username } = signUpDto;
 
     const isUserExists = await this.IsUserExists(email);
@@ -33,7 +33,7 @@ export class AuthService {
       throw new HttpException('Пользователь с такой почтой уже существует', 400);
     } else {
       await this.userService.create({ email: email, password: password, username: username });
-      return this.Login({ email: email, password: password });
+      return this.signIn({ email: email, password: password });
     }
   }
 
