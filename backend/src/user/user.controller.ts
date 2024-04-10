@@ -1,12 +1,13 @@
-import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @ApiBearerAuth()
-@ApiTags('user')
-@Controller('user')
+@ApiTags('users')
+@Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
   @Post()
@@ -22,5 +23,10 @@ export class UserController {
   @Get()
   getAllUsers(): Promise<User[]> {
     return this.userService.findAll();
+  }
+
+  @Post('/addRole/' + ':id')
+  addRole(@Param('id') id: string, @Body() addRoleDto: AddRoleDto) {
+    return this.userService.giveRole({ userId: id, value: addRoleDto.value });
   }
 }

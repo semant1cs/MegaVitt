@@ -7,7 +7,7 @@ interface EventCreationAttributes {
   name: string;
 }
 
-@Table({ tableName: 'event' })
+@Table({ tableName: 'events' })
 export default class Event extends Model<Event, EventCreationAttributes> {
   @Column({
     type: DataType.STRING,
@@ -20,11 +20,11 @@ export default class Event extends Model<Event, EventCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   @ApiProperty({
     example: 'Презентация',
-    description: 'Название мероприятия'
+    description: 'Название мероприятия',
   })
   name: string;
 
@@ -34,14 +34,14 @@ export default class Event extends Model<Event, EventCreationAttributes> {
   })
   @ApiProperty({
     example: 'true',
-    description: 'Участники обязательны или нет'
+    description: 'Участники обязательны или нет',
   })
   is_participant_required: boolean;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
-    defaultValue: 0
+    defaultValue: 0,
   })
   @ApiProperty({
     example: '123',
@@ -52,11 +52,11 @@ export default class Event extends Model<Event, EventCreationAttributes> {
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
-    defaultValue: 0
+    defaultValue: 0,
   })
   @ApiProperty({
     example: '12345',
-    description: 'Лимит участников на событии'
+    description: 'Лимит участников на событии',
   })
   participant_limit: number;
 
@@ -73,7 +73,7 @@ export default class Event extends Model<Event, EventCreationAttributes> {
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
-    defaultValue: 0
+    defaultValue: 0,
   })
   @ApiProperty({
     example: '12345',
