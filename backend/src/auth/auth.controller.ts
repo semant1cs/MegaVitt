@@ -1,6 +1,6 @@
 import User from 'src/user/entities/user.entity';
 import { AuthService } from './auth.service';
-import { Public } from './decorators/public.decorator';
+import { Public } from '../utils/access';
 import { Controller, HttpStatus, Post, HttpCode, Body, Get, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SignInDto } from './dto/sign-in.dto';
