@@ -25,7 +25,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Post('/addRole/' + ':id')
+  @Post(':id' + '/addRole/')
   addRole(@Param('id') id: string, @Body() addRoleDto: AddRoleDto) {
     return this.userService.giveRole({ userId: id, value: addRoleDto.value });
   }
