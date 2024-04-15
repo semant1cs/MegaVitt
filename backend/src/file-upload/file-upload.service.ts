@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFileUploadDto } from './dto/create-file-upload.dto';
 import { UpdateFileUploadDto } from './dto/update-file-upload.dto';
 
 @Injectable()
 export class FileUploadService {
-  create(createFileUploadDto: CreateFileUploadDto) {
-    return 'This action adds a new fileUpload';
+  uploadAvatar(): string {
+    return 'Аватар успешно загружен';
   }
 
   findAll() {
