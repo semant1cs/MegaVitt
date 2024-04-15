@@ -14,6 +14,7 @@ import Participant from './participant/entities/participant.entity';
 import UserRole from './role/entities/user-role.entity';
 import Role from './role/entities/role.entity';
 import { RoleModule } from './role/role.module';
+import Site from './site/entities/site.entity';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RoleModule } from './role/role.module';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
+      models: [Event, User, Ticket, Participant, Site],
       models: [Event, User, Ticket, Participant, UserRole, Role],
       autoLoadModels: true,
     }),
