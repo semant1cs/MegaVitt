@@ -15,6 +15,8 @@ import UserRole from './role/entities/user-role.entity';
 import Role from './role/entities/role.entity';
 import { RoleModule } from './role/role.module';
 import Site from './site/entities/site.entity';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-middlewares/avatar-destination-middleware.service';
 
 @Module({
   imports: [
@@ -38,8 +40,9 @@ import Site from './site/entities/site.entity';
     TicketModule,
     SiteModule,
     RoleModule,
+    FileUploadModule
   ],
   controllers: [],
-  providers: [],
+  providers: [DynamicAvatarDestinationMiddleware],
 })
 export class AppModule {}
