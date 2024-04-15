@@ -2,15 +2,14 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table, HasOne } from 's
 import { UUIDV4 } from 'sequelize';
 import { ApiProperty } from '@nestjs/swagger';
 import User from '../../user/entities/user.entity';
-import Event from '../../event/entities/event.entity';
-
 
 interface SiteCreationAttributes {
   name: string;
   owner_id: string;
+  event_id: string;
 }
 
-@Table({ tableName: 'site' })
+@Table({ tableName: 'sites' })
 export default class Site extends Model<Site, SiteCreationAttributes> {
   @Column({
     type: DataType.STRING,
@@ -31,29 +30,26 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   name: string;
 
-  @Column({
-    type: DataType.STRING,
-    //allowNull: false,
-  })
-  @ApiProperty({
-    example: 'Ссылка на билд сайта',
-    description: 'C:/MegaVitt/builds',
-  })
-  build_ref: string;
+  // @Column({
+  //   type: DataType.STRING,
+  // })
+  // @ApiProperty({
+  //   example: 'Ссылка на билд сайта',
+  //   description: 'C:/MegaVitt/builds',
+  // })
+  // build_ref: string;
 
   @Column({
     type: DataType.STRING,
-    //allowNull: false,
   })
   @ApiProperty({
-    example: 'Ссылка на сайта',
-    description: 'МойСайт.русский',
+    example: 'https://my-site.com',
+    description: 'Ссылка на сайт',
   })
   link: string;
 
   @Column({
     type: DataType.STRING,
-    //allowNull: false,
   })
   @ApiProperty({
     example: 'Ссылка на сайта',
@@ -62,7 +58,6 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   event_id: string;
   @Column({
     type: DataType.STRING,
-    //allowNull: false,
   })
   @ApiProperty({
     example: 'Ссылка на сайта',
@@ -75,7 +70,4 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
 
   @BelongsTo(() => User)
   owner: User;
-
-  // @HasOne(()=> Event)
-  // event: Event;
 }

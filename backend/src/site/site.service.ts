@@ -16,7 +16,7 @@ export class SiteService {
   public async create(createSiteDto: CreateSiteDto, user: any) {
     const site_id = uuidv4();
     const event_id = uuidv4();
-    const site = await this._siteRepository.create({ owner_id: user.sub, event_id: event_id, site_id: site_id});
+    const site = await this._siteRepository.create({ owner_id: user.sub, event_id: event_id});
     const event = await this._eventService.create({name: '', event_id: event_id, site_id: site_id});
 
    return site;
