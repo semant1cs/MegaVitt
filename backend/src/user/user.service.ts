@@ -59,4 +59,9 @@ export class UserService {
   public findAll(): Promise<User[]> {
     return this.userRepository.findAll({ include: { all: true } });
   }
+
+  public async updateAvatar(user: User, avatar: string) {
+    await user.update({ avatar: avatar });
+    return user;
+  }
 }

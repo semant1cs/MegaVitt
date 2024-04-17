@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import path from 'path';
+import User from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
@@ -11,16 +12,13 @@ export class FileUploadService {
     private userService: UserService
   ) {}
 
-  async uploadAvatar(request: Request): Promise<string> {
+  async uploadAvatar(request: Request) {
     const jwtToken = request.headers.authorization.split(' ')[1];
-    const userJwtInfo = this.jwtService.verify(jwtToken);
+    const userJwtInfo = await this.jwtService.verify(jwtToken);
     const userId = userJwtInfo.id;
-    const user = await this.userService.findUserByPK(userId);
+    const user: User = await this.userService.findUserByPK(userId);
 
-    // console.log(user);
-
-    // await user.$set('avatar', 'asd');
-
-    return 'Аватар успешно загружен';
+    if (!user) throw new HttpException('Пользователь не найден', HttpStatus.NOT_FOUND);
+    return await this.userService.updateAvatar(user, `${userId}/avatar`);
   }
 }
