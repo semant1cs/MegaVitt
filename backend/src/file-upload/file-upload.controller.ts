@@ -1,5 +1,5 @@
 import { imageFileFilter } from 'src/utils/file-filters/image-filter/image-filter';
-import { Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Req, UseInterceptors } from '@nestjs/common';
 import * as multer from 'multer';
 import { FileUploadService } from './file-upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -24,7 +24,7 @@ export class FileUploadController {
       fileFilter: imageFileFilter,
     })
   )
-  uploadAvatar() {
-    return this._fileUploadService.uploadAvatar();
+  uploadAvatar(@Req() request: Request) {
+    return this._fileUploadService.uploadAvatar(request);
   }
 }

@@ -17,6 +17,8 @@ import { RoleModule } from './role/role.module';
 import Site from './site/entities/site.entity';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-middlewares/avatar-destination-middleware.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -33,6 +35,7 @@ import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-mi
       models: [Event, User, Ticket, Participant, UserRole, Role, Site],
       autoLoadModels: true,
     }),
+    ServeStaticModule.forRoot({ rootPath: path.join(__dirname, '..', '..', 'src', 'files') }),
     UserModule,
     AuthModule,
     ParticipantModule,
@@ -40,7 +43,7 @@ import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-mi
     TicketModule,
     SiteModule,
     RoleModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   controllers: [],
   providers: [DynamicAvatarDestinationMiddleware],
