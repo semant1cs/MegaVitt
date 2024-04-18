@@ -2,7 +2,6 @@ import { FC } from "react";
 import styles from "./Welcome.module.scss";
 import type { TWelcomeProps } from "../StartPage.types";
 import Button from "@ui/Button";
-import StartPageBackground from "@svg/StartPageBackground";
 import LayoutBody from "@layout/Body";
 
 const Welcome: FC<TWelcomeProps> = ({ navigate }) => {
@@ -21,7 +20,6 @@ const Welcome: FC<TWelcomeProps> = ({ navigate }) => {
       </div>
 
       <div className={styles.image}>
-        <StartPageBackground />
       </div>
     </LayoutBody>
   );

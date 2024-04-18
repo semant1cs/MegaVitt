@@ -4,7 +4,7 @@ import CreatorView from "./Creator.view";
 
 /** Контейнерная компонента для отдачи вьюхи <CreatorView />*/
 const CreatorContainer: FC<TCreatorContainerProps> = props => {
-    return (<CreatorView />);
-}
- 
+  return <CreatorView />;
+};
+
 export default CreatorContainer;
