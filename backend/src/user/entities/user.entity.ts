@@ -48,6 +48,15 @@ export default class User extends Model<User, UserCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
+  })
+  @ApiProperty({
+    example: './files/{id}/avatar.png',
+    description: 'Аватар пользователя',
+  })
+  avatar: string;
+
+  @Column({
+    type: DataType.STRING,
     allowNull: false,
   })
   @ApiProperty({

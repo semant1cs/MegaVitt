@@ -1,26 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { CreateFileUploadDto } from './dto/create-file-upload.dto';
-import { UpdateFileUploadDto } from './dto/update-file-upload.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
+import path from 'path';
+import User from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class FileUploadService {
-  create(createFileUploadDto: CreateFileUploadDto) {
-    return 'This action adds a new fileUpload';
-  }
+  constructor(
+    private jwtService: JwtService,
+    private userService: UserService
+  ) {}
 
-  findAll() {
-    return `This action returns all fileUpload`;
-  }
+  async uploadAvatar(request: Request) {
+    const jwtToken = request.headers.authorization.split(' ')[1];
+    const userJwtInfo = await this.jwtService.verify(jwtToken);
+    const userId = userJwtInfo.id;
+    const user: User = await this.userService.findUserByPK(userId);
 
-  findOne(id: number) {
-    return `This action returns a #${id} fileUpload`;
-  }
-
-  update(id: number, updateFileUploadDto: UpdateFileUploadDto) {
-    return `This action updates a #${id} fileUpload`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} fileUpload`;
+    if (!user) throw new HttpException('Пользователь не найден', HttpStatus.NOT_FOUND);
+    return await this.userService.updateAvatar(user, `${userId}/avatar`);
   }
 }

@@ -1,34 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { imageFileFilter } from 'src/utils/file-filters/image-filter/image-filter';
+import { Controller, Post, Req, UseInterceptors } from '@nestjs/common';
+import * as multer from 'multer';
 import { FileUploadService } from './file-upload.service';
-import { CreateFileUploadDto } from './dto/create-file-upload.dto';
-import { UpdateFileUploadDto } from './dto/update-file-upload.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Request } from 'express';
 
 @Controller('file-upload')
 export class FileUploadController {
-  constructor(private readonly fileUploadService: FileUploadService) {}
+  constructor(private readonly _fileUploadService: FileUploadService) {}
 
-  @Post()
-  create(@Body() createFileUploadDto: CreateFileUploadDto) {
-    return this.fileUploadService.create(createFileUploadDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.fileUploadService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fileUploadService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFileUploadDto: UpdateFileUploadDto) {
-    return this.fileUploadService.update(+id, updateFileUploadDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fileUploadService.remove(+id);
+  @Post('/avatar')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.diskStorage({
+        destination: (req: Request, file: Express.Multer.File, cb): void => {
+          cb(null, req['dynamicDestination']);
+        },
+        filename: (req: Request, file: Express.Multer.File, cb): void => {
+          const filename: string = file.originalname.replace(/^.*(?=\.[^.]+$)/, 'avatar');
+          cb(null, filename);
+        },
+      }),
+      fileFilter: imageFileFilter,
+    })
+  )
+  uploadAvatar(@Req() request: Request) {
+    return this._fileUploadService.uploadAvatar(request);
   }
 }
