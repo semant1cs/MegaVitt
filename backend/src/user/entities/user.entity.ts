@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
-import { Column, DataType, Model, Table, BelongsToMany } from 'sequelize-typescript';
+import Site from '../../site/entities/site.entity';
+import { Column, DataType, Model, Table, BelongsToMany, HasMany } from 'sequelize-typescript';
 import Role from 'src/role/entities/role.entity';
 import UserRole from 'src/role/entities/user-role.entity';
 
@@ -47,6 +48,15 @@ export default class User extends Model<User, UserCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
+  })
+  @ApiProperty({
+    example: './files/{id}/avatar.png',
+    description: 'Аватар пользователя',
+  })
+  avatar: string;
+
+  @Column({
+    type: DataType.STRING,
     allowNull: false,
   })
   @ApiProperty({
@@ -54,6 +64,9 @@ export default class User extends Model<User, UserCreationAttributes> {
     description: 'Пароль пользователя',
   })
   password: string;
+
+  @HasMany(() => Site)
+  sites: Site[];
 
   @BelongsToMany(() => Role, () => UserRole)
   roles: Role[];

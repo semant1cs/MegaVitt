@@ -35,10 +35,14 @@ export class UserService {
   }
 
   public async giveRole(dto: AddRoleDto) {
-    const user = await this.userRepository.findByPk(dto.userId);
+    const user = await this.findUserByPK(dto.userId);
     const role = await this.roleService.getRoleByName(dto.value);
     if (role && user) return await this.addRole(user, role);
     throw new HttpException('Пользователь или роль не найдены', HttpStatus.NOT_FOUND);
+  }
+
+  public async findUserByPK(id: string) {
+    return this.userRepository.findByPk(id);
   }
 
   public async findOneById(id: string) {
@@ -54,5 +58,10 @@ export class UserService {
 
   public findAll(): Promise<User[]> {
     return this.userRepository.findAll({ include: { all: true } });
+  }
+
+  public async updateAvatar(user: User, avatar: string) {
+    await user.update({ avatar: avatar });
+    return user;
   }
 }
