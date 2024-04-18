@@ -1,28 +1,54 @@
 /** Медиа стили экранов */
 
 $lg: 1440px;
-$md: 1024px;
+$md: 1180px;
 $sm: 768px;
 $xs: 480px;
 
 /** Цвета */
 
-$background-primary: #2f3543;
-$background-secondary: #27292f;
-$background-white: #eef2f5;
-
 $grayscale-0: #fff;
-$grayscale-100: #d1d1d1;
-$grayscale-500: #525866;
-$grayscale-800: #222222;
+$grayscale-100: #f2f2f4;
+$grayscale-200: #d1d1d1;
+$grayscale-400: #525866;
+$grayscale-600: #2f3543;
+$grayscale-800: #27292f;
 $grayscale-1000: #1e1e1e;
 
-$primary-0: #c2e8ff;
-$primary-100: #7da0ca;
-$primary-200: #537fb0;
-$primary-400: #507eaf;
 $primary-500: #0060e6;
-$primary-800: #022658;
-$primary-1000: #000f24;
 
 /** Миксины */
+
+@mixin titleText {
+  font-size: 14px;
+  color: $grayscale-100;
+  font-weight: 700;
+
+  @media (min-width: $md) {
+    font-size: 16px;
+  }
+}
+
+@mixin defaultText {
+  font-size: 12px;
+  font-weight: 400;
+  color: $grayscale-100;
+
+  @media (min-width: $md) {
+    font-size: 14px;
+  }
+}
+
+/** Шаблон медиа запросов */
+
+// @media (min-width: $sm) {
+
+// }
+
+// @media (min-width: $md) {
+
+// }
+
+// @media (min-width: $lg) {
+
+// }

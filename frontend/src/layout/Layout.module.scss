@@ -7,7 +7,7 @@
   min-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: $background-white;
+  background-color: $grayscale-0;
   display: flex;
   flex-direction: column;
 }
@@ -20,20 +20,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 86px;
-  background-color: $background-secondary;
+  padding: 0 12px;
+  background-color: $grayscale-800;
 
   &__logo {
     color: $primary-500;
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 
 /** Body */
 
 .body {
+  display: flex;
   flex: 1 1 auto;
-  background-color: $background-primary;
+  background-color: $grayscale-600;
+  padding: 0 24px;
+
+  &__container {
+    margin: 0 auto;
+    flex: 1 1 auto;
+    max-width: 1776px;
+  }
 }
 
 /** Toaster */
@@ -47,6 +55,50 @@
   &__body {
     width: 10%;
     height: 10%;
-    background-color: white;
+    background-color: $grayscale-0;
+  }
+}
+
+@media (min-width: $sm) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .body {
+    &__container {
+      padding: 0 42px;
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .header {
+    padding: 0 42px;
+
+    &__logo {
+      font-size: 24px;
+    }
+  }
+
+  .body {
+    &__container {
+      padding: 0 84px;
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .header {
+    padding: 0 84px;
+
+    &__logo {
+      font-size: 28px;
+    }
+  }
+
+  .body {
+    &__container {
+      padding: 0 168px;
+    }
   }
 }

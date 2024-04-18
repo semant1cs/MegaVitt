@@ -5,6 +5,7 @@ import LayoutBody from "@layout/Body";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import parse from "html-react-parser";
 import VirtualDOM, { VirtualDOMElement } from "./Test/util";
+import { nanoid } from "@reduxjs/toolkit";
 
 interface Element {
   id: number;
@@ -45,7 +46,10 @@ const CreatorView: FC<TCreatorViewProps> = () => {
 
     if (!destination || destination.droppableId !== "canvas") return;
 
-    setVdom(prev => [...prev, { tagName: "div", props: { class: styles.container }, children: [] }]);
+    setVdom(prev => [
+      ...prev,
+      { tagName: "div", props: { class: styles.container, onmouseover: (() => console.log("daw")) }, children: [] },
+    ]);
   }
 
   const vNode: VirtualDOMElement = {
@@ -74,6 +78,8 @@ const CreatorView: FC<TCreatorViewProps> = () => {
   if (appp) {
     VirtualDOM.patch(vNode, appp);
   }
+
+  console.log(vdom);
 
   return (
     <LayoutBody className={styles.creator}>

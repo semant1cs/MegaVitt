@@ -7,32 +7,45 @@
 
 .contained {
   &__primary {
-    padding: 20px 60px;
-    font-size: 18px;
-    color: $grayscale-0;
+    @include titleText();
+    padding: 15px 45px;
     background-color: $primary-500;
   }
 
   &__secondary {
+    @include titleText();
     padding: 12px 20px;
-    font-size: 14px;
-    color: $grayscale-0;
-    background-color: $grayscale-500;
+    background-color: $grayscale-600;
   }
 
   &__white {
-    padding: 10px 60px;
-    font-size: 16px;
-    font-weight: 700;
-    color: $grayscale-1000;
+    @include titleText();
+    padding: 10px 45px;
+    color: $grayscale-800;
     background-color: $grayscale-0;
   }
 }
 
 .outlined {
+  @include defaultText();
   padding: 12px 20px;
-  font-size: 14px;
-  color: $grayscale-500;
+  color: $grayscale-400;
   background-color: transparent;
-  border: 1px solid $grayscale-500;
+  border: 1px solid $grayscale-600;
+}
+
+@media (min-width: $md) {
+  .contained {
+    &__primary {
+      padding: 20px 60px;
+    }
+
+    &__secondary {
+      padding: 12px 20px;
+    }
+
+    &__white {
+      padding: 10px 60px;
+    }
+  }
 }

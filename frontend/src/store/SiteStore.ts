@@ -1,15 +1,14 @@
-
 import { makeAutoObservable, makeObservable } from "mobx";
 import authAxiosInstance from "../api/api-instance";
 
 class SiteStore {
-   constructor() {
-     makeAutoObservable(this)
-   }
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-   getSite(data:any) {
-      authAxiosInstance({data: data, method: "GET", url: "site/"})
-   }
+  getSite(data: any) {
+    authAxiosInstance.get("site/", { data: data });
+  }
 }
 
-export default new SiteStore()
+export default new SiteStore();
