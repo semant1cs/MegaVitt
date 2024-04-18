@@ -4,8 +4,8 @@ import { CreateParticipantDto } from './dto/create-participant.dto';
 import { UpdateParticipantDto } from './dto/update-participant.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('participant')
-@Controller('participant')
+@ApiTags('participants')
+@Controller('participants')
 export class ParticipantController {
   constructor(private readonly participantService: ParticipantService) {}
 

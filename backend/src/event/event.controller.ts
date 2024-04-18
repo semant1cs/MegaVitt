@@ -1,21 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/utils/access';
+import { RolesGuard } from 'src/utils/access';
 
-@ApiTags('event')
-@Controller('event')
+@ApiTags('events')
+@Controller('events')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
   @Post()
-  @ApiBearerAuth()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventService.create(createEventDto);
   }
 
   @Get()
+  @Roles(['user'])
+  @UseGuards(RolesGuard)
   findAll() {
     return this.eventService.findAll();
   }
