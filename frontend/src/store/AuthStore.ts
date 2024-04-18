@@ -1,5 +1,5 @@
+import AuthApi from "@api/auth-api";
 import { TAuthenticationForm } from "@components/Authentication/Authentication.types";
-import AuthService from "@services/AuthService";
 import { makeAutoObservable } from "mobx";
 
 class AuthStore {
@@ -8,13 +8,13 @@ class AuthStore {
   }
 
   async signUp(form: TAuthenticationForm) {
-    return await AuthService.signUp(form).then(data => {
+    return await AuthApi.signUp(form).then(data => {
       console.log(data);
     });
   }
 
   async signIn(form: TAuthenticationForm) {
-    return await AuthService.signIn(form).then(data => {
+    return await AuthApi.signIn(form).then(data => {
       console.log(data);
     });
   }

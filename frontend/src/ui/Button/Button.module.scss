@@ -10,12 +10,22 @@
     @include titleText();
     padding: 15px 45px;
     background-color: $primary-500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-10;
+    }
   }
 
   &__secondary {
     @include titleText();
     padding: 12px 20px;
     background-color: $grayscale-600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-10;
+    }
   }
 
   &__white {
@@ -23,6 +33,11 @@
     padding: 10px 45px;
     color: $grayscale-800;
     background-color: $grayscale-0;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-10;
+    }
   }
 }
 
@@ -32,6 +47,21 @@
   color: $grayscale-400;
   background-color: transparent;
   border: 1px solid $grayscale-600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-10;
+  }
+}
+
+.text {
+  @include titleText();
+  font-weight: 400;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $primary-10;
+  }
 }
 
 @media (min-width: $md) {

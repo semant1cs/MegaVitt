@@ -7,41 +7,49 @@ import type { TSignInViewProps } from "../Authentication.types";
 import { FC } from "react";
 import styles from "../Authentication.module.scss";
 import { useNavigate } from "react-router-dom";
+import TextFieldUnderline from "@ui/TextField/TextFieldUnderline";
 
 const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleSaveForm, changeCurrentPage }) => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.signIn}>
-      <Button
-        variant="text"
-        className={styles.logo}
-        onClick={() => navigate("/")}
-      >
-        VASKA
-      </Button>
+      <div className={styles.header}>
+        <button
+          className={[styles.close, "close-icon"].join(" ")}
+          onClick={() => navigate("/")}
+        />
+
+        <Button
+          variant="text"
+          className={styles.logo}
+          onClick={() => navigate("/")}
+        >
+          VASKA
+        </Button>
+      </div>
 
       <div className={styles.inputs}>
         <TextFieldContainer variant="light">
           <TextFieldLabel>Электронная почта</TextFieldLabel>
 
-          <TextFieldInner>
-            <TextField
-              value={form?.email || ""}
-              onChange={event => setEmail(event.target.value)}
-            />
-          </TextFieldInner>
+          <TextField
+            value={form?.email || ""}
+            onChange={event => setEmail(event.target.value)}
+          />
+
+          <TextFieldUnderline />
         </TextFieldContainer>
 
         <TextFieldContainer variant="light">
           <TextFieldLabel>Пароль</TextFieldLabel>
 
-          <TextFieldInner>
-            <TextField
-              value={form?.password || ""}
-              onChange={event => setPassword(event.target.value)}
-            />
-          </TextFieldInner>
+          <TextField
+            value={form?.password || ""}
+            onChange={event => setPassword(event.target.value)}
+          />
+
+          <TextFieldUnderline />
         </TextFieldContainer>
       </div>
 
@@ -53,10 +61,16 @@ const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleS
           Войти
         </Button>
 
-        <div>
-          <Button onClick={() => changeCurrentPage("signUp")}>Зарегистрироваться</Button>
+        <div className={styles.buttons__hint}>
+          <Button
+            variant="text"
+            className={styles.buttons__hint__button}
+            onClick={() => changeCurrentPage("signUp")}
+          >
+            Зарегистрироваться
+          </Button>
 
-          <Button onClick={() => {}}>Забыли пароль?</Button>
+          <p className={styles.buttons__hint__text}>Забыли пароль?</p>
         </div>
       </div>
     </div>

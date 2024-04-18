@@ -7,6 +7,7 @@ import TextFieldInner from "@ui/TextField/TextFieldInner";
 import Button from "@ui/Button";
 import styles from "../Authentication.module.scss";
 import { useNavigate } from "react-router-dom";
+import TextFieldUnderline from "@ui/TextField/TextFieldUnderline";
 
 /** Вьюха для отображения страницы регистрации */
 const SignUpView: FC<TSignUpViewProps> = ({
@@ -21,46 +22,53 @@ const SignUpView: FC<TSignUpViewProps> = ({
 
   return (
     <div className={styles.signUp}>
-      <Button
-        variant="text"
-        className={styles.logo}
-        onClick={() => navigate("/")}
-      >
-        VASKA
-      </Button>
+      <div className={styles.header}>
+        <button
+          className={[styles.close, "close-icon"].join(" ")}
+          onClick={() => navigate("/")}
+        />
+
+        <Button
+          variant="text"
+          className={styles.logo}
+          onClick={() => navigate("/")}
+        >
+          VASKA
+        </Button>
+      </div>
 
       <div className={styles.inputs}>
         <TextFieldContainer variant="light">
           <TextFieldLabel>Имя пользователя</TextFieldLabel>
 
-          <TextFieldInner>
-            <TextField
-              value={form?.username || ""}
-              onChange={event => setUsername(event.target.value)}
-            />
-          </TextFieldInner>
+          <TextField
+            value={form?.username || ""}
+            onChange={event => setUsername(event.target.value)}
+          />
+
+          <TextFieldUnderline />
         </TextFieldContainer>
 
         <TextFieldContainer variant="light">
           <TextFieldLabel>Электронная почта</TextFieldLabel>
 
-          <TextFieldInner>
-            <TextField
-              value={form?.email || ""}
-              onChange={event => setEmail(event.target.value)}
-            />
-          </TextFieldInner>
+          <TextField
+            value={form?.email || ""}
+            onChange={event => setEmail(event.target.value)}
+          />
+
+          <TextFieldUnderline />
         </TextFieldContainer>
 
         <TextFieldContainer variant="light">
           <TextFieldLabel>Пароль</TextFieldLabel>
 
-          <TextFieldInner>
-            <TextField
-              value={form?.password || ""}
-              onChange={event => setPassword(event.target.value)}
-            />
-          </TextFieldInner>
+          <TextField
+            value={form?.password || ""}
+            onChange={event => setPassword(event.target.value)}
+          />
+
+          <TextFieldUnderline />
         </TextFieldContainer>
       </div>
 
@@ -71,11 +79,17 @@ const SignUpView: FC<TSignUpViewProps> = ({
         >
           Зарегистрироваться
         </Button>
+        
+        <div className={styles.buttons__hint}>
+          <p className={styles.buttons__hint__text}>Уже есть аккаунт?</p>
 
-        <div>
-          <span>Уже есть аккаунт?</span>
-
-          <Button onClick={() => changeCurrentPage("signIn")}>Войти</Button>
+          <Button
+            variant="text"
+            className={styles.buttons__hint__button}
+            onClick={() => changeCurrentPage("signIn")}
+          >
+            Войти
+          </Button>
         </div>
       </div>
     </div>

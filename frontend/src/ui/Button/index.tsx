@@ -28,7 +28,7 @@ const Button: FC<PropsWithChildren<TButtonProps>> = ({ children, variant, ...pro
       className={[styles.button, getVariantStyle(), props.className].join(" ")}
       onClick={props.onClick}
     >
-      <p>{children}</p>
+      {children}
     </button>
   );
 };

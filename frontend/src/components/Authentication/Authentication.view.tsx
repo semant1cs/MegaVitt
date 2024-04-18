@@ -6,7 +6,9 @@ import styles from "./Authentication.module.scss";
 const AuthenticationView: FC<TAuthenticationViewProps> = props => {
   return (
     <>
-      <LayoutBody className={styles.auth}>{props.getCurrentPage()}</LayoutBody>
+      <LayoutBody classNames={{ body: styles.auth, body__container: styles.auth__container }}>
+        {props.getCurrentPage()}
+      </LayoutBody>
     </>
   );
 };

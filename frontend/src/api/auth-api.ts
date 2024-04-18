@@ -1,11 +1,10 @@
 import type { TAuthenticationForm } from "@components/Authentication/Authentication.types";
 import LayoutStore from "@store/LayoutStore";
 import axios from "axios";
-import { observable } from "mobx";
 
 const backAPIURL = import.meta.env.VITE_BASE_URL_AUTH;
 
-class AuthService {
+class AuthApi {
   async signUp(form: TAuthenticationForm) {
     try {
       const response = await axios.post(
@@ -59,4 +58,4 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+export default new AuthApi();

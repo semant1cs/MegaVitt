@@ -29,3 +29,9 @@ export type TTextFieldHintText = {
   className?: string;
   variant?: "light" | "dark";
 };
+
+export type TTextFieldUnderline = {
+  isError?: boolean;
+  className?: string;
+  variant?: "light" | "dark";
+}

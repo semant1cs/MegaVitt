@@ -3,7 +3,10 @@ export type TLayoutHeaderProps = {
   className?: string;
 };
 export type TLayoutBodyProps = {
-  className?: string;
+  classNames?: {
+    body?: string;
+    body__container?: string;
+  };
 };
 export type TLayoutModalProps = {};
 export type TLayoutLoaderProps = {};

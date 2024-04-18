@@ -6,6 +6,7 @@ import styles from "./StartPage.module.scss";
 import { useNavigate } from "react-router-dom";
 import Welcome from "./Welcome";
 import AllSites from "./AllSites";
+import Button from "@ui/Button";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
 const StartPageView: FC<TStartPageViewProps> = props => {
@@ -20,21 +21,37 @@ const StartPageView: FC<TStartPageViewProps> = props => {
         <ul className={styles.nav}>
           {isAuth ? (
             <>
-              <li className={styles.nav__item}>
-                <span>Мои сайты</span>
+              <li>
+                <Button
+                  variant="text"
+                  className={styles.nav__item}
+                  onClick={() => {}}
+                >
+                  Мои сайты
+                </Button>
               </li>
-              <li className={styles.nav__item}>
-                <span>Имя аккаунта</span>
-                <span className="user-icon"></span>
+
+              <li>
+                <Button
+                  variant="text"
+                  className={styles.nav__item}
+                  onClick={() => {}}
+                >
+                  <span>Имя аккаунта</span>
+                  <span className="user-icon"></span>
+                </Button>
               </li>
             </>
           ) : (
-            <li
-              className={styles.nav__item}
-              onClick={() => navigate("/auth")}
-            >
-              <span>Войти</span>
-              <span className="user-icon"></span>
+            <li>
+              <Button
+                variant="text"
+                className={styles.nav__item}
+                onClick={() => navigate("/auth")}
+              >
+                <span>Войти</span>
+                <span className="user-icon"></span>
+              </Button>
             </li>
           )}
         </ul>

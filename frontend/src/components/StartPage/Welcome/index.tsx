@@ -6,7 +6,7 @@ import LayoutBody from "@layout/Body";
 
 const Welcome: FC<TWelcomeProps> = ({ navigate }) => {
   return (
-    <LayoutBody className={styles.welcome}>
+    <LayoutBody classNames={{body__container: styles.welcome}}>
       <div className={styles.text}>
         <h1 className={styles.text__title}>Конструктор сайта вашего мероприятия</h1>
 
