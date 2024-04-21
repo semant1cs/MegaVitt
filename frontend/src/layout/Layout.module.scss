@@ -47,15 +47,53 @@
 /** Toaster */
 
 .toaster {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(#000000, 0);
+  gap: 16px;
+  top: 40px;
+  right: 50%;
+  display: flex;
+  position: fixed;
+  z-index: 100000;
+  pointer-events: none;
+  flex-direction: column;
+  transition: 0.3s all ease;
+  transform: translate(50%, 0%);
 
-  &__body {
-    width: 10%;
-    height: 10%;
-    background-color: $grayscale-0;
+  &__container {
+    @include titleText();
+    padding: 16px;
+    display: flex;
+    font-style: normal;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    transition: 0.3s all ease;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  &__enter {
+    opacity: 0;
+  }
+  &__enterActive {
+    opacity: 0.9;
+  }
+  &__enterDone {
+    opacity: 0.9;
+  }
+  &__exit {
+    opacity: 0;
+  }
+
+  &__active {
+  }
+
+  &__text {
+    color: $grayscale-1000;
+  }
+
+  &__error {
+    background-color: $primary-10;
   }
 }
 

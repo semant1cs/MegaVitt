@@ -15,7 +15,7 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
   /** Можно ли сохранить форму */
   const canSaveForm = changedForm;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Эффект для установки лисенера для установки окна о том, что пользователь покидает страницу */
   useEffect(() => {
@@ -49,7 +49,7 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
 
   /** Хендлер для сохранения формы */
   function handleSaveForm() {
-    AuthStore.signUp(form).then(() => navigate("/"))
+    AuthStore.signUp(form);
   }
 
   return (
