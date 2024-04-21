@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import type { TAuthenticationContainerProps, TAuthenticationForm, TCurrentPage } from "./Authentication.types";
 import AuthenticationView from "./Authentication.view";
-import { FC, Suspense, lazy, useCallback, useMemo, useState } from "react";
+import { FC, Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
 
 const SignIn = lazy(() => import("@components/Authentication/SignIn"));
 const SignUp = lazy(() => import("@components/Authentication/SignUp"));
@@ -14,6 +15,11 @@ const INITIAL_STATE: TAuthenticationForm = {
 const AuthenticationContainer: FC<TAuthenticationContainerProps> = props => {
   const [form, setForm] = useState<TAuthenticationForm>(INITIAL_STATE);
   const [currentPage, setCurrentPage] = useState<TCurrentPage>("signIn");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!!localStorage.getItem("userToken")) navigate("/cabinet");
+  }, []);
 
   /** Колбек для изменения текущей страницы `currentPage` */
   const changeCurrentPage = useCallback((page: TCurrentPage) => setCurrentPage(() => page), []);

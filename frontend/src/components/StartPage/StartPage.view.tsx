@@ -3,44 +3,44 @@ import type { TStartPageViewProps } from "./StartPage.types";
 import LayoutHeader from "@layout/Header";
 import styles from "./StartPage.module.scss";
 import { useNavigate } from "react-router-dom";
-import Welcome from "./Welcome";
-import AllSites from "./AllSites";
 import Button from "@ui/Button";
+import LayoutBody from "@layout/Body";
+import AuthStore from "@store/AuthStore";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
 const StartPageView: FC<TStartPageViewProps> = props => {
   const navigate = useNavigate();
-
   const isAuth = !!localStorage.getItem("userToken");
+  const userName = AuthStore.initialUserState?.username;
 
   return (
     <>
       <LayoutHeader>
-        <ul className={styles.nav}>
-          {isAuth ? (
-            <>
-              <li>
-                <Button
-                  variant="text"
-                  className={styles.nav__item}
-                  onClick={() => {}}
-                >
-                  Мои сайты
-                </Button>
-              </li>
+        {isAuth ? (
+          <ul className={styles.nav}>
+            <li>
+              <Button
+                variant="text"
+                className={styles.nav__item}
+                onClick={() => navigate("/cabinet")}
+              >
+                Мои сайты
+              </Button>
+            </li>
 
-              <li>
-                <Button
-                  variant="text"
-                  className={styles.nav__item}
-                  onClick={() => {}}
-                >
-                  <span>Имя аккаунта</span>
-                  <span className="user-icon"></span>
-                </Button>
-              </li>
-            </>
-          ) : (
+            <li>
+              <Button
+                variant="text"
+                className={styles.nav__item}
+                onClick={() => {}}
+              >
+                <span>{userName}</span>
+                <span className={["user-icon", styles.nav__icon].join(" ")}></span>
+              </Button>
+            </li>
+          </ul>
+        ) : (
+          <ul className={styles.nav}>
             <li>
               <Button
                 variant="text"
@@ -48,14 +48,28 @@ const StartPageView: FC<TStartPageViewProps> = props => {
                 onClick={() => navigate("/auth")}
               >
                 <span>Войти</span>
-                <span className="user-icon"></span>
+                <span className={["user-icon", styles.nav__icon].join(" ")}></span>
               </Button>
             </li>
-          )}
-        </ul>
+          </ul>
+        )}
       </LayoutHeader>
 
-      {isAuth ? <AllSites /> : <Welcome navigate={navigate} />}
+      <LayoutBody classNames={{ body__container: styles.welcome }}>
+        <div className={styles.text}>
+          <h1 className={styles.text__title}>Конструктор сайта вашего мероприятия</h1>
+
+          <Button
+            variant="contained-primary"
+            className={styles.text__button}
+            onClick={() => navigate("/auth")}
+          >
+            Создать сайт
+          </Button>
+        </div>
+
+        <div className={styles.image}></div>
+      </LayoutBody>
     </>
   );
 };

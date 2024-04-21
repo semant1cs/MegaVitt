@@ -2,6 +2,7 @@ import React, { ReactNode, memo } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
+import AllSites from "@views/AllSites";
 import AuthStore from "@store/AuthStore";
 // import Creator from "@views/Creator";
 
@@ -17,7 +18,7 @@ const AppRouter: React.FC = memo(() => {
     // { path: "/creator", element: <Creator /> },
   ];
 
-  const privateRoutes: RouteType[] = [...publicRoutes, ...[]];
+  const privateRoutes: RouteType[] = [...publicRoutes, ...[{ path: "/cabinet", element: <AllSites /> }]];
 
   const location = useLocation();
   const isAuth = !!localStorage.getItem("userToken");
@@ -34,7 +35,7 @@ const AppRouter: React.FC = memo(() => {
         ))}
       </Routes>
     ) : (
-      <Navigate to="/" />
+      <Navigate to="/cabinet" />
     )
   ) : publicRoutes.findIndex(comp => comp.path === location.pathname) !== -1 ? (
     <Routes>

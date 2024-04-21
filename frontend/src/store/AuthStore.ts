@@ -57,7 +57,23 @@ class AuthStore {
 
     try {
       const { data: responseData } = await authAxiosInstance.get(getProfileURL);
-      this.updateInitialUserState(responseData);
+
+      /** Моковые данные. Потом убрать */
+      const sites: UserState["sites"] = [
+        {
+          id: 123,
+          title: "Название сайта",
+          image_url: "",
+          url_link: "https://localhost/123",
+        },
+        {
+          id: 234,
+          title: "Название сайта",
+          image_url: "",
+          url_link: "https://localhost/123",
+        },
+      ];
+      this.updateInitialUserState({ ...responseData, sites: sites });
     } catch (error) {
       LayoutStore.setToaster(await getErrorMessage(error));
     } finally {

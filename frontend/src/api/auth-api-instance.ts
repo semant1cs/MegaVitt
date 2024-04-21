@@ -19,4 +19,29 @@ const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosReque
 
 authAxiosInstance.interceptors.request.use(authInterceptor);
 
+/** Отлавливаем ошибку с окончанием токена и обновляем его */
+authAxiosInstance.interceptors.response.use(
+  config => config,
+  async error => {
+    const originalRequest = error.config;
+
+    if (
+      error.response &&
+      error.response?.status === 401 &&
+      error.response?.statusText === "Unauthorized" &&
+      !!localStorage.getItem("userToken")
+    ) {
+      try {
+        console.log("Нужно обновить сессию");
+        // return authAxiosInstance.request(originalRequest);
+
+        /** Временное решение */
+        window.location.replace("http://localhost:5173/auth");
+      } catch (e) {}
+    }
+
+    throw error;
+  },
+);
+
 export default authAxiosInstance;
