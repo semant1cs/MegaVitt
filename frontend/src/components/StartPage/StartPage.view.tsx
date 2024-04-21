@@ -1,7 +1,6 @@
 import { FC } from "react";
 import type { TStartPageViewProps } from "./StartPage.types";
 import LayoutHeader from "@layout/Header";
-import LayoutBody from "@layout/Body";
 import styles from "./StartPage.module.scss";
 import { useNavigate } from "react-router-dom";
 import Welcome from "./Welcome";
@@ -12,8 +11,7 @@ import Button from "@ui/Button";
 const StartPageView: FC<TStartPageViewProps> = props => {
   const navigate = useNavigate();
 
-  //   const isAuth = localStorage.getItem("userToken");
-  const isAuth = false;
+  const isAuth = !!localStorage.getItem("userToken");
 
   return (
     <>

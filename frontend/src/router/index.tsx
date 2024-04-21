@@ -2,6 +2,7 @@ import React, { ReactNode, memo } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
+import AuthStore from "@store/AuthStore";
 // import Creator from "@views/Creator";
 
 type RouteType = {
@@ -19,7 +20,7 @@ const AppRouter: React.FC = memo(() => {
   const privateRoutes: RouteType[] = [...publicRoutes, ...[]];
 
   const location = useLocation();
-  const isAuth = localStorage.getItem("userToken");
+  const isAuth = !!localStorage.getItem("userToken");
 
   return isAuth ? (
     privateRoutes.findIndex(comp => comp.path === location.pathname) !== -1 ? (
