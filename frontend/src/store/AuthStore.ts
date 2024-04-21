@@ -8,6 +8,7 @@ const root = "auth";
 
 const signInURL = `${root}/signIn`;
 const signUpURL = `${root}/signUp`;
+const getProfileURL = `${root}/profile`;
 
 class AuthStore {
   constructor() {
@@ -35,6 +36,18 @@ class AuthStore {
     try {
       const { data: responseData } = await authAxiosInstance.post(signInURL, form);
       localStorage.setItem("userToken", responseData.access_token);
+    } catch (error) {
+      LayoutStore.setToaster(await getErrorMessage(error));
+    } finally {
+      LayoutStore.showLoader(false);
+    }
+  }
+
+  async getProfile() {
+    LayoutStore.showLoader(true);
+
+    try {
+      const { data: responseData } = await authAxiosInstance.get(getProfileURL);
     } catch (error) {
       LayoutStore.setToaster(await getErrorMessage(error));
     } finally {
