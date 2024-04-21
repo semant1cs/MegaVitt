@@ -2,7 +2,7 @@ import React, { ReactNode, memo } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
-import Creator from "@views/Creator";
+// import Creator from "@views/Creator";
 
 type RouteType = {
   path: string;
@@ -13,7 +13,7 @@ const AppRouter: React.FC = memo(() => {
   const publicRoutes: RouteType[] = [
     { path: "/", element: <StartPage /> },
     { path: "/auth", element: <Authentication /> },
-    { path: "/creator", element: <Creator /> },
+    // { path: "/creator", element: <Creator /> },
   ];
 
   const privateRoutes: RouteType[] = [...publicRoutes, ...[]];

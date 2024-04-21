@@ -1,30 +1,33 @@
 import { makeAutoObservable } from "mobx";
 
+export interface ToasterMessage {
+  text: string;
+  id: number;
+}
+
 class LayoutStore {
   canShowLoader: boolean = false;
   canShowModal: boolean = false;
-  toasterMessage: string = "";
+  toasterMessages: ToasterMessage[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  showLoader() {
-    this.canShowLoader = true;
+  showLoader(flag: boolean) {
+    this.canShowLoader = flag;
   }
 
   showModal(flag: boolean) {
     this.canShowModal = flag;
   }
 
-  showToaster(message: string) {
-    this.updateToasterMessage(message);
-
-    setTimeout(() => this.updateToasterMessage(""), 2000);
+  setToaster(messages: string[]) {
+    this.toasterMessages = [...this.toasterMessages, ...messages.map(text => ({ text, id: new Date().getTime() + Math.random() }))];
   }
 
-  private updateToasterMessage(message: string) {
-    this.toasterMessage = message;
+  removeToaster(id: number) {
+    this.toasterMessages = this.toasterMessages.filter(msg => msg.id !== id);
   }
 }
 

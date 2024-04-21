@@ -44,7 +44,7 @@ const SignInContainer: FC<TSignInContainerProps> = props => {
 
   /** Хендлер для сохранения формы */
   function handleSaveForm() {
-    AuthStore.signIn(form).then(() => navigate("/creator"));
+    AuthStore.signIn(form);
   }
 
   return (
