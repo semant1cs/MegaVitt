@@ -8,12 +8,12 @@ const LayoutHeader: FC<PropsWithChildren<TLayoutHeaderProps>> = ({ className, ..
 
   return (
     <header className={[styles.header, className].join(" ")}>
-      <p
+      <h1
         className={styles.header__logo}
         onClick={() => navigate("/")}
       >
         VASKA
-      </p>
+      </h1>
 
       <nav>{props.children}</nav>
     </header>
