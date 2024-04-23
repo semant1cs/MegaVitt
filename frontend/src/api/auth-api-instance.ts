@@ -44,4 +44,6 @@ authAxiosInstance.interceptors.response.use(
   },
 );
 
+authAxiosInstance.defaults.withCredentials = true;
+
 export default authAxiosInstance;

@@ -12,7 +12,8 @@ async function bootstrap() {
   const config = new DocumentBuilder().setTitle('Mega Vitt API').setVersion('0.1').build();
   const document = SwaggerModule.createDocument(app, config);
 
-  app.useGlobalPipes(new ZodValidationPipe()).enableCors();
+  app.useGlobalPipes(new ZodValidationPipe());
+  app.enableCors({ credentials: true, origin: true });
   app.use(cookieParser());
   SwaggerModule.setup('api/docs', app, document);
 
