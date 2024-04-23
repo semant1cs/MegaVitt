@@ -29,7 +29,15 @@ export class AuthController {
 
   @Get('profile')
   @ApiBearerAuth()
-  getProfile(@Req() req): Promise<User> {
+  getProfile(@Req() req: Request) {
     return req.user;
+  }
+
+  @Get('refresh')
+  refreshToken(@Req() request: Request, @Res() response: Response) {
+    const refreshToken = request.headers.cookie.split(' ')[0].replace('refresh_token=', '');
+    if (refreshToken.charAt(-1) === ';') refreshToken.slice(0, -1);
+
+    this.authService.refreshTokens(refreshToken, response, { fromAuth: true });
   }
 }

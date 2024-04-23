@@ -1,15 +1,18 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
-import { jwtConstants } from '../../../auth/constants';
+import { Request, Response } from 'express';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
+import { ConfigService } from '@nestjs/config';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
-    private reflector: Reflector
+    private reflector: Reflector,
+    private configService: ConfigService,
+    private authService: AuthService
   ) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -18,21 +21,21 @@ export class AuthGuard implements CanActivate {
       context.getClass(),
     ]);
     if (isPublic) {
-      // 💡 See this condition
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
+    const response = context.switchToHttp().getResponse();
+    const token = await this.extractTokenFromHeader(request, response);
+
     if (!token) {
       throw new UnauthorizedException();
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret_key,
+        secret: this.configService.get('JWT_SECRET_KEY'),
       });
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
+
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
@@ -40,7 +43,15 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
-    return request.headers.cookie?.replace('Authorization=', '');
+  private async extractTokenFromHeader(request: Request, response: Response): Promise<string | undefined> {
+    const cookies = request.headers.cookie?.split(' ');
+
+    if (cookies === undefined) return undefined;
+    if (cookies.length === 2) return request.headers.cookie?.split(' ')[1].replace('Authorization=', '');
+    const refreshToken = request.headers.cookie?.split(' ')[0].replace('refresh_token=', '');
+
+    const tokens = await this.authService.refreshTokens(refreshToken, response, { fromAuth: false });
+
+    return tokens.access_token;
   }
 }
