@@ -44,13 +44,13 @@ export class AuthGuard implements CanActivate {
   }
 
   private async extractTokenFromHeader(request: Request, response: Response): Promise<string | undefined> {
-    const cookies = request.headers.cookie?.split(' ');
+    const cookies = request.cookies;
 
     if (cookies === undefined) return undefined;
-    if (cookies.length === 2) return request.headers.cookie?.split(' ')[1].replace('Authorization=', '');
-    const refreshToken = request.headers.cookie?.split(' ')[0].replace('refresh_token=', '');
+    if (cookies.Authorization) return cookies.Authorization;
 
-    const tokens = await this.authService.refreshTokens(refreshToken, response, { fromAuth: false });
+    const refreshToken = cookies.refresh_token;
+    const tokens = await this.authService.refreshTokens(refreshToken, response, request, { fromAuth: false });
 
     return tokens.access_token;
   }

@@ -79,11 +79,18 @@ export class AuthService {
     response.cookie('Authorization', accessToken);
   }
 
-  async refreshTokens(refreshToken: string, response: Response, options: { fromAuth: boolean }) {
-    console.log(refreshToken);
-    const userInfo = await this.jwtService.verifyAsync(refreshToken, {
-      secret: this.configService.get('JWT_REFRESH_KEY'),
-    });
+  async refreshTokens(refreshToken: string, response: Response, request: Request, options: { fromAuth: boolean }) {
+    let userInfo: User;
+
+    if (refreshToken === undefined) {
+      userInfo = await this.jwtService.verifyAsync(request.cookies.Authorization, {
+        secret: this.configService.get('JWT_SECRET_KEY'),
+      });
+    } else {
+      userInfo = await this.jwtService.verifyAsync(refreshToken, {
+        secret: this.configService.get('JWT_REFRESH_KEY'),
+      });
+    }
 
     const user = await this.userService.findOneById(userInfo.id);
     const tokens = await this.getTokens(user);

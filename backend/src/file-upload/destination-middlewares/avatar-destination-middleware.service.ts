@@ -11,8 +11,8 @@ export class DynamicAvatarDestinationMiddleware implements NestMiddleware {
     private configService: ConfigService
   ) {}
 
-  async use(req: any, res: any, next: (error?: any) => void): Promise<void> {
-    const jwtToken: string = req.cookies.Authorization;
+  async use(request: any, res: any, next: (error?: any) => void): Promise<void> {
+    const jwtToken: string = request.cookies.Authorization;
     const userId = await this._jwtService.verify(jwtToken, { secret: this.configService.get('JWT_SECRET_KEY') }).id;
 
     const filePath: string = path.resolve('src', 'files', userId);
@@ -21,7 +21,7 @@ export class DynamicAvatarDestinationMiddleware implements NestMiddleware {
       fs.mkdirSync(filePath, { recursive: true });
     }
 
-    req['dynamicDestination'] = filePath;
+    request['dynamicDestination'] = filePath;
     next();
   }
 }

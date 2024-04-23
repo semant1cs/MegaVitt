@@ -35,9 +35,8 @@ export class AuthController {
 
   @Get('refresh')
   refreshToken(@Req() request: Request, @Res() response: Response) {
-    const refreshToken = request.headers.cookie.split(' ')[0].replace('refresh_token=', '');
-    if (refreshToken.charAt(-1) === ';') refreshToken.slice(0, -1);
+    const refreshToken = request.cookies.refresh_token;
 
-    this.authService.refreshTokens(refreshToken, response, { fromAuth: true });
+    this.authService.refreshTokens(refreshToken, response, request, { fromAuth: true });
   }
 }
