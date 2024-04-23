@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const appHost = "localhost";
-const appPort = "3000";
+const appPort = "3002";
 
 const baseURL = `http://${appHost}:${appPort}`;
 
@@ -11,7 +11,7 @@ const authAxiosInstance = axios.create({
 });
 
 const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-  config.headers["Authorization"] = `Bearer ${localStorage.getItem("userToken")}`;
+  config.headers["Authorization"] = `${localStorage.getItem("userToken")}`;
   config.headers["Content-Type"] = "application/json";
   config.headers["Accept"] = "application/json";
   return config;

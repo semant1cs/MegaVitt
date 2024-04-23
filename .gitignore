@@ -86,3 +86,4 @@ node_modules
 backend/.env
 .env
 
+backend/contracts/build
