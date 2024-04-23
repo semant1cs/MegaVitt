@@ -2,10 +2,12 @@ import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './../user/user.service';
-import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { comparePassword, encodePassword } from 'src/utils/bcrypt';
 import Role from 'src/role/entities/role.entity';
-import { Request, Response } from 'express';
+import { Request, Response, response } from 'express';
+import { ConfigService } from '@nestjs/config';
+import User from 'src/user/entities/user.entity';
 
 type JwtPayload = {
   email: string;
@@ -17,23 +19,24 @@ type JwtPayload = {
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private configService: ConfigService
   ) {}
 
   async signIn(signInDto: SignInDto, request: Request, response: Response) {
     const { email, password } = signInDto;
-    const user = await this.userService.findOneByEmail(email);
+    const user: User = await this.userService.findOneByEmail(email);
 
     if (!comparePassword(password, user?.password)) {
       throw new UnauthorizedException();
     }
-    const payload: JwtPayload = { email: user.email, id: user.id, roles: user.roles };
-    const access_token = await this.jwtService.signAsync(payload);
 
-    response.cookie('Authorization', access_token);
+    const tokens = await this.getTokens(user);
 
-    response.send(access_token);
-    return { access_token: access_token };
+    await this.setTokensCookie(tokens.accessToken, tokens.refreshToken, response);
+
+    response.send({ access_token: tokens.accessToken });
+    return { access_token: tokens.accessToken };
   }
 
   async signUp(signUpDto: SignUpDto, request: Request, response: Response) {
@@ -50,9 +53,45 @@ export class AuthService {
     }
   }
 
+  private async getTokens(user: User) {
+    const payload: JwtPayload = { email: user.email, id: user.id, roles: user.roles };
+
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(payload, {
+        secret: this.configService.get<string>('JWT_SECRET_KEY'),
+      }),
+      this.jwtService.signAsync(payload, {
+        secret: this.configService.get<string>('JWT_REFRESH_KEY'),
+      }),
+    ]);
+
+    return { accessToken, refreshToken };
+  }
+
   private async IsUserExists(email: string) {
     const user = await this.userService.findOneByEmail(email);
 
     return user !== undefined;
+  }
+
+  private async setTokensCookie(accessToken: string, refreshToken: string, response: Response) {
+    response.cookie('refresh_token', refreshToken);
+    response.cookie('Authorization', accessToken);
+  }
+
+  async refreshTokens(refreshToken: string, response: Response, options: { fromAuth: boolean }) {
+    console.log(refreshToken);
+    const userInfo = await this.jwtService.verifyAsync(refreshToken, {
+      secret: this.configService.get('JWT_REFRESH_KEY'),
+    });
+
+    const user = await this.userService.findOneById(userInfo.id);
+    const tokens = await this.getTokens(user);
+
+    await this.setTokensCookie(tokens.accessToken, tokens.refreshToken, response);
+
+    if (options.fromAuth) response.send({ access_token: tokens.accessToken });
+
+    return { access_token: tokens.accessToken };
   }
 }
