@@ -3,6 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { ConfigService } from '@nestjs/config';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   app.useGlobalPipes(new ZodValidationPipe()).enableCors();
+  app.use(cookieParser());
   SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(PORT, () => console.log(`SWAGGER AVAILABLE ON http://localhost:${PORT}/api/docs/`));
