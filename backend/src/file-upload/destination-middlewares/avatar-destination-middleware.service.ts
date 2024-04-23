@@ -2,16 +2,19 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DynamicAvatarDestinationMiddleware implements NestMiddleware {
-  constructor(private _jwtService: JwtService) {
-  }
+  constructor(
+    private _jwtService: JwtService,
+    private configService: ConfigService
+  ) {}
 
-  use(req: any, res: any, next: (error?: any) => void): void {
-    const jwtToken: string = (req.headers.authorization as string).split(' ')[1];
-    const userId: string = this._jwtService.verify(jwtToken).id;
+  async use(req: any, res: any, next: (error?: any) => void): Promise<void> {
+    const jwtToken: string = req.cookies.Authorization;
+    const userId = await this._jwtService.verify(jwtToken, { secret: this.configService.get('JWT_SECRET_KEY') }).id;
+
     const filePath: string = path.resolve('src', 'files', userId);
 
     if (!fs.existsSync(filePath)) {
@@ -20,5 +23,5 @@ export class DynamicAvatarDestinationMiddleware implements NestMiddleware {
 
     req['dynamicDestination'] = filePath;
     next();
-  };
+  }
 }

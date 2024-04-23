@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import path from 'path';
@@ -9,12 +10,13 @@ import { UserService } from 'src/user/user.service';
 export class FileUploadService {
   constructor(
     private jwtService: JwtService,
-    private userService: UserService
+    private userService: UserService,
+    private configService: ConfigService
   ) {}
 
   async uploadAvatar(request: Request) {
-    const jwtToken = request.headers.authorization.split(' ')[1];
-    const userJwtInfo = await this.jwtService.verify(jwtToken);
+    const jwtToken = request.cookies.Authorization;
+    const userJwtInfo = await this.jwtService.verify(jwtToken, { secret: this.configService.get('JWT_SECRET_KEY') });
     const userId = userJwtInfo.id;
     const user: User = await this.userService.findUserByPK(userId);
 
