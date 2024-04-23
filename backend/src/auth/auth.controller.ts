@@ -5,7 +5,7 @@ import { Controller, HttpStatus, Post, HttpCode, Body, Get, Req, Res } from '@ne
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
-import { UserLoginResponse, UserRegisterResponse } from 'contracts';
+import { UserLoginResponse, UserRegisterResponse } from 'zod-contracts';
 import { Request, Response } from 'express';
 
 @ApiTags('auth')

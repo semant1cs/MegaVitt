@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserLoginRequestSchema } from 'contracts';
+import { UserLoginRequestSchema } from 'zod-contracts';
 import { createZodDto } from 'nestjs-zod';
 
 export class SignInDto extends createZodDto(UserLoginRequestSchema) {
