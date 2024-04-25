@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import AuthStore from "@store/AuthStore";
 import { AdminPanelViewProps } from "./AdminPanel.types";
 
-const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut }) => {
+const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) => {
   const navigate = useNavigate();
   const userName = AuthStore.initialUserState?.username;
 
@@ -45,7 +45,7 @@ const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut }) => {
           </li>
         </ul>
       </LayoutHeader>
-      <LayoutBody>asd</LayoutBody>
+      <LayoutBody>{usersList?.map(user => <div key={user.id}>{user.username}</div>)}</LayoutBody>
     </>
   );
 };
