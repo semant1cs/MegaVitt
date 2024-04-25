@@ -18,5 +18,5 @@ export const GetUserResponseSchema = z.object({
    }))
 });
 
-export type UserLoginRequest = z.infer<typeof GetUserRequestSchema>;
-export type UserLoginResponse = z.infer<typeof GetUserResponseSchema>;
+export type GetUserRequest = z.infer<typeof GetUserRequestSchema>;
+export type GetUserResponse = z.infer<typeof GetUserResponseSchema>;

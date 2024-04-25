@@ -87,3 +87,4 @@ backend/.env
 .env
 
 backend/contracts/build
+contracts/build/commands/index.js
