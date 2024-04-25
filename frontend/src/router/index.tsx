@@ -4,6 +4,7 @@ import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
 import AllSites from "@views/AllSites";
 import AuthStore from "@store/AuthStore";
+import AdminPanel from "@components/AdminPanel";
 // import Creator from "@views/Creator";
 
 type RouteType = {
@@ -18,7 +19,13 @@ const AppRouter: React.FC = memo(() => {
     // { path: "/creator", element: <Creator /> },
   ];
 
-  const privateRoutes: RouteType[] = [...publicRoutes, ...[{ path: "/cabinet", element: <AllSites /> }]];
+  const privateRoutes: RouteType[] = [
+    ...publicRoutes,
+    ...[
+      { path: "/cabinet", element: <AllSites /> },
+      { path: "/admin", element: <AdminPanel /> },
+    ],
+  ];
 
   const location = useLocation();
   const isAuth = !!localStorage.getItem("userToken");

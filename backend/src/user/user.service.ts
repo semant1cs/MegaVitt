@@ -6,6 +6,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import Role from 'src/role/entities/role.entity';
 import { AddRoleDto } from './dto/add-role.dto';
 
+const configGetUserEndpoint = { attributes: { exclude: ['password'] }, include: ['roles'] };
+
 @Injectable()
 export class UserService {
   constructor(
@@ -46,18 +48,18 @@ export class UserService {
   }
 
   public async findOneById(id: string) {
-    const user = await this.userRepository.findOne({ where: { id: id }, include: { all: true } });
+    const user = await this.userRepository.findOne({ ...configGetUserEndpoint });
     if (!user) throw new HttpException('Пользователя не существует', 400);
     return user;
   }
 
   public async findOneByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email: email }, include: { all: true } });
+    const user = await this.userRepository.findOne({ where: { email: email } });
     if (user) return user;
   }
 
-  public findAll(): Promise<User[]> {
-    return this.userRepository.findAll({ include: { all: true } });
+  public async findAll(): Promise<User[]> {
+    return this.userRepository.findAll(configGetUserEndpoint);
   }
 
   public async updateAvatar(user: User, avatar: string) {
