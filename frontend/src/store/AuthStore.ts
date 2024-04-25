@@ -51,6 +51,15 @@ class AuthStore {
     }
   }
 
+  async logOut() {
+    try {
+      // const {data: responseData} = await authAxiosInstance.post(logOutURL);
+      localStorage.removeItem("userToken");
+    } catch (error) {
+      LayoutStore.setToaster(await getErrorMessage(error));
+    }
+  }
+
   /** Получение данных о пользователе */
   async getProfile() {
     LayoutStore.showLoader(true);

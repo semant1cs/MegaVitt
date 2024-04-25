@@ -1,0 +1,23 @@
+@import "@reactStyles/vars.scss";
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &__item {
+    @include titleText();
+    font-weight: 400;
+    cursor: pointer;
+    color: $grayscale-100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+      .nav__icon {
+        background-color: $primary-10;
+      }
+    }
+  }
+}
