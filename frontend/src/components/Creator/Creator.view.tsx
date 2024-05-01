@@ -11,15 +11,10 @@ import { FC } from "react";
 import type { TCreatorViewProps } from "./Creator.types";
 import layoutStyles from "@layout/Layout.module.scss";
 import LayoutHeader from "@layout/Header";
-import LayoutBody from "@layout/Body";
+
 import Button from "@ui/Button";
-import styles from "./Creator.module.scss";
 import { useNavigate } from "react-router-dom";
-import TextFieldContainer from "@ui/TextField/TextFieldContainer";
-import TextFieldLabel from "@ui/TextField/TextFieldLabel";
-import TextFieldInner from "@ui/TextField/TextFieldInner";
-import TextField from "@ui/TextField";
-import Template from "./Template";
+import Initialization from "./Initialization";
 
 // interface Element {
 //   id: number;
@@ -169,41 +164,7 @@ const CreatorView: FC<TCreatorViewProps> = props => {
         </ul>
       </LayoutHeader>
 
-      <LayoutBody classNames={{ body: styles.creator }}>
-        <div className={styles.header}>
-          <h2 className={styles.header__title}>Создание сайта&nbsp;&mdash; шаг&nbsp;1</h2>
-
-          <div className={styles.header__inputs}>
-            <TextFieldContainer className={styles.input}>
-              <TextFieldLabel>Название сайта</TextFieldLabel>
-
-              <TextFieldInner>
-                <TextField
-                  value={""}
-                  onChange={() => {}}
-                />
-              </TextFieldInner>
-            </TextFieldContainer>
-
-            <TextFieldContainer className={styles.input}>
-              <TextFieldLabel>Адрес страницы</TextFieldLabel>
-
-              <TextFieldInner>
-                <TextField
-                  value={""}
-                  onChange={() => {}}
-                />
-              </TextFieldInner>
-            </TextFieldContainer>
-          </div>
-        </div>
-
-        <section className={styles.templates}>
-          <h3 className={styles.templates__title}>Выберите шаблон</h3>
-
-          <Template />
-        </section>
-      </LayoutBody>
+      <Initialization />
     </>
   );
 };

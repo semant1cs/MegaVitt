@@ -18,7 +18,7 @@
   }
 
   &__secondary {
-    @include mainText();
+    @include additionalText();
     padding: 12px 20px;
     background-color: $grayscale-400;
     transition: all 0.3s ease;
@@ -50,6 +50,8 @@
   transition: all 0.3s ease;
 
   &:hover {
+    color: $grayscale-100;
+    border: 1px solid $primary-10;
     background-color: $primary-10;
   }
 }

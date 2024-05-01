@@ -43,9 +43,9 @@
 }
 
 .textField {
+  @include mainText();
   width: 100%;
   font-weight: 400;
-  @include mainText();
 
   &.light {
     color: $grayscale-100;

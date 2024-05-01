@@ -73,7 +73,7 @@ class AuthStore {
           url_link: "https://localhost/123",
         },
         {
-          id: 234,
+          id: 2344,
           title: "Название сайта",
           image_url: "",
           url_link: "https://localhost/123",

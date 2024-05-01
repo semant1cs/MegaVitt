@@ -21,7 +21,3 @@ export type TVirtualDOMNodeHTML = {
   props: ComponentProps<keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>>;
   children: (TVirtualDOMNodeHTML | string)[];
 };
-
-export type TTemplateContainerProps = {};
-
-export type TTemplateViewProps = {};

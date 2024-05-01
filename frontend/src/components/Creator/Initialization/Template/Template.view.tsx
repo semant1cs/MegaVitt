@@ -1,16 +1,18 @@
 import { FC } from "react";
-import type { TTemplateViewProps } from "../Creator.types";
+import type { TTemplateViewProps } from "../Initialization.types";
 import styles from "./Template.module.scss";
 import Button from "@ui/Button";
 
 const TemplateView: FC<TTemplateViewProps> = props => {
   return (
     <article className={styles.template}>
-      <span className={["plus-icon", styles.template__add].join(" ")}></span>
+      <div className={styles.header}>
+        <span className={["thin-plus-icon", styles.header__add].join(" ")}></span>
+      </div>
 
       <div className={styles.text}>
         <h4 className={styles.text__title}>Пустая страница</h4>
-        <p className={styles.text__link}>Начать с&nbsp;чистого листа</p>
+        <p className={styles.text__description}>Начать с&nbsp;чистого листа</p>
       </div>
 
       <div className={styles.buttons}>

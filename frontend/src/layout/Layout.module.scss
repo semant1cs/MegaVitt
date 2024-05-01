@@ -60,8 +60,8 @@
   background-color: $grayscale-600;
 
   &__container {
+    width: 100%;
     margin: 0 auto;
-    flex: 1 1 auto;
     max-width: 1776px;
     padding: 0 24px;
   }
