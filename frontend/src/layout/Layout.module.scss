@@ -36,12 +36,12 @@
   display: flex;
   flex: 1 1 auto;
   background-color: $grayscale-600;
-  padding: 0 24px;
 
   &__container {
     margin: 0 auto;
     flex: 1 1 auto;
     max-width: 1776px;
+    padding: 0 24px;
   }
 }
 
@@ -60,7 +60,7 @@
   transform: translate(50%, 0%);
 
   &__container {
-    @include titleText();
+    @include mainText();
     padding: 16px;
     display: flex;
     font-style: normal;
@@ -97,7 +97,7 @@
 
   .body {
     &__container {
-      padding: 0 42px;
+      padding: 0 48px;
     }
   }
 }
@@ -113,7 +113,7 @@
 
   .body {
     &__container {
-      padding: 0 84px;
+      padding: 0 96px;
     }
   }
 }
@@ -129,7 +129,7 @@
 
   .body {
     &__container {
-      padding: 0 168px;
+      padding: 0 192px;
     }
   }
 }

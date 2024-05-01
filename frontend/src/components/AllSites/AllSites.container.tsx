@@ -16,9 +16,9 @@ const AllSitesContainer: FC<TAllSitesContainerProps> = observer(props => {
     <AllSitesView
       navigate={useNavigate()}
       cards={initialUserForm?.sites}
-      userName={initialUserForm?.username}
+      userName={initialUserForm?.email}
     />
   );
 });
 
-export { AllSitesContainer };
+export default AllSitesContainer;

@@ -67,7 +67,7 @@
       }
 
       &__text {
-        @include titleText();
+        @include mainText();
         font-weight: 400;
         color: $grayscale-200;
       }

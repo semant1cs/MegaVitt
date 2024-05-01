@@ -7,7 +7,7 @@
 
 .contained {
   &__primary {
-    @include titleText();
+    @include mainText();
     padding: 15px 45px;
     background-color: $primary-500;
     transition: all 0.3s ease;
@@ -18,7 +18,7 @@
   }
 
   &__secondary {
-    @include titleText();
+    @include mainText();
     padding: 12px 20px;
     background-color: $grayscale-600;
     transition: all 0.3s ease;
@@ -29,7 +29,7 @@
   }
 
   &__white {
-    @include titleText();
+    @include mainText();
     padding: 10px 45px;
     color: $grayscale-800;
     background-color: $grayscale-0;
@@ -42,7 +42,7 @@
 }
 
 .outlined {
-  @include defaultText();
+  @include additionalText();
   padding: 12px 20px;
   color: $grayscale-400;
   background-color: transparent;
@@ -55,7 +55,7 @@
 }
 
 .text {
-  @include titleText();
+  @include mainText();
   font-weight: 400;
   transition: all 0.3s ease;
 

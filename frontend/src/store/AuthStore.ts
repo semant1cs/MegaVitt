@@ -3,7 +3,7 @@ import { TAuthenticationForm } from "@components/Authentication/Authentication.t
 import { makeAutoObservable } from "mobx";
 import LayoutStore from "./LayoutStore";
 import getErrorMessage from "../utils/getErrorMessage";
-import type { UserState } from "@components/StartPage/AllSites/AllSites.types";
+import type { UserState } from "@components/AllSites/AllSites.types";
 
 const root = "auth";
 
@@ -62,6 +62,12 @@ class AuthStore {
       const sites: UserState["sites"] = [
         {
           id: 123,
+          title: "Название сайта",
+          image_url: "",
+          url_link: "https://localhost/123",
+        },
+        {
+          id: 234,
           title: "Название сайта",
           image_url: "",
           url_link: "https://localhost/123",

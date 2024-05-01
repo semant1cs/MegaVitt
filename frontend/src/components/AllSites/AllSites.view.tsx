@@ -30,10 +30,11 @@ const AllSitesView: FC<TAllSitesViewProps> = ({ cards, userName, navigate }) => 
           <h2 className={styles.header__title}>Мои сайты</h2>
 
           <Button
+            variant="contained-white"
             className={styles.header__button}
             onClick={() => navigate("/creator")}
           >
-            <span className={"plus-icon"}></span>
+            <span className={["plus-icon", styles.header__icon].join(" ")}></span>
             <span className={styles.header__text}>Создать новый сайт</span>
           </Button>
         </div>

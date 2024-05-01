@@ -4,6 +4,7 @@ export type UserState = {
   id?: string;
   roles?: UserRole[];
   username?: string;
+  email?: string;
 
   /** Моковые данные. Потом убрать */
   sites?: UserSite[];
