@@ -2,6 +2,7 @@ import { FC } from "react";
 import type { TStartPageViewProps } from "./StartPage.types";
 import LayoutHeader from "@layout/Header";
 import styles from "./StartPage.module.scss";
+import layoutStyles from "@layout/Layout.module.scss";
 import { useNavigate } from "react-router-dom";
 import Button from "@ui/Button";
 import LayoutBody from "@layout/Body";
@@ -17,11 +18,11 @@ const StartPageView: FC<TStartPageViewProps> = props => {
     <>
       <LayoutHeader>
         {isAuth ? (
-          <ul className={styles.nav}>
+          <ul className={layoutStyles.nav}>
             <li>
               <Button
                 variant="text"
-                className={styles.nav__item}
+                className={layoutStyles.nav__item}
                 onClick={() => navigate("/cabinet")}
               >
                 Мои сайты
@@ -31,24 +32,24 @@ const StartPageView: FC<TStartPageViewProps> = props => {
             <li>
               <Button
                 variant="text"
-                className={styles.nav__item}
+                className={layoutStyles.nav__item}
                 onClick={() => {}}
               >
                 <span>{userName}</span>
-                <span className={["user-icon", styles.nav__icon].join(" ")}></span>
+                <span className={["user-icon", layoutStyles.nav__icon].join(" ")}></span>
               </Button>
             </li>
           </ul>
         ) : (
-          <ul className={styles.nav}>
+          <ul className={layoutStyles.nav}>
             <li>
               <Button
                 variant="text"
-                className={styles.nav__item}
+                className={layoutStyles.nav__item}
                 onClick={() => navigate("/auth")}
               >
                 <span>Войти</span>
-                <span className={["user-icon", styles.nav__icon].join(" ")}></span>
+                <span className={["user-icon", layoutStyles.nav__icon].join(" ")}></span>
               </Button>
             </li>
           </ul>

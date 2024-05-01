@@ -1,27 +1,5 @@
 @import "@reactStyles/vars.scss";
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  &__item {
-    @include mainText();
-    font-weight: 400;
-    cursor: pointer;
-    color: $grayscale-100;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    &:hover {
-      .nav__icon {
-        background-color: $primary-10;
-      }
-    }
-  }
-}
-
 .allSites {
   gap: 60px;
   display: flex;
@@ -63,20 +41,12 @@
 }
 
 @media (min-width: $sm) {
-  .nav {
-    gap: 30px;
-  }
-
   .sites {
-    gap: 25px;
+    gap: 30px;
   }
 }
 
 @media (min-width: $md) {
-  .nav {
-    gap: 30px;
-  }
-
   .header {
     &__button {
       padding: 14px 30px;
@@ -84,15 +54,11 @@
   }
 
   .sites {
-    gap: 50px;
+    gap: 45px;
   }
 }
 
 @media (min-width: $lg) {
-  .nav {
-    gap: 40px;
-  }
-
   .header {
     &__button {
       padding: 14px 40px;
@@ -100,6 +66,6 @@
   }
 
   .sites {
-    gap: 75px;
+    gap: 60px;
   }
 }

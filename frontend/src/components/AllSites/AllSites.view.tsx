@@ -2,24 +2,25 @@ import { FC } from "react";
 import type { TAllSitesViewProps } from "./AllSites.types";
 import LayoutBody from "@layout/Body";
 import Button from "@ui/Button";
-import { Card } from "./Card";
+import Card from "./Card";
 import styles from "./AllSites.module.scss";
 import LayoutHeader from "@layout/Header";
+import layoutStyles from "@layout/Layout.module.scss";
 
 /** Вьюха для страницы "Мои сайты" */
 const AllSitesView: FC<TAllSitesViewProps> = ({ cards, userName, navigate }) => {
   return (
     <>
       <LayoutHeader>
-        <ul className={styles.nav}>
+        <ul className={layoutStyles.nav}>
           <li>
             <Button
               variant="text"
-              className={styles.nav__item}
+              className={layoutStyles.nav__item}
               onClick={() => {}}
             >
               <span>{userName}</span>
-              <span className={["user-icon", styles.nav__icon].join(" ")}></span>
+              <span className={["user-icon", layoutStyles.nav__icon].join(" ")}></span>
             </Button>
           </li>
         </ul>

@@ -30,6 +30,28 @@
   }
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &__item {
+    @include mainText();
+    font-weight: 400;
+    cursor: pointer;
+    color: $grayscale-100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+      .nav__icon {
+        background-color: $primary-10;
+      }
+    }
+  }
+}
+
 /** Body */
 
 .body {
@@ -95,6 +117,10 @@
     padding: 0 24px;
   }
 
+  .nav {
+    gap: 30px;
+  }
+
   .body {
     &__container {
       padding: 0 48px;
@@ -111,6 +137,10 @@
     }
   }
 
+  .nav {
+    gap: 30px;
+  }
+
   .body {
     &__container {
       padding: 0 96px;
@@ -125,6 +155,10 @@
     &__logo {
       font-size: 28px;
     }
+  }
+
+  .nav {
+    gap: 40px;
   }
 
   .body {

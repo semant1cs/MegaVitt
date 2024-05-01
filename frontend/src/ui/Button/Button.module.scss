@@ -20,7 +20,7 @@
   &__secondary {
     @include mainText();
     padding: 12px 20px;
-    background-color: $grayscale-600;
+    background-color: $grayscale-400;
     transition: all 0.3s ease;
 
     &:hover {
