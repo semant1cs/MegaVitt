@@ -8,12 +8,28 @@ export type TNode = {
 };
 
 class VirtualDOM {
-  virtualDOM: TNode = {
-    tagName: "div",
-    props: { id: "virtual-dom-root" },
-    children: [],
-  };
-  dom: ReactElement = (<div id="virtual-dom-root"></div>);
+  public getAllAttributes(element: HTMLElement) {
+    function parseAttributeValue(value: string) {
+      const obj: { [key: string]: any } = {};
+
+      value.split(";").forEach(attr => {
+        const [property, val] = attr.split(":").map(a => a.trim());
+        if (property && val) {
+          obj[property] = val;
+        }
+      });
+
+      return obj;
+    }
+
+    const attributes: { [key: string]: any } = {};
+
+    Array.from(element.attributes).forEach(attr => {
+      attributes[attr.name] = attr.value.includes(";") ? parseAttributeValue(attr.value) : attr.value;
+    });
+
+    return attributes;
+  }
 
   public createVNode(tagName: TNode["tagName"], props: TNode["props"] = {}, children: (TNode | string)[] = []): TNode {
     if (typeof tagName === "function") {
@@ -45,7 +61,14 @@ class VirtualDOM {
       : React.createElement(tagName, props);
   }
 
-  public appendChild(patch: TNode, child: TNode): void {}
+  public appendChild(parent: TNode, child: TNode): TNode {
+    // console.log("parent", parent);
+    // console.log("child", child);
+
+    parent.children.push(child);
+
+    return parent;
+  }
 }
 
 export const virtualDOM = new VirtualDOM();
