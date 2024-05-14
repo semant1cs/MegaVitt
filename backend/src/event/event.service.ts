@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import Event from './entities/event.entity';
@@ -7,28 +7,25 @@ import { raw } from 'express';
 
 @Injectable()
 export class EventService {
-  constructor(@InjectModel(Event) private eventModel: typeof Event) {}
+  constructor(@InjectModel(Event) private _eventRepository: typeof Event) {}
   public async create(createEventDto: CreateEventDto) {
-    const newEvent = await this.eventModel.create(createEventDto);
+    const newEvent = await this._eventRepository.create(createEventDto);
     return newEvent;
   }
 
   public async findAll() {
-    return await this.eventModel.findAll();
+    return await this._eventRepository.findAll();
   }
 
-  public async findOne(id: string) {
-    return await this.eventModel.findByPk(id);
+  public findOne(id: number) {
+    return `This action returns a #${id} event`;
   }
 
   public update(id: number, updateEventDto: UpdateEventDto) {
     return `This action updates a #${id} event`;
   }
 
-  public async remove(id: string) {
-    const event = await this.findOne(id);
-    if (!event) throw new HttpException('Мероприятие не найдено', 400);
-    await this.eventModel.destroy({ where: { id } });
-    return event;
+  remove(id: number) {
+    return `This action removes a #${id} event`;
   }
 }

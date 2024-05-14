@@ -3,10 +3,8 @@ import { UUIDV4 } from 'sequelize';
 import { DataType, Column, Model, Table, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Participant from '../../participant/entities/participant.entity';
 import Site from '../../site/entities/site.entity';
-import Ticket from 'src/ticket/entities/ticket.entity';
 
 interface EventCreationAttributes {
-  id: string;
   name: string;
 }
 
@@ -39,7 +37,7 @@ export default class Event extends Model<Event, EventCreationAttributes> {
     example: 'true',
     description: 'Участники обязательны или нет',
   })
-  isParticipantRequired: boolean;
+  is_participant_required: boolean;
 
   @Column({
     type: DataType.INTEGER,
@@ -50,7 +48,7 @@ export default class Event extends Model<Event, EventCreationAttributes> {
     example: '123',
     description: 'Количество участников',
   })
-  participantCount: number;
+  participant_count: number;
 
   @Column({
     type: DataType.INTEGER,
@@ -61,7 +59,7 @@ export default class Event extends Model<Event, EventCreationAttributes> {
     example: '12345',
     description: 'Лимит участников на событии',
   })
-  participantLimit: number;
+  participant_limit: number;
 
   @Column({
     type: DataType.BOOLEAN,
@@ -71,7 +69,7 @@ export default class Event extends Model<Event, EventCreationAttributes> {
     example: 'true',
     description: 'Билеты обязательны или нет',
   })
-  isTicketsRequired: boolean;
+  is_tickets_required: boolean;
 
   @Column({
     type: DataType.INTEGER,
@@ -82,17 +80,14 @@ export default class Event extends Model<Event, EventCreationAttributes> {
     example: '12345',
     description: 'Цена билета',
   })
-  ticketCost: number;
-
-  @BelongsTo(() => Site)
-  site: Site;
-
-  @ForeignKey(() => Site)
-  siteId: string;
+  ticket_cost: number;
 
   @HasMany(() => Participant)
   participants: Participant[];
 
-  @HasMany(() => Ticket)
-  tickets: Ticket[];
+  @ForeignKey(()=> Site)
+  site_id: string;
+
+  @BelongsTo(()=> Site)
+  site: Site;
 }

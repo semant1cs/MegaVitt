@@ -11,22 +11,22 @@ import { RolesGuard } from 'src/utils/access';
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
-  @Post()
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventService.create(createEventDto);
-  }
+  // @Post()
+  // create(@Body() createEventDto: CreateEventDto) {
+  //   return this.eventService.create(createEventDto);
+  // }
 
-  @Get()
-  @Roles(['user'])
-  @UseGuards(RolesGuard)
-  findAll() {
-    return this.eventService.findAll();
-  }
+  // @Get()
+  // @Roles(['user'])
+  // @UseGuards(RolesGuard)
+  // findAll() {
+  //   return this.eventService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventService.findOne(id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.eventService.findOne(+id);
+  // }
 
   // @Patch(':id')
   // @ApiBearerAuth()
@@ -34,9 +34,9 @@ export class EventController {
   //   return this.eventService.update(+id, updateEventDto);
   // }
 
-  @Delete(':id')
-  @ApiBearerAuth()
-  remove(@Param('id') id: string) {
-    return this.eventService.remove(id);
-  }
+  // @Delete(':id')
+  // @ApiBearerAuth()
+  // remove(@Param('id') id: string) {
+  //   return this.eventService.remove(+id);
+  // }
 }

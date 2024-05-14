@@ -1,9 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
-import Event from 'src/event/entities/event.entity';
-import { Column, DataType, Model, Table, ForeignKey } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-interface TicketCreationAttributes {}
+interface TicketCreationAttributes {
+  email: string;
+  password: string;
+}
 
 @Table({ tableName: 'tickets' })
 export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
@@ -28,7 +30,7 @@ export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
     example: '488f36c1-d856-456a-b3bd-6bba5fba64f4',
     description: 'ID владельца билета',
   })
-  ownerId: string;
+  owner_id: string;
 
   @Column({
     type: DataType.INTEGER,
@@ -39,7 +41,4 @@ export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
     description: 'Стоимость билета',
   })
   cost: number;
-
-  @ForeignKey(() => Event)
-  eventId: string;
 }
