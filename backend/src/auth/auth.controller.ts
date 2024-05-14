@@ -30,7 +30,7 @@ export class AuthController {
   @Get('profile')
   @ApiBearerAuth()
   getProfile(@Req() req: Request) {
-    return this.authService.getUserInfo(req);
+    return req.user;
   }
 
   @Get('refresh')

@@ -2,15 +2,17 @@ import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './../user/user.service';
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { comparePassword, encodePassword } from 'src/utils/bcrypt';
-import { Request, Response } from 'express';
+import Role from 'src/role/entities/role.entity';
+import { Request, Response, response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import User from 'src/user/entities/user.entity';
 
 type JwtPayload = {
   email: string;
   id: string;
+  roles: Role[];
 };
 
 @Injectable()
@@ -24,8 +26,6 @@ export class AuthService {
   async signIn(signInDto: SignInDto, request: Request, response: Response) {
     const { email, password } = signInDto;
     const user: User = await this.userService.findOneByEmail(email);
-
-    if (!user) throw new HttpException('Пользователь с такой почтой не найден', 404);
 
     if (!comparePassword(password, user?.password)) {
       throw new UnauthorizedException();
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   private async getTokens(user: User) {
-    const payload: JwtPayload = { email: user.email, id: user.id };
+    const payload: JwtPayload = { email: user.email, id: user.id, roles: user.roles };
 
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
@@ -82,9 +82,7 @@ export class AuthService {
   async refreshTokens(refreshToken: string, response: Response, request: Request, options: { fromAuth: boolean }) {
     let userInfo: User;
 
-    if (refreshToken === undefined && request.cookies.Authorization === undefined)
-      throw new HttpException('Авторизуйтесь заново', 400);
-    else if (refreshToken === undefined) {
+    if (refreshToken === undefined) {
       userInfo = await this.jwtService.verifyAsync(request.cookies.Authorization, {
         secret: this.configService.get('JWT_SECRET_KEY'),
       });
@@ -102,12 +100,5 @@ export class AuthService {
     if (options.fromAuth) response.send({ access_token: tokens.accessToken });
 
     return { access_token: tokens.accessToken };
-  }
-
-  public async getUserInfo(req: Request) {
-    const userId = req.user['id'];
-    const user = await this.userService.findOneById(userId);
-    if (!user) throw new HttpException('Произошла непредвиденная ошибка, перезайдите', HttpStatus.BAD_REQUEST);
-    return user;
   }
 }
