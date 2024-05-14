@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Global, Module, forwardRef } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
@@ -9,6 +9,7 @@ import Role from 'src/role/entities/role.entity';
 import UserRole from 'src/role/entities/user-role.entity';
 import { RoleModule } from 'src/role/role.module';
 
+@Global()
 @Module({
   controllers: [UserController],
   providers: [UserService],

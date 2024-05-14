@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -23,6 +23,11 @@ export class UserController {
   @Get()
   getAllUsers(): Promise<User[]> {
     return this.userService.findAll();
+  }
+
+  @Delete(':id')
+  removeUser(@Param('id') id: string) {
+    return this.userService.remove(id);
   }
 
   @Post(':id' + '/addRole/')

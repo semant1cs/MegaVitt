@@ -1,12 +1,14 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table, HasOne } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, Model, Table, HasOne, ForeignKey } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 import { ApiProperty } from '@nestjs/swagger';
 import User from '../../user/entities/user.entity';
+import Event from 'src/event/entities/event.entity';
 
 interface SiteCreationAttributes {
+  id: string;
+  ownerId: string;
   name: string;
-  owner_id: string;
-  event_id: string;
+  link: string;
 }
 
 @Table({ tableName: 'sites' })
@@ -30,15 +32,6 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   name: string;
 
-  // @Column({
-  //   type: DataType.STRING,
-  // })
-  // @ApiProperty({
-  //   example: 'Ссылка на билд сайта',
-  //   description: 'C:/MegaVitt/builds',
-  // })
-  // build_ref: string;
-
   @Column({
     type: DataType.STRING,
   })
@@ -48,26 +41,12 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   link: string;
 
-  @Column({
-    type: DataType.STRING,
-  })
-  @ApiProperty({
-    example: 'Ссылка на сайта',
-    description: 'МойСайт.русский',
-  })
-  event_id: string;
-  @Column({
-    type: DataType.STRING,
-  })
-  @ApiProperty({
-    example: 'Ссылка на сайта',
-    description: 'МойСайт.русский',
-  })
-  site_id: string;
-
-  @ForeignKey(() => User)
-  owner_id: string;
+  @HasOne(() => Event)
+  event: Event;
 
   @BelongsTo(() => User)
   owner: User;
+
+  @ForeignKey(() => User)
+  ownerId: string;
 }

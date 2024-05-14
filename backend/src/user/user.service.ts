@@ -41,8 +41,8 @@ export class UserService {
     throw new HttpException('Пользователь или роль не найдены', HttpStatus.NOT_FOUND);
   }
 
-  public async findUserByPK(id: string) {
-    return this.userRepository.findByPk(id);
+  public findUserByPK(id: string) {
+    return this.userRepository.findByPk(id, { include: { all: true } });
   }
 
   public async findOneById(id: string) {
@@ -62,6 +62,13 @@ export class UserService {
 
   public async updateAvatar(user: User, avatar: string) {
     await user.update({ avatar: avatar });
+    return user;
+  }
+
+  public async remove(id: string) {
+    const user = await this.findUserByPK(id);
+    if (!user) throw new HttpException('Пользователя не существует', 404);
+    await this.userRepository.destroy({ where: { id } });
     return user;
   }
 }
