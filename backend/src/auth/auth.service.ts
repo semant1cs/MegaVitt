@@ -84,6 +84,10 @@ export class AuthService {
   async refreshTokens(refreshToken: string, response: Response, request: Request, options: { fromAuth: boolean }) {
     let userInfo: User;
 
+    if (!(refreshToken && request.cookies.Authorization)) {
+      throw new HttpException('Перелогиньтесь', 400);
+    }
+
     if (refreshToken === undefined) {
       userInfo = await this.jwtService.verifyAsync(request.cookies.Authorization, {
         secret: this.configService.get('JWT_SECRET_KEY'),
