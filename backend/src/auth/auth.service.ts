@@ -49,7 +49,7 @@ export class AuthService {
     } else {
       const hashedPassword = encodePassword(password);
       await this.userService.create({ email: email, password: hashedPassword, username: username });
-      return this.signIn({ email: email, password: password }, request, response);
+      return { email: email, password: password };
     }
   }
 
