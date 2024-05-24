@@ -107,4 +107,8 @@ export class AuthService {
 
     return { access_token: tokens.accessToken };
   }
+
+  async getProfileUser(id: string) {
+    return await this.userService.findOneById(id, { attributes: { exclude: ['password'] }, include: ['roles'] });
+  }
 }
