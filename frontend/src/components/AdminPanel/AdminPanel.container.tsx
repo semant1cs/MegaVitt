@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import AdminPanelStore from "@store/AdminPanelStore";
 import { observer } from "mobx-react-lite";
 
-const AdminPanelContainer: FC = props => {
+const AdminPanelContainer: FC = observer(props => {
   const navigate = useNavigate();
   const userList = AdminPanelStore.usersList;
 
   useEffect(() => {
     AdminPanelStore.getUsers();
-  });
+  }, []);
 
   function handleLogOut() {
     AuthStore.logOut().then(() => navigate("/"));
@@ -23,6 +23,6 @@ const AdminPanelContainer: FC = props => {
       usersList={userList}
     />
   );
-};
+});
 
 export { AdminPanelContainer };

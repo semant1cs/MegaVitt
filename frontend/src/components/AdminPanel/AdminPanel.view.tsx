@@ -6,6 +6,7 @@ import Button from "@ui/Button";
 import { useNavigate } from "react-router-dom";
 import AuthStore from "@store/AuthStore";
 import { AdminPanelViewProps } from "./AdminPanel.types";
+import CustomTable from "@ui/Table";
 
 const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) =>
     <>
       <LayoutHeader>
         <ul className={styles.nav}>
-
           <li>
             <Button
               variant="text"
@@ -36,7 +36,7 @@ const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) =>
           </li>
         </ul>
       </LayoutHeader>
-      <LayoutBody>{usersList?.map(user => <div key={user.id}>{user.username}</div>)}</LayoutBody>
+      <LayoutBody>{usersList !== undefined ? <CustomTable rows={usersList} /> : ""}</LayoutBody>
     </>
   );
 };

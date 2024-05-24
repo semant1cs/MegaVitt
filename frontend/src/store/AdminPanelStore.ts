@@ -10,6 +10,7 @@ class AdminPanelStore {
   }
 
   usersList?: GetUserResponse[];
+
   async getUsers() {
     const response = await authAxiosInstance.get(usersUrl);
     this.setUserList(response.data);
@@ -17,6 +18,10 @@ class AdminPanelStore {
 
   setUserList(fetchedUsersList: GetUserResponse[]) {
     this.usersList = fetchedUsersList;
+  }
+
+  async deleteUsers(usersIds: string[]) {
+    usersIds.forEach(userId => authAxiosInstance.delete(`${usersUrl}/${userId}`));
   }
 }
 
