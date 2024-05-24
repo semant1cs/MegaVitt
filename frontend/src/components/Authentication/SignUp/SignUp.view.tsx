@@ -42,6 +42,9 @@ const SignUpView: FC<TSignUpViewProps> = ({
           <TextFieldLabel>Имя пользователя</TextFieldLabel>
 
           <TextField
+            type="text"
+            name="username"
+            autoComplete="username"
             value={form?.username || ""}
             onChange={event => setUsername(event.target.value)}
           />
@@ -53,6 +56,9 @@ const SignUpView: FC<TSignUpViewProps> = ({
           <TextFieldLabel>Электронная почта</TextFieldLabel>
 
           <TextField
+            type="email"
+            name="email"
+            autoComplete="off"
             value={form?.email || ""}
             onChange={event => setEmail(event.target.value)}
           />
@@ -64,6 +70,8 @@ const SignUpView: FC<TSignUpViewProps> = ({
           <TextFieldLabel>Пароль</TextFieldLabel>
 
           <TextField
+            type="password"
+            name="password"
             value={form?.password || ""}
             onChange={event => setPassword(event.target.value)}
           />
@@ -79,7 +87,7 @@ const SignUpView: FC<TSignUpViewProps> = ({
         >
           Зарегистрироваться
         </Button>
-        
+
         <div className={styles.buttons__hint}>
           <p className={styles.buttons__hint__text}>Уже есть аккаунт?</p>
 

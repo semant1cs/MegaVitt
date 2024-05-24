@@ -1,0 +1,57 @@
+@import "@reactStyles/vars.scss";
+
+.template {
+  padding: 15px;
+}
+
+.header {
+  display: flex;
+  padding: 75px 60px;
+  align-items: center;
+  justify-content: center;
+
+  .header__add {
+    width: 30px;
+    height: 30px;
+    background-color: $grayscale-200;
+  }
+}
+
+.text {
+  gap: 10px;
+  display: flex;
+  padding: 30px 0;
+  flex-direction: column;
+  border-top: 1px solid $grayscale-200;
+
+  &__title {
+    @include additionalText();
+    color: $grayscale-800;
+  }
+
+  &__description {
+    @include additionalText_2();
+    color: $grayscale-600;
+  }
+}
+
+.buttons {
+  gap: 20px;
+  display: flex;
+
+  &__select {
+    font-weight: 400;
+  }
+
+  &__look {
+  }
+}
+
+@media (min-width: $sm) {
+}
+
+@media (min-width: $md) {
+}
+
+@media (min-width: $lg) {
+}

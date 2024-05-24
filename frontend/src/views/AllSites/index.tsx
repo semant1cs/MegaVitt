@@ -1,4 +1,4 @@
-import AllSitesContainer from "@components/StartPage/AllSites";
+import AllSitesContainer from "@components/AllSites/AllSites.container";
 import Layout from "@layout/index";
 
 const AllSites = () => {

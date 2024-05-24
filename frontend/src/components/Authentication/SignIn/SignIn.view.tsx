@@ -34,6 +34,9 @@ const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleS
           <TextFieldLabel>Электронная почта</TextFieldLabel>
 
           <TextField
+            type="email"
+            name="email"
+            autoComplete="off"
             value={form?.email || ""}
             onChange={event => setEmail(event.target.value)}
           />
@@ -45,6 +48,8 @@ const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleS
           <TextFieldLabel>Пароль</TextFieldLabel>
 
           <TextField
+            type="password"
+            name="password"
             value={form?.password || ""}
             onChange={event => setPassword(event.target.value)}
           />

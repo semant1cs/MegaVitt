@@ -1,0 +1,71 @@
+@import "@reactStyles/vars.scss";
+
+.allSites {
+  gap: 60px;
+  display: flex;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  flex-direction: column;
+}
+
+.header {
+  gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__title {
+    @include title_1();
+    color: $grayscale-0;
+  }
+
+  &__button {
+    gap: 10px;
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    color: $grayscale-800;
+  }
+
+  .header__icon {
+    width: 20px;
+    height: 20px;
+    background-color: $grayscale-800;
+  }
+}
+
+.sites {
+  gap: 15px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+@media (min-width: $sm) {
+  .sites {
+    gap: 30px;
+  }
+}
+
+@media (min-width: $md) {
+  .header {
+    &__button {
+      padding: 14px 30px;
+    }
+  }
+
+  .sites {
+    gap: 45px;
+  }
+}
+
+@media (min-width: $lg) {
+  .header {
+    &__button {
+      padding: 14px 40px;
+    }
+  }
+
+  .sites {
+    gap: 60px;
+  }
+}

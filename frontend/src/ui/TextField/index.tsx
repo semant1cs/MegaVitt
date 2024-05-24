@@ -2,9 +2,10 @@ import { FC } from "react";
 import type { TTextField } from "./TextField.types";
 import styles from "./TextField.module.scss";
 
-const TextField: FC<TTextField> = props => {
+const TextField: FC<TTextField> = ({ ...props }) => {
   return (
     <input
+      {...props}
       type={props.type}
       value={props.value}
       onChange={props.onChange}

@@ -8,9 +8,12 @@
   background-color: $grayscale-100;
 
   &__container {
-    margin: unset;
     flex: unset;
+    display: flex;
+    margin: unset;
     max-width: unset;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -61,13 +64,13 @@
     &__hint {
       gap: 30px;
       display: flex;
-     
+
       &__button {
         color: $grayscale-200;
       }
 
       &__text {
-        @include titleText();
+        @include mainText();
         font-weight: 400;
         color: $grayscale-200;
       }

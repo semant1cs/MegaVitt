@@ -25,7 +25,7 @@ export class AuthService {
 
   async signIn(signInDto: SignInDto, request: Request, response: Response) {
     const { email, password } = signInDto;
-    const user: User = await this.userService.findOneByEmail(email);
+    const user: User = await this.userService.findOneByEmail(email, { exclude: ['roles'], include: { all: true } });
 
     if (!comparePassword(password, user?.password)) {
       throw new UnauthorizedException();
@@ -49,7 +49,7 @@ export class AuthService {
     } else {
       const hashedPassword = encodePassword(password);
       await this.userService.create({ email: email, password: hashedPassword, username: username });
-      return this.signIn({ email: email, password: password }, request, response);
+      return { email: email, password: password };
     }
   }
 
@@ -75,12 +75,18 @@ export class AuthService {
   }
 
   private async setTokensCookie(accessToken: string, refreshToken: string, response: Response) {
-    response.cookie('refresh_token', refreshToken);
-    response.cookie('Authorization', accessToken);
+    if (response.cookie) {
+      response.cookie('refresh_token', refreshToken);
+      response.cookie('Authorization', accessToken);
+    }
   }
 
   async refreshTokens(refreshToken: string, response: Response, request: Request, options: { fromAuth: boolean }) {
     let userInfo: User;
+
+    if (!(refreshToken && request.cookies.Authorization)) {
+      throw new HttpException('Перелогиньтесь', 400);
+    }
 
     if (refreshToken === undefined) {
       userInfo = await this.jwtService.verifyAsync(request.cookies.Authorization, {
@@ -92,7 +98,7 @@ export class AuthService {
       });
     }
 
-    const user = await this.userService.findOneById(userInfo.id);
+    const user = await this.userService.findOneByEmail(userInfo.email, { include: { all: true }, exclude: ['roles'] });
     const tokens = await this.getTokens(user);
 
     await this.setTokensCookie(tokens.accessToken, tokens.refreshToken, response);

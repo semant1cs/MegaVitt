@@ -22,7 +22,7 @@ export type TTextField = {
   className?: string;
   variant?: "light" | "dark";
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 export type TTextFieldHintText = {
   isError?: boolean;
@@ -34,4 +34,4 @@ export type TTextFieldUnderline = {
   isError?: boolean;
   className?: string;
   variant?: "light" | "dark";
-}
+};

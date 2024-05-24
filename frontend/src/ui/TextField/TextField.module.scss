@@ -7,7 +7,7 @@
 }
 
 .label {
-  @include defaultText();
+  @include additionalText();
 
   &.light {
     color: $grayscale-200;
@@ -19,7 +19,7 @@
 }
 
 .hint {
-  @include defaultText();
+  @include additionalText();
 
   &.light {
     color: $grayscale-200;
@@ -43,26 +43,27 @@
 }
 
 .textField {
-  @include titleText();
+  @include mainText();
+  width: 100%;
   font-weight: 400;
 
   &.light {
     color: $grayscale-100;
   }
- 
+
   &.dark {
     color: $grayscale-800;
   }
 }
 
-.underline{
+.underline {
   width: 100%;
   height: 1px;
 
   &.light {
     background-color: $grayscale-200;
   }
- 
+
   &.dark {
     background-color: $grayscale-400;
   }
