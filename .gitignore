@@ -88,3 +88,4 @@ backend/.env
 
 backend/contracts/build
 contracts/build/commands/index.js
+/backend/src/files/
