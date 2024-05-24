@@ -15,15 +15,6 @@ const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) =>
     <>
       <LayoutHeader>
         <ul className={styles.nav}>
-          <li>
-            <Button
-              variant="text"
-              className={styles.nav__item}
-              onClick={() => navigate("/cabinet")}
-            >
-              Мои сайты
-            </Button>
-          </li>
 
           <li>
             <Button
