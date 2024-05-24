@@ -40,7 +40,7 @@ import * as path from 'path';
         autoLoadModels: true,
       }),
     }),
-    ServeStaticModule.forRoot({ rootPath: path.join(__dirname, '..', '..', 'src', 'files') }),
+    ServeStaticModule.forRoot({ rootPath: path.join(__dirname, '..', 'src', 'files') }),
     UserModule,
     AuthModule,
     ParticipantModule,

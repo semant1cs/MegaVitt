@@ -11,12 +11,12 @@ const configGetUserEndpoint = { attributes: { exclude: ['password'] }, include: 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User) private userRepository: typeof User,
+    @InjectModel(User) private userModel: typeof User,
     private roleService: RoleService
   ) {}
 
   public async create(dto: CreateUserDto): Promise<User> {
-    const user = await this.userRepository.create(dto);
+    const user = await this.userModel.create(dto);
     const role = await this.roleService.getRoleByName('user');
 
     if (role === null) throw new HttpException('Роль обычного пользователя не задана (user)', HttpStatus.BAD_REQUEST);
@@ -44,26 +44,32 @@ export class UserService {
   }
 
   public async findUserByPK(id: string) {
-    return this.userRepository.findByPk(id);
+    return this.userModel.findByPk(id);
   }
 
-  public async findOneById(id: string) {
-    const user = await this.userRepository.findOne({ ...configGetUserEndpoint });
+  public async findOneById(id: string, config = configGetUserEndpoint) {
+    const user = await this.userModel.findOne(config);
     if (!user) throw new HttpException('Пользователя не существует', 400);
     return user;
   }
 
   public async findOneByEmail(email: string, options = { include: { all: true }, exclude: [''] }) {
-    const user = await this.userRepository.findOne({ where: { email: email }, ...options.include, ...options.exclude });
+    const user = await this.userModel.findOne({ where: { email: email }, ...options.include, ...options.exclude });
     if (user) return user;
   }
 
   public async findAll(): Promise<User[]> {
-    return this.userRepository.findAll(configGetUserEndpoint);
+    return this.userModel.findAll(configGetUserEndpoint);
   }
 
   public async updateAvatar(user: User, avatar: string) {
     await user.update({ avatar: avatar });
+    return user;
+  }
+
+  public async deleteUser(id: string) {
+    const user = await this.findOneById(id, { attributes: { exclude: ['password', 'roles'] }, include: [] });
+    await this.userModel.destroy({ where: { id } });
     return user;
   }
 }
