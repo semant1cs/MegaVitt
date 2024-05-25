@@ -18,7 +18,11 @@ import Site from './site/entities/site.entity';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-middlewares/avatar-destination-middleware.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { TemplateModule } from './template/template.module';
+import { PresetFontsModule } from './preset-fonts/preset-fonts.module';
+import { PresetColorsModule } from './preset-colors/preset-colors.module';
 import * as path from 'path';
+import Template from './template/entities/template.entity';
 
 @Module({
   imports: [
@@ -36,7 +40,7 @@ import * as path from 'path';
         username: process.env.POSTGRES_USERNAME,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        models: [Event, User, Ticket, Participant, UserRole, Role, Site],
+        models: [Event, User, Ticket, Participant, UserRole, Role, Site, Template],
         autoLoadModels: true,
       }),
     }),
@@ -49,6 +53,9 @@ import * as path from 'path';
     SiteModule,
     RoleModule,
     FileUploadModule,
+    TemplateModule,
+    PresetFontsModule,
+    PresetColorsModule,
   ],
   controllers: [],
   providers: [DynamicAvatarDestinationMiddleware],
