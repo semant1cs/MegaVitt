@@ -24,7 +24,6 @@ export default class Ticket extends Model<Ticket, TicketCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
-    defaultValue: UUIDV4,
   })
   @ApiProperty({
     example: '488f36c1-d856-456a-b3bd-6bba5fba64f4',
