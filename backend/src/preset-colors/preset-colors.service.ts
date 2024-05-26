@@ -1,26 +1,50 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePresetColorDto } from './dto/create-preset-color.dto';
 import { UpdatePresetColorDto } from './dto/update-preset-color.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import PresetColor from './entities/preset-color.entity';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class PresetColorsService {
-  create(createPresetColorDto: CreatePresetColorDto) {
-    return 'This action adds a new presetColor';
+  constructor(
+    @InjectModel(PresetColor) private presetColorModel: typeof PresetColor,
+    private userService: UserService
+  ) {}
+
+  async create(createPresetFontDto: CreatePresetColorDto, request) {
+    const userId = request.user.id;
+    const user = await this.userService.findOneById(userId, {
+      attributes: { exclude: ['password'] },
+      include: ['roles', 'presetColors'],
+    });
+    const presetColor = await this.presetColorModel.create(createPresetFontDto);
+
+    user.$add('presetColors', presetColor);
+
+    presetColor.userId = userId;
+    presetColor.save();
+
+    return presetColor;
   }
 
-  findAll() {
-    return `This action returns all presetColors`;
+  async findAll() {
+    return await this.presetColorModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} presetColor`;
+  async findOne(id: string) {
+    return this.presetColorModel.findByPk(id);
   }
 
-  update(id: number, updatePresetColorDto: UpdatePresetColorDto) {
-    return `This action updates a #${id} presetColor`;
+  async update(id: string, updatePresetColorDto: UpdatePresetColorDto) {
+    await this.presetColorModel.update(updatePresetColorDto, { where: { id } });
+    const presetColor = await this.findOne(id);
+    return presetColor;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} presetColor`;
+  async remove(id: string) {
+    const presetColor = await this.findOne(id);
+    const countRemoved = await this.presetColorModel.destroy({ where: { id } });
+    if (countRemoved !== 0) return presetColor;
   }
 }

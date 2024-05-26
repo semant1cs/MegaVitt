@@ -1,7 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
 import { Table, Model, Column, DataType } from 'sequelize-typescript';
-interface TemplateCreationAttributes {}
+
+interface TemplateCreationAttributes {
+  title: string;
+}
 
 @Table({ tableName: 'templates' })
 export default class Template extends Model<Template, TemplateCreationAttributes> {
