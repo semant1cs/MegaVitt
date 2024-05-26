@@ -2,9 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/
 import { PresetColorsService } from './preset-colors.service';
 import { CreatePresetColorDto } from './dto/create-preset-color.dto';
 import { UpdatePresetColorDto } from './dto/update-preset-color.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('presets-colors')
+@ApiBearerAuth()
 @Controller('preset-colors')
 export class PresetColorsController {
   constructor(private readonly presetColorsService: PresetColorsService) {}

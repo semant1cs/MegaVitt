@@ -2,9 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/
 import { PresetFontsService } from './preset-fonts.service';
 import { CreatePresetFontDto } from './dto/create-preset-font.dto';
 import { UpdatePresetFontDto } from './dto/update-preset-font.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('preset-fonts')
+@ApiBearerAuth()
 @ApiTags('presets-fonts')
 export class PresetFontsController {
   constructor(private readonly presetFontsService: PresetFontsService) {}
