@@ -36,7 +36,9 @@ const AdminPanelView: FC<AdminPanelViewProps> = ({ handleLogOut, usersList }) =>
           </li>
         </ul>
       </LayoutHeader>
-      <LayoutBody>{usersList !== undefined ? <CustomTable rows={usersList} /> : ""}</LayoutBody>
+      <LayoutBody classNames={{ body__container: styles.adminPanel }}>
+        <div className={styles.table}>{usersList !== undefined ? <CustomTable rows={usersList} /> : ""}</div>
+      </LayoutBody>
     </>
   );
 };

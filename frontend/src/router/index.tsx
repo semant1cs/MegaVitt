@@ -5,7 +5,8 @@ import StartPage from "@views/StartPage";
 import AllSites from "@views/AllSites";
 import Creator from "@views/Creator";
 import AuthStore from "@store/AuthStore";
-import AdminPanel from "@components/AdminPanel";
+import AdminPanel from "@views/AdminPanel";
+
 // import Creator from "@views/Creator";
 
 type RouteType = {
