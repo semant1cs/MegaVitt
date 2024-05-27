@@ -14,35 +14,35 @@ services:
       - "${APP_PORT}:${APP_PORT}"
       - 9229:9229
     command: npm run start:dev
-    depends_on:
-      - postgres
+    # depends_on:
+    #   - postgres
     restart: always
 
-  postgres:
-    container_name: postgres
-    image: postgres:15
-    env_file:
-      - .env
-    environment:
-      POSTGRES_PASSWORD: "admin123"
-      PG_DATA: /var/lib/postgresql/data
-    command: "-p ${POSTGRES_PORT}"
-    ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+  # postgres:
+  #   container_name: postgres
+  #   image: postgres:15
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     POSTGRES_PASSWORD: "admin123"
+  #     PG_DATA: /var/lib/postgresql/data
+  #   command: "-p ${POSTGRES_PORT}"
+  #   ports:
+  #     - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    ports:
-      - "${PGADMIN_PORT}:${PGADMIN_PORT}"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
-      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   ports:
+  #     - "${PGADMIN_PORT}:${PGADMIN_PORT}"
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+  #     PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
 
   frontend:
     container_name: frontend
