@@ -28,7 +28,7 @@
     "react-transition-group": "^4.4.5",
     "styled-components": "^6.1.11",
     "swiper": "^11.1.1",
-    "zod-contracts": "^1.0.3"
+    "zod-contracts": "^1.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
