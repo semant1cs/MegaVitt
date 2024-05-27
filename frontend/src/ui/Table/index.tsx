@@ -273,11 +273,11 @@ function CustomTable(props: CustomTableProps) {
       return rows[selectVal].id;
     });
     console.log(selected);
-    // AdminPanelStore.deleteUsers(deleteRowsIds).then(() => {
-    //   if (AdminPanelStore.usersList) {
-    //     AdminPanelStore?.usersList.filter(row => !deleteRowsIds.includes(row.id));
-    //   }
-    // });
+    AdminPanelStore.deleteUsers(deleteRowsIds).then(() => {
+      if (AdminPanelStore.usersList) {
+        AdminPanelStore?.usersList.filter(row => !deleteRowsIds.includes(row.id));
+      }
+    });
   };
 
   return (
