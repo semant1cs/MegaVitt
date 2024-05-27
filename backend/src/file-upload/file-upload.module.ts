@@ -1,16 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { FileUploadService } from './file-upload.service';
-import { FileUploadController } from './file-upload.controller';
-import { DynamicAvatarDestinationMiddleware } from './destination-middlewares/avatar-destination-middleware.service';
-import { UserModule } from 'src/user/user.module';
+import {Module} from '@nestjs/common';
+import {FileUploadService} from './file-upload.service';
+import {FileUploadController} from './file-upload.controller';
+import {UserModule} from 'src/user/user.module';
+import {SiteModule} from "../site/site.module";
 
 @Module({
   controllers: [FileUploadController],
   providers: [FileUploadService],
-  imports: [UserModule],
+  imports: [UserModule, SiteModule],
 })
-export class FileUploadModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(DynamicAvatarDestinationMiddleware).forRoutes('file-upload/avatar');
-  }
+export class FileUploadModule {
+
 }

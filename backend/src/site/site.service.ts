@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
 import { CreateSiteDto } from './dto/create-site.dto';
 import { UpdateSiteDto } from './dto/update-site.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -26,12 +26,14 @@ export class SiteService {
     return await this._siteRepository.findAll({include: {all: true}})
   }
 
-  public findOne(id: number) {
-    return `This action returns a #${id} site`;
+  public async findSite(id: number): Promise<Site> {
+    const site: Site = await this._siteRepository.findByPk(id);
+    if (!site) throw new HttpException('Сайт не найден', HttpStatus.NOT_FOUND)
+    return site
   }
 
-  public update(id: number, updateSiteDto: UpdateSiteDto) {
-    return `This action updates a #${id} site`;
+  public async updatePreview(site: Site, imagePath: string) {
+    return site.update({preview: imagePath})
   }
 
   remove(id: number) {

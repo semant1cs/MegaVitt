@@ -50,6 +50,16 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
+    defaultValue: null
+  })
+  @ApiProperty({
+    example: 'files/3a90415a-ee0f-4caa-b9ee-688638cd236f/4d2aaddd-859d-4a40-b5cc-2e7f89cb81fa/preview.png',
+    description: 'Путь к картинке сайта'
+  })
+  preview: string;
+
+  @Column({
+    type: DataType.STRING,
   })
   @ApiProperty({
     example: 'Ссылка на сайта',

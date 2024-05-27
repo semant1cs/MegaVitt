@@ -16,7 +16,6 @@ import Role from './role/entities/role.entity';
 import { RoleModule } from './role/role.module';
 import Site from './site/entities/site.entity';
 import { FileUploadModule } from './file-upload/file-upload.module';
-import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-middlewares/avatar-destination-middleware.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
 
@@ -51,6 +50,5 @@ import * as path from 'path';
     FileUploadModule,
   ],
   controllers: [],
-  providers: [DynamicAvatarDestinationMiddleware],
 })
 export class AppModule {}
