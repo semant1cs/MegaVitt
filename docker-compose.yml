@@ -1,7 +1,7 @@
 version: "3.0"
 
 services:
-  main:
+  backend:
     container_name: backend
     build:
       context: ./backend/
