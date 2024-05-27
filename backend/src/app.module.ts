@@ -44,6 +44,9 @@ import PresetColor from './preset-colors/entities/preset-color.entity';
         database: process.env.POSTGRES_DB,
         models: [Event, User, Ticket, Participant, UserRole, Role, Site, Template, PresetFont, PresetColor],
         autoLoadModels: true,
+        dialectOptions: {
+          ssl: { require: true, rejectUnauthorized: false },
+        },
       }),
     }),
     ServeStaticModule.forRoot({ rootPath: path.join(__dirname, '..', 'src', 'files') }),
