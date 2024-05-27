@@ -9,11 +9,11 @@ import { UpdateSiteDto } from './dto/update-site.dto';
 export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
-  // @Post()
-  // @ApiBearerAuth()
-  // create(@Body() createSiteDto: CreateSiteDto, @Request() req) {
-  //   return this.siteService.create(createSiteDto, req.user);
-  // }
+  @Post()
+  @ApiBearerAuth()
+  create(@Body() createSiteDto: CreateSiteDto, @Request() req) {
+    return this.siteService.create(createSiteDto, req.user);
+  }
 
   // @Get()
   // findAll() {

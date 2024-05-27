@@ -7,6 +7,8 @@ interface SiteCreationAttributes {
   name: string;
   owner_id: string;
   event_id: string;
+  build_ref: string;
+  site_id: string
 }
 
 @Table({ tableName: 'sites' })
@@ -30,14 +32,20 @@ export default class Site extends Model<Site, SiteCreationAttributes> {
   })
   name: string;
 
-  // @Column({
-  //   type: DataType.STRING,
-  // })
-  // @ApiProperty({
-  //   example: 'Ссылка на билд сайта',
-  //   description: 'C:/MegaVitt/builds',
-  // })
-  // build_ref: string;
+
+
+
+  @Column({
+    type: DataType.STRING,
+  })
+  @ApiProperty({
+    example: 'Ссылка на билд сайта',
+    description: 'C:/MegaVitt/builds',
+  })
+  build_ref: string;
+
+
+
 
   @Column({
     type: DataType.STRING,
