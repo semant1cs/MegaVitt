@@ -1,9 +1,11 @@
+import PresetColor from 'src/preset-colors/entities/preset-color.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { UUIDV4 } from 'sequelize';
 import Site from '../../site/entities/site.entity';
 import { Column, DataType, Model, Table, BelongsToMany, HasMany } from 'sequelize-typescript';
 import Role from 'src/role/entities/role.entity';
 import UserRole from 'src/role/entities/user-role.entity';
+import PresetFont from 'src/preset-fonts/entities/preset-font.entity';
 
 interface UserCreationAttributes {
   email: string;
@@ -65,9 +67,15 @@ export default class User extends Model<User, UserCreationAttributes> {
   })
   password: string;
 
+  @BelongsToMany(() => Role, () => UserRole)
+  roles: Role[];
+
   @HasMany(() => Site)
   sites: Site[];
 
-  @BelongsToMany(() => Role, () => UserRole)
-  roles: Role[];
+  @HasMany(() => PresetFont)
+  presetFonts: PresetFont[];
+
+  @HasMany(() => PresetColor)
+  presetColors: PresetColor[];
 }

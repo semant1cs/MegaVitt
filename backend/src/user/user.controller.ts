@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import User from './entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -28,5 +28,10 @@ export class UserController {
   @Post(':id' + '/addRole/')
   addRole(@Param('id') id: string, @Body() addRoleDto: AddRoleDto) {
     return this.userService.giveRole({ userId: id, value: addRoleDto.value });
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.userService.deleteUser(id);
   }
 }

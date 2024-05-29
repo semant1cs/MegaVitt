@@ -13,6 +13,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# RUN npx sequelize-cli db:seed:all
+
 # Creates a "dist" folder with the production build
 RUN npm run build
 

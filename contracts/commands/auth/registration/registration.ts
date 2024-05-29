@@ -7,7 +7,8 @@ export const UserRegisterRequestSchema = z.object({
 });
 
 export const UserRegisterResponseSchema = z.object({
-  access_token: z.string(),
+  email: z.string().email().max(64).min(3),
+  password: z.string().max(64).min(8),
 });
 
 export type UserRegisterRequest = z.infer<typeof UserRegisterRequestSchema>;

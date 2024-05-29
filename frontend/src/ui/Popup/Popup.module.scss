@@ -1,0 +1,20 @@
+@import "@reactStyles/vars.scss";
+
+.popup_body {
+  width: max-content;
+  padding: 15px 25px;
+  margin: 8px;
+  border-radius: 8px;
+  background-color: $grayscale-600;
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 0.7);
+  z-index: 1;
+
+  button {
+    color: $red-400;
+
+    &:hover {
+      color: $grayscale-1000;
+      transition: 0.3s;
+    }
+  }
+}

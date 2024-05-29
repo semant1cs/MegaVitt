@@ -17,6 +17,7 @@ export class RoleController {
   }
 
   @Get('/:value')
+  @ApiBearerAuth()
   getByValue(@Param('value') value: string) {
     return this.roleService.getRoleByName(value);
   }

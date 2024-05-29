@@ -4,6 +4,10 @@ import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
 import AllSites from "@views/AllSites";
 import Creator from "@views/Creator";
+import AuthStore from "@store/AuthStore";
+import AdminPanel from "@views/AdminPanel";
+
+// import Creator from "@views/Creator";
 
 type RouteType = {
   path: string;
@@ -20,6 +24,7 @@ const AppRouter: React.FC = memo(() => {
     ...publicRoutes,
     ...[
       { path: "/cabinet", element: <AllSites /> },
+      { path: "/admin", element: <AdminPanel /> },
       { path: "/creator", element: <Creator /> },
     ],
   ];
