@@ -14,6 +14,7 @@ const Popup: FC<PropsWithChildren<TPopupProps>> = ({ children, onClick, classNam
   const popupRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     setAnchor(anchor ? null : event.currentTarget);
     setIsOpen(!isOpen);
   };
@@ -23,6 +24,16 @@ const Popup: FC<PropsWithChildren<TPopupProps>> = ({ children, onClick, classNam
   const OnEscapePressed = (event: KeyboardEvent) => {
     if (event.key === "Escape") setIsOpen(false);
   };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClose);
+
+    return () => window.removeEventListener("click", handleClose);
+  }, []);
 
   useEffect(() => {
     if (popupRef && popupRef?.current) {
@@ -36,7 +47,12 @@ const Popup: FC<PropsWithChildren<TPopupProps>> = ({ children, onClick, classNam
 
   return (
     <div ref={popupRef}>
-      <Button onClick={handleClick}>{children}</Button>
+      <Button
+        onClick={handleClick}
+        className={className}
+      >
+        {children}
+      </Button>
       <BasePopup
         open={isOpen}
         anchor={anchor}

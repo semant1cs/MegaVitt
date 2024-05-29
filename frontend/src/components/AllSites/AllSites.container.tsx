@@ -1,24 +1,13 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import type { TAllSitesContainerProps } from "./AllSites.types";
 import AllSitesView from "./AllSites.view";
-import AuthStore from "@store/AuthStore";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router-dom";
+import { auth } from "@store/AuthStore";
 
 const AllSitesContainer: FC<TAllSitesContainerProps> = observer(props => {
-  const initialUserForm = AuthStore.initialUserState;
+  const initialUserForm = auth.initialUserState;
 
-  useEffect(() => {
-    (async () => await AuthStore.getProfile())();
-  }, []);
-
-  return (
-    <AllSitesView
-      navigate={useNavigate()}
-      cards={initialUserForm?.sites}
-      userName={initialUserForm?.email}
-    />
-  );
+  return <AllSitesView cards={initialUserForm?.sites} />;
 });
 
 export default AllSitesContainer;

@@ -3,11 +3,10 @@ import type { TSignUpViewProps } from "../Authentication.types";
 import TextFieldContainer from "@ui/TextField/TextFieldContainer";
 import TextFieldLabel from "@ui/TextField/TextFieldLabel";
 import TextField from "@ui/TextField";
-import TextFieldInner from "@ui/TextField/TextFieldInner";
 import Button from "@ui/Button";
 import styles from "../Authentication.module.scss";
-import { useNavigate } from "react-router-dom";
 import TextFieldUnderline from "@ui/TextField/TextFieldUnderline";
+import { useNavigate } from "react-router-dom";
 
 /** Вьюха для отображения страницы регистрации */
 const SignUpView: FC<TSignUpViewProps> = ({

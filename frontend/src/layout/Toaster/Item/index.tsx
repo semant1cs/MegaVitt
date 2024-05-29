@@ -1,4 +1,4 @@
-import LayoutStore from "@store/LayoutStore";
+import { layout } from "@store/LayoutStore";
 import { FC, useEffect, useState } from "react";
 import styles from "../../Layout.module.scss";
 
@@ -23,7 +23,7 @@ export const Item: FC<ToasterItemProps> = props => {
       setToggle(() => false);
 
       setTimeout(() => {
-        LayoutStore.removeToaster(props.id);
+        layout.removeToaster(props.id);
       }, 300);
     }, timerEndTime);
 

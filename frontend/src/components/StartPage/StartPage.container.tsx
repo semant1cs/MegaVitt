@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import type { TStartPageContainerProps } from "./StartPage.types";
 import StartPageView from "./StartPage.view";
-import AuthStore from "@store/AuthStore";
-import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { auth } from "@store/AuthStore";
 
-/** Контейнерная компонента для отдачи вьюхи <StartPageView /> */
-const StartPageContainer: FC<TStartPageContainerProps> = () => {
-  const navigate = useNavigate();
+/** Контейнерная компонента для определение текущей страницы */
+const StartPageContainer: FC<TStartPageContainerProps> = observer(() => {
+  useEffect(() => {
+    if (!localStorage.getItem("userToken")) return;
 
-  const logOut = () => {
-    AuthStore.logOut().then(() => navigate("/"));
-  };
+    (async () => await auth.getProfile())();
+  }, []);
 
-  return <StartPageView onHandleLogout={logOut} />;
-};
+  return <StartPageView />;
+});
 
 export default StartPageContainer;
