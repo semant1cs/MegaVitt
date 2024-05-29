@@ -5,7 +5,7 @@ import { TCreatorViewProps } from "../Creator.types";
 import { randomId } from "../../../utils/getRandomId";
 import { observer } from "mobx-react-lite";
 import VirtualDomStore, { type TNode } from "@store/VirtualDomStore";
-import HTMLReactParser from "html-react-parser/lib/index";
+import { FlexContainer, FlexItem, TextBlock } from "./elements";
 import { toJS } from "mobx";
 
 const CreatorView: FC<TCreatorViewProps> = observer(() => {
@@ -18,22 +18,22 @@ const CreatorView: FC<TCreatorViewProps> = observer(() => {
   }
 
   function handleOnDragEnter(event: React.DragEvent<HTMLElement>) {
-    event.currentTarget.style.border = "1px solid red";
+    event.currentTarget.style.outline = "2px solid red";
   }
 
   function handleOnDragLeave(event: React.DragEvent<HTMLElement>) {
-    event.currentTarget.style.border = "1px solid white";
+    event.currentTarget.style.outline = "none";
   }
 
   function handleOnDragEnd(event: React.DragEvent<HTMLElement>) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const droppableNodeTarget = event.currentTarget;
     const draggableNodeId = event.dataTransfer.getData("draggableNode");
     const draggableNodeTarget = document.getElementById(draggableNodeId);
 
-    droppableNodeTarget.style.border = "1px solid white";
+    droppableNodeTarget.style.outline = "none";
 
     if (!droppableNodeTarget || !draggableNodeTarget) return;
 
@@ -62,7 +62,6 @@ const CreatorView: FC<TCreatorViewProps> = observer(() => {
       draggableNodeTarget.childNodes,
     );
 
-    console.log(droppableProps);
     VirtualDomStore.appendChild(droppableProps, virtualDraggable);
   }
 
@@ -86,38 +85,11 @@ const CreatorView: FC<TCreatorViewProps> = observer(() => {
   return (
     <LayoutBody classNames={{ body__container: styles.creator }}>
       <div className={styles.elements}>
-        <h2>Elements</h2>
-        <ul>
-          <div
-            id={randomId()}
-            draggable="true"
-            className={styles.text}
-            onDragStart={handleOnDragStart}
-          >
-            Text
-          </div>
-          <div
-            id={randomId()}
-            draggable="true"
-            className={styles.flex__item}
-            onDragStart={handleOnDragStart}
-          >
-            Flex Item
-          </div>
-          <div
-            id={randomId()}
-            draggable="true"
-            className={styles.flex__container}
-            onDragStart={handleOnDragStart}
-          >
-            Flex Container
-          </div>
-        </ul>
+        <TextBlock handleOnDragStart={handleOnDragStart} />
+        <FlexItem handleOnDragStart={handleOnDragStart} />
+        <FlexContainer handleOnDragStart={handleOnDragStart} />
       </div>
-      <div>
-        <h2>Canvas</h2>
-        <div className={styles.canvas}>{VirtualDomStore.dom}</div>
-      </div>
+      <div className={styles.canvas}>{VirtualDomStore.dom}</div>
     </LayoutBody>
   );
 });

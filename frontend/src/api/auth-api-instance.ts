@@ -27,10 +27,8 @@ authAxiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      error.response &&
-      error.response?.status === 401 &&
-      error.response?.statusText === "Unauthorized" &&
-      !!localStorage.getItem("userToken")
+      (error.response && error.response?.status === 401 && error.response?.statusText === "Unauthorized") ||
+      !localStorage.getItem("userToken")
     ) {
       try {
         try {
