@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@ui/Button";
 import LayoutBody from "@layout/Body";
 import AuthStore from "@store/AuthStore";
-import { Unstable_Popup as Popup } from "@mui/base/Unstable_Popup";
+import Popup from "@ui/Popup";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
 const StartPageView: FC<TStartPageViewProps> = ({ onHandleLogout }) => {
