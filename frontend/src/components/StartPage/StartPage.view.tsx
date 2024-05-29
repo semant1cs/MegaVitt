@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import type { TStartPageViewProps } from "./StartPage.types";
 import LayoutHeader from "@layout/Header";
 import styles from "./StartPage.module.scss";
@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "@ui/Button";
 import LayoutBody from "@layout/Body";
 import AuthStore from "@store/AuthStore";
+import { Unstable_Popup as Popup } from "@mui/base/Unstable_Popup";
+import Popup from "@ui/Popup";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
-const StartPageView: FC<TStartPageViewProps> = props => {
+const StartPageView: FC<TStartPageViewProps> = ({ onHandleLogout }) => {
   const navigate = useNavigate();
   const isAuth = !!localStorage.getItem("userToken");
   const userName = AuthStore.initialUserState?.username;
@@ -28,16 +30,14 @@ const StartPageView: FC<TStartPageViewProps> = props => {
                 Мои сайты
               </Button>
             </li>
-
             <li>
-              <Button
-                variant="text"
+              <Popup
+                onClick={onHandleLogout}
                 className={layoutStyles.nav__item}
-                onClick={() => {}}
               >
                 <span>{userName}</span>
                 <span className={["user-icon", layoutStyles.nav__icon].join(" ")}></span>
-              </Button>
+              </Popup>
             </li>
           </ul>
         ) : (
