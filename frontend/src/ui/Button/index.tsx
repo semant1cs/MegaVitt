@@ -4,7 +4,7 @@ import styles from "./Button.module.scss";
 type TButtonProps = {
   variant?: "text" | "contained-primary" | "contained-secondary" | "contained-white" | "outlined";
   className?: string;
-  onClick: () => void;
+  onClick: (e?: any) => void;
 };
 
 const Button: FC<PropsWithChildren<TButtonProps>> = ({ children, variant, ...props }) => {
