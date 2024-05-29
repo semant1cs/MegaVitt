@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
-const appHost = "178.154.231.116";
+const appHost = "158.160.50.203";
 const appPort = "3002";
 
 const baseURL = `http://${appHost}:${appPort}`;
