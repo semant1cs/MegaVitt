@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import type { TAuthenticationContainerProps, TAuthenticationForm, TCurrentPage } from "./Authentication.types";
 import AuthenticationView from "./Authentication.view";
 import { FC, Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
@@ -15,11 +14,6 @@ const INITIAL_STATE: TAuthenticationForm = {
 const AuthenticationContainer: FC<TAuthenticationContainerProps> = props => {
   const [form, setForm] = useState<TAuthenticationForm>(INITIAL_STATE);
   const [currentPage, setCurrentPage] = useState<TCurrentPage>("signIn");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!!localStorage.getItem("userToken")) navigate("/cabinet");
-  }, []);
 
   /** Колбек для изменения текущей страницы `currentPage` */
   const changeCurrentPage = useCallback((page: TCurrentPage) => setCurrentPage(() => page), []);
@@ -33,18 +27,13 @@ const AuthenticationContainer: FC<TAuthenticationContainerProps> = props => {
   /** Функция для получения текущей страницы */
   const getCurrentPage = useMemo((): (() => React.ReactNode) => {
     switch (currentPage) {
-      case "signIn":
-        return () => (
-          <Suspense fallback={false}>
-            <SignIn {...commonPageProps} />
-          </Suspense>
-        );
       case "signUp":
         return () => (
           <Suspense fallback={false}>
             <SignUp {...commonPageProps} />
           </Suspense>
         );
+      case "signIn":
       default:
         return () => (
           <Suspense fallback={false}>

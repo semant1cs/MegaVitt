@@ -1,11 +1,13 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import type { TAuthenticationForm, TSignUpContainerProps } from "../Authentication.types";
 import SignUpView from "./SignUp.view";
+import { auth } from "@store/AuthStore";
 import { useNavigate } from "react-router-dom";
-import AuthStore from "@store/AuthStore";
 
 /** Контейнерная компонента для отдачи вьюхи <SignUpView /> */
 const SignUpContainer: FC<TSignUpContainerProps> = props => {
+  const navigate = useNavigate();
+
   const setterForm = props.form;
 
   const [initialState, setInitialState] = useState<TAuthenticationForm>(setterForm);
@@ -14,8 +16,6 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
   const changedForm = JSON.stringify(form) !== JSON.stringify(initialState);
   /** Можно ли сохранить форму */
   const canSaveForm = changedForm;
-
-  const navigate = useNavigate();
 
   /** Эффект для установки лисенера для установки окна о том, что пользователь покидает страницу */
   useEffect(() => {
@@ -48,8 +48,11 @@ const SignUpContainer: FC<TSignUpContainerProps> = props => {
   }, []);
 
   /** Хендлер для сохранения формы */
-  function handleSaveForm() {
-    AuthStore.signUp(form).then(() => navigate("/"));
+  async function handleSaveForm() {
+    try {
+      await auth.signUp(form);
+      navigate("/cabinet");
+    } catch (e) {}
   }
 
   return (

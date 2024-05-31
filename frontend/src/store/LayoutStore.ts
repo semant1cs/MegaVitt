@@ -6,8 +6,8 @@ export interface ToasterMessage {
 }
 
 class LayoutStore {
-  canShowLoader: boolean = false;
   canShowModal: boolean = false;
+  canShowLoader: boolean = false;
   toasterMessages: ToasterMessage[] = [];
 
   constructor() {
@@ -23,7 +23,10 @@ class LayoutStore {
   }
 
   setToaster(messages: string[]) {
-    this.toasterMessages = [...this.toasterMessages, ...messages.map(text => ({ text, id: new Date().getTime() + Math.random() }))];
+    this.toasterMessages = [
+      ...this.toasterMessages,
+      ...messages.map(text => ({ text, id: new Date().getTime() + Math.random() })),
+    ];
   }
 
   removeToaster(id: number) {
@@ -32,3 +35,4 @@ class LayoutStore {
 }
 
 export default new LayoutStore();
+export const layout = new LayoutStore();

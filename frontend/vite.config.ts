@@ -15,6 +15,7 @@ export default defineConfig({
       "@reactStyles": "/src/assets/globalStyles",
       "@images": "/src/assets/images",
       "@api": "/src/api",
+      "@utils": "/src/utils",
     },
   },
 });

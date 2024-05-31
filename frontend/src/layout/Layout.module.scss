@@ -37,14 +37,17 @@
 
   &__item {
     @include mainText();
-    font-weight: 400;
-    cursor: pointer;
-    color: $grayscale-100;
-    display: flex;
-    align-items: center;
     gap: 10px;
+    display: flex;
+    cursor: pointer;
+    font-weight: 400;
+    align-items: center;
+    color: $grayscale-100;
+    transition: all 0.3s ease;
 
     &:hover {
+      color: $primary-10;
+      
       .nav__icon {
         background-color: $primary-10;
       }

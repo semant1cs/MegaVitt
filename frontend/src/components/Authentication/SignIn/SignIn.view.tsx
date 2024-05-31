@@ -1,13 +1,12 @@
 import TextFieldContainer from "@ui/TextField/TextFieldContainer";
 import TextFieldLabel from "@ui/TextField/TextFieldLabel";
 import TextField from "@ui/TextField";
-import TextFieldInner from "@ui/TextField/TextFieldInner";
 import Button from "@ui/Button";
 import type { TSignInViewProps } from "../Authentication.types";
 import { FC } from "react";
 import styles from "../Authentication.module.scss";
-import { useNavigate } from "react-router-dom";
 import TextFieldUnderline from "@ui/TextField/TextFieldUnderline";
+import { useNavigate } from "react-router-dom";
 
 const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleSaveForm, changeCurrentPage }) => {
   const navigate = useNavigate();

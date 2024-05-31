@@ -1,9 +1,9 @@
 import authAxiosInstance from "@api/auth-api-instance";
 import { TAuthenticationForm } from "@components/Authentication/Authentication.types";
 import { makeAutoObservable } from "mobx";
-import LayoutStore from "./LayoutStore";
 import getErrorMessage from "../utils/getErrorMessage";
 import type { UserState } from "@components/AllSites/AllSites.types";
+import { layout } from "./LayoutStore";
 
 const root = "auth";
 
@@ -25,45 +25,52 @@ class AuthStore {
 
   /** Регистрация */
   async signUp(form: TAuthenticationForm) {
-    LayoutStore.showLoader(true);
+    layout.showLoader(true);
 
     try {
       await authAxiosInstance.post(signUpURL, form);
       const { data: responseDataSignIn } = await authAxiosInstance.post(signUpURL, form);
       localStorage.setItem("userToken", responseDataSignIn.access_token);
     } catch (error) {
-      LayoutStore.setToaster(await getErrorMessage(error));
+      layout.setToaster(await getErrorMessage(error));
+      throw error;
     } finally {
-      LayoutStore.showLoader(false);
+      layout.showLoader(false);
     }
   }
 
   /** Авторизация */
   async signIn(form: TAuthenticationForm) {
-    LayoutStore.showLoader(true);
+    layout.showLoader(true);
 
     try {
       const { data: responseData } = await authAxiosInstance.post(signInURL, form);
       localStorage.setItem("userToken", responseData.access_token);
     } catch (error) {
-      LayoutStore.setToaster(await getErrorMessage(error));
+      layout.setToaster(await getErrorMessage(error));
+      throw error;
     } finally {
-      LayoutStore.showLoader(false);
+      layout.showLoader(false);
     }
   }
 
   async logOut() {
+    layout.showLoader(true);
+
     try {
       // const {data: responseData} = await authAxiosInstance.post(logOutURL);
       localStorage.removeItem("userToken");
     } catch (error) {
-      LayoutStore.setToaster(await getErrorMessage(error));
+      layout.setToaster(await getErrorMessage(error));
+      throw error;
+    } finally {
+      layout.showLoader(false);
     }
   }
 
   /** Получение данных о пользователе */
   async getProfile() {
-    LayoutStore.showLoader(true);
+    layout.showLoader(true);
 
     try {
       const { data: responseData } = await authAxiosInstance.get(getProfileURL);
@@ -91,11 +98,12 @@ class AuthStore {
       ];
       this.updateInitialUserState({ ...responseData, sites: sites });
     } catch (error) {
-      LayoutStore.setToaster(await getErrorMessage(error));
+      layout.setToaster(await getErrorMessage(error));
     } finally {
-      LayoutStore.showLoader(false);
+      layout.showLoader(false);
     }
   }
 }
 
 export default new AuthStore();
+export const auth = new AuthStore();
