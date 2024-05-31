@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { randomId } from "../../../utils/getRandomId";
-import styles from "./Test.module.scss";
+import styles from "../Creator.module.scss";
 
 export type TCommonElementProps = {
   handleOnDragStart(event: React.DragEvent<HTMLElement>): void;

@@ -1,3 +1,4 @@
+import { layout } from "@store/LayoutStore";
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const appHost = "localhost";
@@ -31,6 +32,7 @@ authAxiosInstance.interceptors.response.use(
         // const { data: responseData } = await authAxiosInstance.get("/auth/refresh");
         // localStorage.setItem("userToken", responseData.access_token);
         localStorage.setItem("userToken", "");
+        window.location.replace("/auth");
       } catch (e) {
       } finally {
         // return authAxiosInstance.request(originalRequest);

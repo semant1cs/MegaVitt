@@ -3,7 +3,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Authentication from "@views/Authentication";
 import StartPage from "@views/StartPage";
 import AllSites from "@views/AllSites";
-import Creator from "@views/Creator";
+import CreateSite from "@views/CreateSite";
 import AdminPanel from "@views/AdminPanel";
 
 type RouteType = {
@@ -22,7 +22,7 @@ const AppRouter: React.FC = memo(() => {
     ...[
       { path: "/cabinet", element: <AllSites /> },
       { path: "/admin", element: <AdminPanel /> },
-      { path: "/creator", element: <Creator /> },
+      { path: "/create", element: <CreateSite /> },
     ],
   ];
 

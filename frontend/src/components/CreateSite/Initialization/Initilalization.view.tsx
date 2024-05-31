@@ -12,8 +12,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Keyboard, Mousewheel, Scrollbar } from "swiper/modules";
 import "swiper/css/scrollbar";
+import Button from "@ui/Button";
+import { site } from "@store/SiteStore";
+import { observer } from "mobx-react-lite";
 
-const InitilalizationView: FC<TInitializationViewProps> = props => {
+const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
   return (
     <LayoutBody classNames={{ body: styles.initialization, body__container: styles.initialization__container }}>
       <div className={styles.header}>
@@ -102,9 +105,17 @@ const InitilalizationView: FC<TInitializationViewProps> = props => {
         </Swiper>
 
         <div id="templates-slider-scrollbar"></div>
+
+        <Button
+          className={styles.next}
+          variant="contained-primary"
+          onClick={() => site.updateStepPage("creator")}
+        >
+          Следующий шаг
+        </Button>
       </section>
     </LayoutBody>
   );
-};
+});
 
 export default InitilalizationView;

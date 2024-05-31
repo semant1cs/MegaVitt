@@ -1,6 +1,5 @@
 @import "@reactStyles/vars.scss";
 
-
 .initialization {
   padding: 60px 0;
   background-color: $grayscale-100;
@@ -62,6 +61,11 @@
       background-color: $grayscale-800;
     }
   }
+}
+
+.next {
+  align-self: flex-end;
+  padding: 12px 20px;
 }
 
 @media (min-width: $sm) {
