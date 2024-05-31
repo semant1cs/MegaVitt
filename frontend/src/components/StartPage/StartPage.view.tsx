@@ -5,6 +5,8 @@ import styles from "./StartPage.module.scss";
 import Button from "@ui/Button";
 import LayoutBody from "@layout/Body";
 import { useNavigate } from "react-router-dom";
+import AuthStore from "@store/AuthStore";
+import Popup from "@ui/Popup";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
 const StartPageView: FC<TStartPageViewProps> = () => {
