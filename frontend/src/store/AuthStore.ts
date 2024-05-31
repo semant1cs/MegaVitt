@@ -30,6 +30,7 @@ class AuthStore {
     try {
       const { data: responseData } = await authAxiosInstance.post(signUpURL, form);
       localStorage.setItem("userToken", responseData.access_token);
+      await this.signIn(form);
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
       throw error;

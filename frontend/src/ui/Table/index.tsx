@@ -268,16 +268,13 @@ function CustomTable(props: CustomTableProps) {
 
   const handleDelete = () => {
     const deleteRowsIds = selected.map(selectVal => {
-      console.log(selectVal + rowsPerPage * page);
-      console.log(rows[selectVal + rowsPerPage * page].username);
       return rows[selectVal].id;
     });
-    console.log(selected);
-    // AdminPanelStore.deleteUsers(deleteRowsIds).then(() => {
-    //   if (AdminPanelStore.usersList) {
-    //     AdminPanelStore?.usersList.filter(row => !deleteRowsIds.includes(row.id));
-    //   }
-    // });
+    AdminPanelStore.deleteUsers(deleteRowsIds).then(() => {
+      if (AdminPanelStore.usersList) {
+        AdminPanelStore?.usersList.filter(row => !deleteRowsIds.includes(row.id));
+      }
+    });
   };
 
   return (
