@@ -1,7 +1,7 @@
 import { layout } from "@store/LayoutStore";
 import axios, { InternalAxiosRequestConfig } from "axios";
 
-const appHost = "158.160.50.203";
+const appHost = "158.160.46.159";
 const appPort = "3002";
 
 const baseURL = `http://${appHost}:${appPort}`;
