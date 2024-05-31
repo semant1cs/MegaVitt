@@ -1,3 +1,4 @@
+import { layout } from "@store/LayoutStore";
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const appHost = "158.160.50.203";
@@ -26,23 +27,16 @@ authAxiosInstance.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    if (
-      error.response &&
-      error.response?.status === 401 &&
-      error.response?.statusText === "Unauthorized" &&
-      !!localStorage.getItem("userToken")
-    ) {
+    if (error.response && error.response?.status === 401 && error.response?.statusText === "Unauthorized") {
       try {
-        try {
-          // const { data: responseData } = await authAxiosInstance.get("/auth/refresh");
-          // localStorage.setItem("userToken", responseData.access_token);
-          localStorage.setItem("userToken", "");
-          window.location.replace("http://localhost:5173/auth");
-        } catch (e) {
-        } finally {
-          // return authAxiosInstance.request(originalRequest);
-        }
-      } catch (e) {}
+        // const { data: responseData } = await authAxiosInstance.get("/auth/refresh");
+        // localStorage.setItem("userToken", responseData.access_token);
+        localStorage.setItem("userToken", "");
+        window.location.replace("/auth");
+      } catch (e) {
+      } finally {
+        // return authAxiosInstance.request(originalRequest);
+      }
     }
 
     throw error;

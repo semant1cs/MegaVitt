@@ -1,12 +1,12 @@
 import type { TLayoutToasterProps } from "@layout/Layout.types";
 import { FC, useMemo } from "react";
-import LayoutStore from "@store/LayoutStore";
+import { layout } from "@store/LayoutStore";
 import { observer } from "mobx-react-lite";
 import { Item } from "./Item";
 import styles from "../Layout.module.scss";
 
 const LayoutToaster: FC<TLayoutToasterProps> = observer(props => {
-  const messages = useMemo(() => LayoutStore.toasterMessages, [LayoutStore.toasterMessages]);
+  const messages = useMemo(() => layout.toasterMessages, [layout.toasterMessages]);
 
   return (
     <div className={styles.toaster}>

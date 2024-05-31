@@ -1,5 +1,3 @@
-import { NavigateFunction } from "react-router-dom";
-
 export type UserState = {
   id?: string;
   roles?: UserRole[];
@@ -28,7 +26,6 @@ export type TAllSitesContainerProps = {};
 export type TAllSitesViewProps = {
   userName?: string;
   cards?: UserSite[];
-  navigate: NavigateFunction;
 };
 
 export type TCardProps = {

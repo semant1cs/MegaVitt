@@ -1,47 +1,96 @@
-import { FC } from "react";
-import type { TCreatorViewProps } from "./Creator.types";
-import layoutStyles from "@layout/Layout.module.scss";
-import LayoutHeader from "@layout/Header";
+import { FC, useEffect } from "react";
+import styles from "./Creator.module.scss";
+import LayoutBody from "@layout/Body";
+import { TCreatorViewProps } from "./Creator.types";
+import { randomId } from "../../utils/getRandomId";
+import { observer } from "mobx-react-lite";
+import VirtualDomStore, { type TNode } from "@store/VirtualDomStore";
+import { FlexContainer, FlexItem, TextBlock } from "./Elements";
 
-import Button from "@ui/Button";
-import { useNavigate } from "react-router-dom";
-import Initialization from "./Initialization";
-import Test from "./Test";
+const CreatorView: FC<TCreatorViewProps> = observer(() => {
+  function handleOnDragStart(event: React.DragEvent<HTMLElement>) {
+    event.dataTransfer.setData("draggableNode", event.currentTarget.id);
+  }
 
-const CreatorView: FC<TCreatorViewProps> = props => {
-  const navigate = useNavigate();
+  function handleOnDragOver(event: React.DragEvent<HTMLElement>) {
+    event.preventDefault();
+  }
+
+  function handleOnDragEnter(event: React.DragEvent<HTMLElement>) {
+    event.currentTarget.style.outline = "2px solid red";
+  }
+
+  function handleOnDragLeave(event: React.DragEvent<HTMLElement>) {
+    event.currentTarget.style.outline = "none";
+  }
+
+  function handleOnDragEnd(event: React.DragEvent<HTMLElement>) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const droppableNodeTarget = event.currentTarget;
+    const draggableNodeId = event.dataTransfer.getData("draggableNode");
+    const draggableNodeTarget = document.getElementById(draggableNodeId);
+
+    droppableNodeTarget.style.outline = "none";
+
+    if (!droppableNodeTarget || !draggableNodeTarget) return;
+
+    const droppableProps: TNode["props"] = {
+      ...VirtualDomStore.getAllAttributes(droppableNodeTarget),
+      className: droppableNodeTarget.className,
+    };
+
+    const draggableProps: TNode["props"] = {
+      ...VirtualDomStore.getAllAttributes(draggableNodeTarget),
+      key: randomId(),
+      draggable: false,
+      onDrop: handleOnDragEnd,
+      onDragOver: handleOnDragOver,
+      onDragEnter: handleOnDragEnter,
+      onDragLeave: handleOnDragLeave,
+      className: draggableNodeTarget.className,
+    };
+
+    delete droppableProps.class;
+    delete draggableProps.class;
+
+    const virtualDraggable = VirtualDomStore.createVNode(
+      draggableNodeTarget.tagName.toLowerCase(),
+      draggableProps,
+      draggableNodeTarget.childNodes,
+    );
+
+    VirtualDomStore.appendChild(droppableProps, virtualDraggable);
+  }
+
+  useEffect(() => {
+    if (!VirtualDomStore.vDom) {
+      VirtualDomStore.updateVDom({
+        tagName: "div",
+        props: {
+          id: "app",
+          onDrop: handleOnDragEnd,
+          className: styles.canvas__app,
+          onDragOver: handleOnDragOver,
+          onDragEnter: handleOnDragEnter,
+          onDragLeave: handleOnDragLeave,
+        },
+        children: [],
+      });
+    }
+  }, []);
 
   return (
-    <>
-      <LayoutHeader>
-        <ul className={layoutStyles.nav}>
-          <li>
-            <Button
-              variant="text"
-              className={layoutStyles.nav__item}
-              onClick={() => navigate("/cabinet")}
-            >
-              Мои сайты
-            </Button>
-          </li>
-
-          <li>
-            <Button
-              variant="text"
-              className={layoutStyles.nav__item}
-              onClick={() => {}}
-            >
-              <span>{123}</span>
-              <span className={["user-icon", layoutStyles.nav__icon].join(" ")}></span>
-            </Button>
-          </li>
-        </ul>
-      </LayoutHeader>
-
-      {/* <Initialization /> */}
-      <Test />
-    </>
+    <LayoutBody classNames={{ body__container: styles.creator }}>
+      <div className={styles.elements}>
+        <TextBlock handleOnDragStart={handleOnDragStart} />
+        <FlexItem handleOnDragStart={handleOnDragStart} />
+        <FlexContainer handleOnDragStart={handleOnDragStart} />
+      </div>
+      <div className={styles.canvas}>{VirtualDomStore.dom}</div>
+    </LayoutBody>
   );
-};
+});
 
 export default CreatorView;
