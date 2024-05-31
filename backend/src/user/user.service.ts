@@ -48,7 +48,7 @@ export class UserService {
   }
 
   public async findOneById(id: string, config = configGetUserEndpoint) {
-    const user = await this.userModel.findOne(config);
+    const user = await this.userModel.findOne({ ...config, where: { id } });
     if (!user) throw new HttpException('Пользователя не существует', 400);
     return user;
   }
