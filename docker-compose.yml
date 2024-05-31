@@ -14,8 +14,8 @@ services:
       - "${APP_PORT}:${APP_PORT}"
       - 9229:9229
     command: npm run start:dev
-    # depends_on:
-    #   - postgres
+    # # depends_on:
+    # #   - postgres
     restart: always
 
   # postgres:
