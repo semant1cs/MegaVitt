@@ -20,7 +20,9 @@ const AllSitesView: FC<TAllSitesViewProps> = ({ cards }) => {
           <h2 className={styles.header__title}>Мои сайты</h2>
 
           <Button
-            variant="contained-white"
+            size="md"
+            color="white"
+            variant="contained"
             className={styles.header__button}
             onClick={() => navigate("/create")}
           >

@@ -1,8 +1,7 @@
-import { layout } from "@store/LayoutStore";
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const appHost = "localhost";
-const appPort = "3002";
+const appPort = "3000";
 
 const baseURL = `http://${appHost}:${appPort}`;
 
@@ -12,7 +11,7 @@ const authAxiosInstance = axios.create({
 });
 
 const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-  config.headers["Authorization"] = `${localStorage.getItem("userToken")}`;
+  config.headers["Authorization"] = `${sessionStorage.getItem("userToken")}`;
   config.headers["Content-Type"] = "application/json";
   config.headers["Accept"] = "application/json";
   config.withCredentials = true;
@@ -30,8 +29,8 @@ authAxiosInstance.interceptors.response.use(
     if (error.response && error.response?.status === 401 && error.response?.statusText === "Unauthorized") {
       try {
         // const { data: responseData } = await authAxiosInstance.get("/auth/refresh");
-        // localStorage.setItem("userToken", responseData.access_token);
-        localStorage.setItem("userToken", "");
+        // sessionStorage.setItem("userToken", responseData.access_token);
+        sessionStorage.setItem("userToken", "");
         window.location.replace("/auth");
       } catch (e) {
       } finally {

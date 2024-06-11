@@ -5,8 +5,6 @@ import styles from "./StartPage.module.scss";
 import Button from "@ui/Button";
 import LayoutBody from "@layout/Body";
 import { useNavigate } from "react-router-dom";
-import AuthStore from "@store/AuthStore";
-import Popup from "@ui/Popup";
 
 /** Вьюха для отображения начальной страницы `StartPage`*/
 const StartPageView: FC<TStartPageViewProps> = () => {
@@ -21,7 +19,9 @@ const StartPageView: FC<TStartPageViewProps> = () => {
           <h1 className={styles.text__title}>Конструктор сайта вашего мероприятия</h1>
 
           <Button
-            variant="contained-primary"
+            size="lg"
+            color="primary"
+            variant="contained"
             className={styles.text__button}
             onClick={() => navigate("/auth")}
           >

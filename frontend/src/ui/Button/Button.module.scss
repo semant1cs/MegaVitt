@@ -5,54 +5,24 @@
   width: fit-content;
 }
 
+// variant
+
 .contained {
-  &__primary {
-    @include mainText();
-    padding: 15px 45px;
-    background-color: $primary-500;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary-10;
-    }
-  }
-
-  &__secondary {
-    @include additionalText();
-    padding: 12px 20px;
-    background-color: $grayscale-400;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary-10;
-    }
-  }
-
-  &__white {
-    @include mainText();
-    padding: 10px 45px;
-    color: $grayscale-800;
-    background-color: $grayscale-0;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary-10;
-    }
-  }
+  @include mainText();
+  font-weight: 400;
+  transition: all 0.3s ease;
 }
 
 .outlined {
-  @include additionalText();
-  padding: 12px 20px;
+  @include mainText();
+  font-weight: 400;
   color: $grayscale-400;
-  background-color: transparent;
-  border: 1px solid $grayscale-600;
   transition: all 0.3s ease;
+  border: 1px solid $grayscale-400;
 
   &:hover {
     color: $grayscale-100;
     border: 1px solid $primary-10;
-    background-color: $primary-10;
   }
 }
 
@@ -66,18 +36,59 @@
   }
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+// size
+
+.lg {
+  padding: 15px 45px;
+}
+
+.md {
+  padding: 12px 20px;
+}
+
+// color
+
+.primary {
+  color: $grayscale-100;
+  background-color: $primary-500;
+
+  &:hover {
+    background-color: $primary-10;
+  }
+}
+
+.white {
+  color: $grayscale-800;
+  background-color: $grayscale-100;
+
+  &:hover {
+    color: $grayscale-100;
+    background-color: $primary-10;
+  }
+}
+
+.secondary {
+  color: $grayscale-100;
+  background-color: $grayscale-400;
+
+  &:hover {
+    background-color: $primary-10;
+  }
+}
+
+// none style
+
+.none {
+}
+
 @media (min-width: $md) {
-  .contained {
-    &__primary {
-      padding: 20px 60px;
-    }
-
-    &__secondary {
-      padding: 12px 20px;
-    }
-
-    &__white {
-      padding: 10px 60px;
-    }
+  .lg {
+    padding: 20px 60px;
   }
 }

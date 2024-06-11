@@ -36,18 +36,15 @@
   gap: 20px;
 
   &__item {
-    @include mainText();
     gap: 10px;
     display: flex;
-    cursor: pointer;
     font-weight: 400;
     align-items: center;
-    color: $grayscale-100;
     transition: all 0.3s ease;
 
     &:hover {
       color: $primary-10;
-      
+
       .nav__icon {
         background-color: $primary-10;
       }
@@ -60,13 +57,20 @@
 .body {
   display: flex;
   flex: 1 1 auto;
-  background-color: $grayscale-600;
+
+  &.dark {
+    background-color: $grayscale-600;
+  }
+
+  &.light {
+    background-color: $grayscale-100;
+  }
 
   &__container {
     width: 100%;
     margin: 0 auto;
     max-width: 1776px;
-    padding: 0 24px;
+    padding: 45px 24px;
   }
 }
 
@@ -126,7 +130,7 @@
 
   .body {
     &__container {
-      padding: 0 48px;
+      padding: 60px 48px;
     }
   }
 }
@@ -146,7 +150,7 @@
 
   .body {
     &__container {
-      padding: 0 96px;
+      padding: 60px 96px;
     }
   }
 }
@@ -166,7 +170,7 @@
 
   .body {
     &__container {
-      padding: 0 192px;
+      padding: 60px 192px;
     }
   }
 }

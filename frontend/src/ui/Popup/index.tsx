@@ -58,7 +58,14 @@ const Popup: FC<PropsWithChildren<TPopupProps>> = ({ children, onClick, classNam
         anchor={anchor}
         className={styles.popup_body}
       >
-        <Button onClick={onClick}>Выйти</Button>
+        <Button
+          size="md"
+          color="primary"
+          onClick={onClick}
+          variant="contained"
+        >
+          Выйти
+        </Button>
       </BasePopup>
     </div>
   );

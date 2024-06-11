@@ -8,7 +8,7 @@ import { observer } from "mobx-react-lite";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LayoutHeader: FC<PropsWithChildren<TLayoutHeaderProps>> = observer(({ className, ...props }) => {
-  const isAuth = !!localStorage.getItem("userToken");
+  const isAuth = !!sessionStorage.getItem("userToken");
   const location = useLocation();
   const navigate = useNavigate();
 

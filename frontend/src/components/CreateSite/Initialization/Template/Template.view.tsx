@@ -17,7 +17,9 @@ const TemplateView: FC<TTemplateViewProps> = props => {
 
       <div className={styles.buttons}>
         <Button
-          variant="contained-secondary"
+          size="md"
+          color="secondary"
+          variant="contained"
           className={styles.buttons__select}
           onClick={() => {}}
         >
@@ -25,6 +27,8 @@ const TemplateView: FC<TTemplateViewProps> = props => {
         </Button>
 
         <Button
+          size="md"
+          color="white"
           variant="outlined"
           className={styles.buttons__look}
           onClick={() => {}}

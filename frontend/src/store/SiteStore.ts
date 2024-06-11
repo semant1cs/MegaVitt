@@ -1,16 +1,16 @@
+import { DEFAULT_SITE_SETTINGS } from "@components/CreateSite/CreateSite.config";
+import type { TSiteForm } from "@components/CreateSite/CreateSite.types";
 import { makeAutoObservable } from "mobx";
 
-export type TStepPage = "initialization" | "fonts" | "colors" | "creator";
-
 class SiteStore {
-  stepPage: TStepPage = "initialization";
+  initialSiteState: TSiteForm = DEFAULT_SITE_SETTINGS;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  updateStepPage(value: TStepPage) {
-    this.stepPage = value;
+  updateInitialSiteState(newState: Partial<TSiteForm>) {
+    this.initialSiteState = { ...this.initialSiteState, ...newState };
   }
 }
 

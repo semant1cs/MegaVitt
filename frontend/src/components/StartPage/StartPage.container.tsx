@@ -7,7 +7,7 @@ import { auth } from "@store/AuthStore";
 /** Контейнерная компонента для определение текущей страницы */
 const StartPageContainer: FC<TStartPageContainerProps> = observer(() => {
   useEffect(() => {
-    if (!localStorage.getItem("userToken")) return;
+    if (!sessionStorage.getItem("userToken")) return;
 
     (async () => await auth.getProfile())();
   }, []);

@@ -3,8 +3,6 @@
 .allSites {
   gap: 60px;
   display: flex;
-  padding-top: 60px;
-  padding-bottom: 60px;
   flex-direction: column;
 }
 
@@ -22,9 +20,14 @@
   &__button {
     gap: 10px;
     display: flex;
-    padding: 10px 20px;
+    font-weight: 700;
     align-items: center;
-    color: $grayscale-800;
+
+    &:hover {
+      .header__icon {
+        background-color: $grayscale-100;
+      }
+    }
   }
 
   .header__icon {
@@ -47,24 +50,12 @@
 }
 
 @media (min-width: $md) {
-  .header {
-    &__button {
-      padding: 14px 30px;
-    }
-  }
-
   .sites {
     gap: 45px;
   }
 }
 
 @media (min-width: $lg) {
-  .header {
-    &__button {
-      padding: 14px 40px;
-    }
-  }
-
   .sites {
     gap: 60px;
   }

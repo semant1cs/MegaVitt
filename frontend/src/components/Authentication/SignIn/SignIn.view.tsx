@@ -14,7 +14,8 @@ const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleS
   return (
     <div className={styles.signIn}>
       <div className={styles.header}>
-        <button
+        <Button
+          variant="icon"
           className={[styles.close, "close-icon"].join(" ")}
           onClick={() => navigate("/")}
         />
@@ -59,8 +60,11 @@ const SignInView: FC<TSignInViewProps> = ({ form, setEmail, setPassword, handleS
 
       <div className={styles.buttons}>
         <Button
-          variant="contained-white"
+          size="md"
+          color="white"
+          variant="contained"
           onClick={handleSaveForm}
+          className={styles.buttons__button}
         >
           Войти
         </Button>

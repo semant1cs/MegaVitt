@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { randomId } from "../../../utils/getRandomId";
+import { randomId } from "../../../../utils/getRandomId";
 import styles from "../Creator.module.scss";
 
 export type TCommonElementProps = {

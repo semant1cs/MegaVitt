@@ -1,8 +1,9 @@
 import { ComponentProps } from "react";
+import type { TCommonCreatorProps } from "../CreateSite.types";
 
-export type TCreatorContainerProps = {};
+export type TCreatorContainerProps = TCommonCreatorProps;
 
-export type TCreatorViewProps = {};
+export type TCreatorViewProps = TCreatorContainerProps & {};
 
 export type TVirtualDOMNode = {
   tagName: string;

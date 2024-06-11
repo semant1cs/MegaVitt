@@ -1,8 +1,7 @@
 import { FC, useEffect } from "react";
 import styles from "./Creator.module.scss";
-import LayoutBody from "@layout/Body";
 import { TCreatorViewProps } from "./Creator.types";
-import { randomId } from "../../utils/getRandomId";
+import { randomId } from "../../../utils/getRandomId";
 import { observer } from "mobx-react-lite";
 import VirtualDomStore, { type TNode } from "@store/VirtualDomStore";
 import { FlexContainer, FlexItem, TextBlock } from "./Elements";
@@ -82,14 +81,14 @@ const CreatorView: FC<TCreatorViewProps> = observer(() => {
   }, []);
 
   return (
-    <LayoutBody classNames={{ body__container: styles.creator }}>
+    <div className={styles.creator}>
       <div className={styles.elements}>
         <TextBlock handleOnDragStart={handleOnDragStart} />
         <FlexItem handleOnDragStart={handleOnDragStart} />
         <FlexContainer handleOnDragStart={handleOnDragStart} />
       </div>
       <div className={styles.canvas}>{VirtualDomStore.dom}</div>
-    </LayoutBody>
+    </div>
   );
 });
 

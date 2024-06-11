@@ -29,7 +29,7 @@ class AuthStore {
 
     try {
       const { data: responseData } = await authAxiosInstance.post(signUpURL, form);
-      localStorage.setItem("userToken", responseData.access_token);
+      sessionStorage.setItem("userToken", responseData.access_token);
       await this.signIn(form);
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
@@ -45,7 +45,7 @@ class AuthStore {
 
     try {
       const { data: responseData } = await authAxiosInstance.post(signInURL, form);
-      localStorage.setItem("userToken", responseData.access_token);
+      sessionStorage.setItem("userToken", responseData.access_token);
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
       throw error;
@@ -59,7 +59,7 @@ class AuthStore {
 
     try {
       // const {data: responseData} = await authAxiosInstance.post(logOutURL);
-      localStorage.removeItem("userToken");
+      sessionStorage.removeItem("userToken");
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
       throw error;

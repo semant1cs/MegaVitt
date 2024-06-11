@@ -1,4 +1,4 @@
-import CreateSiteContainer from "@components/CreateSite";
+import CreateSiteContainer from "@components/CreateSite/CreateSite.container";
 import Layout from "@layout/index";
 
 const CreateSite = () => {

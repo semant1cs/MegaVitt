@@ -22,7 +22,8 @@ const SignUpView: FC<TSignUpViewProps> = ({
   return (
     <div className={styles.signUp}>
       <div className={styles.header}>
-        <button
+        <Button
+          variant="icon"
           className={[styles.close, "close-icon"].join(" ")}
           onClick={() => navigate("/")}
         />
@@ -81,8 +82,11 @@ const SignUpView: FC<TSignUpViewProps> = ({
 
       <div className={styles.buttons}>
         <Button
-          variant="contained-white"
+          size="md"
+          color="white"
+          variant="contained"
           onClick={handleSaveForm}
+          className={styles.buttons__button}
         >
           Зарегистрироваться
         </Button>

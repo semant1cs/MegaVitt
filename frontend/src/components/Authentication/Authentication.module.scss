@@ -39,6 +39,10 @@
     width: 16px;
     height: 16px;
     align-self: flex-end;
+
+    &:hover {
+      background-color: $primary-10;
+    }
   }
 
   .logo {
@@ -60,6 +64,11 @@
     align-items: center;
     gap: 40px;
     width: 100%;
+
+    &__button {
+      font-weight: 700;
+      padding: 12px 60px;
+    }
 
     &__hint {
       gap: 30px;

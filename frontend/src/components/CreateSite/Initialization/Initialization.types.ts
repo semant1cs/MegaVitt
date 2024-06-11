@@ -1,6 +1,7 @@
-export type TInitializationContainerProps = {};
+import type { TCommonCreatorProps } from "../CreateSite.types";
 
-export type TInitializationViewProps = {};
+export type TInitializationContainerProps = TCommonCreatorProps;
+export type TInitializationViewProps = TInitializationContainerProps;
 
 export type TTemplateContainerProps = {};
 

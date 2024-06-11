@@ -27,7 +27,7 @@ const AppRouter: React.FC = memo(() => {
   ];
 
   const location = useLocation();
-  const isAuth = !!localStorage.getItem("userToken");
+  const isAuth = !!sessionStorage.getItem("userToken");
 
   return isAuth ? (
     privateRoutes.findIndex(comp => comp.path === location.pathname) !== -1 ? (

@@ -23,7 +23,7 @@ const Card: FC<TCardProps> = ({ card }) => {
           <a className={styles.text__link}>{card.url_link}</a>
         </div>
 
-        <Button onClick={() => {}}>
+        <Button variant="icon" onClick={() => {}}>
           <span className={["settings-icon", styles.icon].join(" ")}></span>
         </Button>
       </div>

@@ -2,30 +2,23 @@ import { FC, PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 
 type TButtonProps = {
-  variant?: "text" | "contained-primary" | "contained-secondary" | "contained-white" | "outlined";
+  variant?: "icon" | "text" | "contained" | "outlined";
+  size?: "lg" | "md" | "none";
+  color?: "primary" | "white" | "secondary" | "none";
   className?: string;
   onClick: (e?: any) => void;
 };
 
-const Button: FC<PropsWithChildren<TButtonProps>> = ({ children, variant, ...props }) => {
-  const getVariantStyle = () => {
-    switch (variant) {
-      case "text":
-        return styles.text;
-      case "contained-primary":
-        return styles.contained__primary;
-      case "contained-secondary":
-        return styles.contained__secondary;
-      case "contained-white":
-        return styles.contained__white;
-      case "outlined":
-        return styles.outlined;
-    }
-  };
-
+const Button: FC<PropsWithChildren<TButtonProps>> = ({
+  children,
+  variant = "contained",
+  size = "none",
+  color = "none",
+  ...props
+}) => {
   return (
     <button
-      className={[styles.button, getVariantStyle(), props.className].join(" ")}
+      className={[styles.button, styles[variant], styles[size], styles[color], props.className].join(" ")}
       onClick={props.onClick}
     >
       {children}

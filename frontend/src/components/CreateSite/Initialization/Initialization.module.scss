@@ -1,16 +1,5 @@
 @import "@reactStyles/vars.scss";
 
-.initialization {
-  padding: 60px 0;
-  background-color: $grayscale-100;
-
-  &__container {
-    gap: 60px;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 .header {
   gap: 30px;
   display: flex;
@@ -64,8 +53,8 @@
 }
 
 .next {
+  font-weight: 700;
   align-self: flex-end;
-  padding: 12px 20px;
 }
 
 @media (min-width: $sm) {

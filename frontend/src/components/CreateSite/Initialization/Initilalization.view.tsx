@@ -3,7 +3,6 @@ import TextFieldLabel from "@ui/TextField/TextFieldLabel";
 import TextFieldInner from "@ui/TextField/TextFieldInner";
 import TextField from "@ui/TextField";
 import Template from "./Template";
-import LayoutBody from "@layout/Body";
 import styles from "./Initialization.module.scss";
 import { type FC } from "react";
 import type { TInitializationViewProps } from "./Initialization.types";
@@ -13,12 +12,11 @@ import "swiper/css";
 import { Keyboard, Mousewheel, Scrollbar } from "swiper/modules";
 import "swiper/css/scrollbar";
 import Button from "@ui/Button";
-import { site } from "@store/SiteStore";
 import { observer } from "mobx-react-lite";
 
 const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
   return (
-    <LayoutBody classNames={{ body: styles.initialization, body__container: styles.initialization__container }}>
+    <>
       <div className={styles.header}>
         <h2 className={styles.header__title}>Создание сайта&nbsp;&mdash; шаг&nbsp;1</h2>
 
@@ -107,14 +105,16 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
         <div id="templates-slider-scrollbar"></div>
 
         <Button
+          size="md"
+          color="primary"
+          variant="contained"
           className={styles.next}
-          variant="contained-primary"
-          onClick={() => site.updateStepPage("creator")}
+          onClick={() => props.handleChangeStep("Fonts")}
         >
           Следующий шаг
         </Button>
       </section>
-    </LayoutBody>
+    </>
   );
 });
 

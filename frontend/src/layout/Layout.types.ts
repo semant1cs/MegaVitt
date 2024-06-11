@@ -7,6 +7,7 @@ export type TLayoutBodyProps = {
     body?: string;
     body__container?: string;
   };
+  variant?: "dark" | "light";
 };
 export type TLayoutModalProps = {};
 export type TLayoutLoaderProps = {};
