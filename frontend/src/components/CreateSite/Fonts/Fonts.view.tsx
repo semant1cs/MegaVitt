@@ -5,6 +5,7 @@ import createStyles from "../CreateSite.module.scss";
 import styles from "./Fonts.module.scss";
 import Preview from "../Preview";
 import Button from "@ui/Button";
+import { Select, SelectItem } from "@ui/Select";
 
 const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts, handleChangeStep }) => {
   return (
@@ -43,6 +44,13 @@ const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts
               Сохранить как шаблон
             </Button>
           </div>
+
+          <Select value="value">
+            <SelectItem value="value">Праф</SelectItem>
+            <SelectItem value="value2">Прафsfsrg</SelectItem>
+            <SelectItem value="value3">Прафfrs</SelectItem>
+            <SelectItem value="value4">Прафwa</SelectItem>
+          </Select>
         </div>
         <Preview />
       </div>

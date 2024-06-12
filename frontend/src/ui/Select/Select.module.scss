@@ -1,0 +1,92 @@
+@import "@reactStyles/vars.scss";
+
+.select {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 5px;
+  border: 1px solid $grayscale-400;
+  background: $grayscale-0;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  padding: 8px;
+
+  &__value {
+    @include mainText();
+    color: $grayscale-800;
+    white-space: nowrap;
+    width: calc(100% - 20px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  &__open {
+    .select__icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.list {
+  left: 0;
+  top: 0;
+  width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid $grayscale-400;
+  background: $grayscale-0;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  max-height: 160px;
+  overflow-y: auto;
+  z-index: 1;
+  position: relative;
+  padding: 4px;
+  gap: 2px;
+
+  &__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    transition: 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    z-index: 10051;
+  }
+
+  &__bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.item {
+  @include mainText();
+  color: $grayscale-800;
+  display: flex;
+  padding: 4px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  word-break: break-word;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: $primary-5;
+  }
+
+  &.active {
+    background-color: $primary-5;
+  }
+}
+
+@media (min-width: $lg) {
+  .select {
+    padding: 6px 8px;
+  }
+}
