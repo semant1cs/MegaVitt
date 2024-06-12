@@ -5,11 +5,8 @@ import CreateSiteView from "./CreateSite.view";
 import React, { useCallback, useState, type ReactElement } from "react";
 import Fonts from "./Fonts";
 import Colors from "./Colors";
-import Preview from "./Preview";
 import type { TCommonCreatorProps, TCreateSiteContainerProps, TSiteForm, TStepPage } from "./CreateSite.types";
-import LayoutBody from "@layout/Body";
 import LayoutHeader from "@layout/Header";
-import styles from "./CreateSite.module.scss";
 
 const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = props => {
   const [initialForm, setInitialForm] = useState<TSiteForm>(site.initialSiteState);
@@ -35,10 +32,7 @@ const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = props => {
           <>
             <LayoutHeader />
 
-            <LayoutBody variant="light">
-              <Colors {...commonComponentProps} />
-              <Preview {...commonComponentProps} />
-            </LayoutBody>
+            <Colors {...commonComponentProps} />
           </>
         );
       case "Fonts":
@@ -46,30 +40,18 @@ const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = props => {
           <>
             <LayoutHeader />
 
-            <LayoutBody variant="light">
-              <Fonts {...commonComponentProps} />
-              <Preview {...commonComponentProps} />
-            </LayoutBody>
+            <Fonts {...commonComponentProps} />
           </>
         );
       case "Creator":
-        return (
-          <LayoutBody>
-            <Creator {...commonComponentProps} />;
-          </LayoutBody>
-        );
+        return <Creator {...commonComponentProps} />;
       case "Initialization":
       default:
         return (
           <>
             <LayoutHeader />
 
-            <LayoutBody
-              variant="light"
-              classNames={{ body__container: styles.container }}
-            >
-              <Initialization {...commonComponentProps} />
-            </LayoutBody>
+            <Initialization {...commonComponentProps} />
           </>
         );
     }

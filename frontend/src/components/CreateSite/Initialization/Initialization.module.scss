@@ -1,34 +1,18 @@
 @import "@reactStyles/vars.scss";
 
-.header {
-  gap: 30px;
+.inputs {
+  gap: 15px;
   display: flex;
-  flex-direction: column;
 
-  &__title {
-    @include title_1();
-    color: $grayscale-800;
+  &__input {
+    flex: 0 1 372px;
   }
-
-  &__inputs {
-    gap: 15px;
-    display: flex;
-  }
-}
-
-.input {
-  flex: 0 1 372px;
 }
 
 .templates {
   gap: 30px;
   display: flex;
   flex-direction: column;
-
-  &__title {
-    @include title_2();
-    color: $grayscale-800;
-  }
 
   .templates__container {
     width: 100%;
@@ -52,24 +36,15 @@
   }
 }
 
-.next {
-  font-weight: 700;
-  align-self: flex-end;
-}
-
 @media (min-width: $sm) {
-  .header {
-    &__inputs {
-      gap: 30px;
-    }
+  .inputs {
+    gap: 30px;
   }
 }
 
 @media (min-width: $md) {
-  .header {
-    &__inputs {
-      gap: 45px;
-    }
+  .inputs {
+    gap: 45px;
   }
 
   .templates {
@@ -81,10 +56,8 @@
 }
 
 @media (min-width: $lg) {
-  .header {
-    &__inputs {
-      gap: 60px;
-    }
+  .inputs {
+    gap: 60px;
   }
 
   .templates {

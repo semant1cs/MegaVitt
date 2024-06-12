@@ -1,0 +1,25 @@
+@import "@reactStyles/vars.scss";
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(500px, 40%) 1fr;
+
+  &__fonts {
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.buttons {
+  gap: 20px;
+  display: flex;
+
+  &__fonts {
+  }
+
+  &__save {
+    color: $grayscale-800;
+    background-color: $primary-5;
+  }
+}

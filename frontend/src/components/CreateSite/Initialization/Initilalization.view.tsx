@@ -4,6 +4,7 @@ import TextFieldInner from "@ui/TextField/TextFieldInner";
 import TextField from "@ui/TextField";
 import Template from "./Template";
 import styles from "./Initialization.module.scss";
+import createStyles from "../CreateSite.module.scss";
 import { type FC } from "react";
 import type { TInitializationViewProps } from "./Initialization.types";
 
@@ -13,15 +14,19 @@ import { Keyboard, Mousewheel, Scrollbar } from "swiper/modules";
 import "swiper/css/scrollbar";
 import Button from "@ui/Button";
 import { observer } from "mobx-react-lite";
+import LayoutBody from "@layout/Body";
 
 const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
   return (
-    <>
-      <div className={styles.header}>
-        <h2 className={styles.header__title}>Создание сайта&nbsp;&mdash; шаг&nbsp;1</h2>
+    <LayoutBody
+      variant="light"
+      classNames={{ body__container: createStyles.container }}
+    >
+      <div className={createStyles.header}>
+        <h2 className={createStyles.title}>Создание сайта&nbsp;&mdash; шаг&nbsp;1</h2>
 
-        <div className={styles.header__inputs}>
-          <TextFieldContainer className={styles.input}>
+        <div className={styles.inputs}>
+          <TextFieldContainer className={styles.inputs__input}>
             <TextFieldLabel>Название сайта</TextFieldLabel>
 
             <TextFieldInner>
@@ -32,7 +37,7 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
             </TextFieldInner>
           </TextFieldContainer>
 
-          <TextFieldContainer className={styles.input}>
+          <TextFieldContainer className={styles.inputs__input}>
             <TextFieldLabel>Адрес страницы</TextFieldLabel>
 
             <TextFieldInner>
@@ -46,7 +51,7 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
       </div>
 
       <section className={styles.templates}>
-        <h3 className={styles.templates__title}>Выберите шаблон</h3>
+        <h3 className={createStyles.subtitle}>Выберите шаблон</h3>
 
         <Swiper
           slidesPerView={"auto"}
@@ -104,17 +109,19 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(props => {
 
         <div id="templates-slider-scrollbar"></div>
 
-        <Button
-          size="md"
-          color="primary"
-          variant="contained"
-          className={styles.next}
-          onClick={() => props.handleChangeStep("Fonts")}
-        >
-          Следующий шаг
-        </Button>
+        <div className={createStyles.buttons}>
+          <Button
+            size="md"
+            color="primary"
+            variant="contained"
+            className={createStyles.buttons__button}
+            onClick={() => props.handleChangeStep("Fonts")}
+          >
+            Следующий шаг
+          </Button>
+        </div>
       </section>
-    </>
+    </LayoutBody>
   );
 });
 
