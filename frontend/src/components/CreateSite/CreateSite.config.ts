@@ -7,7 +7,7 @@ export const DEFAULT_SITE_SETTINGS: TSiteForm = {
   colors: {
     main: "#0060E6",
     mainContrast: "#FFFFFF",
-    text: "#FFFFFF",
+    text: "#000000",
     backgroundSection: "#F2F2F4",
     backgound: "#FFFFFF",
     error: "#FF0000",

@@ -7,7 +7,7 @@ import Preview from "../Preview";
 import Button from "@ui/Button";
 import { Select, SelectItem } from "@ui/Select";
 
-const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts, handleChangeStep }) => {
+const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts, handleChangeStep, ...props }) => {
   return (
     <LayoutBody
       variant="light"
@@ -52,7 +52,8 @@ const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts
             <SelectItem value="value4">Прафwa</SelectItem>
           </Select>
         </div>
-        <Preview />
+
+        <Preview initialForm={props.initialForm} />
       </div>
 
       <div className={createStyles.buttons}>

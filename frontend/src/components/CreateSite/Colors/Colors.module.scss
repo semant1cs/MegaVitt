@@ -1,0 +1,39 @@
+@import "@reactStyles/vars.scss";
+
+.content {
+  gap: 60px;
+  display: flex;
+  flex-direction: column;
+
+  &__colors {
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.inputs {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  gap: 20px;
+  display: flex;
+
+  &__colors {
+  }
+
+  &__save {
+    color: $grayscale-800;
+    background-color: $primary-5;
+  }
+}
+
+@media (min-width: $sm) {
+  .content {
+    display: grid;
+    grid-template-columns: minmax(320px, 35%) 1fr;
+  }
+}
