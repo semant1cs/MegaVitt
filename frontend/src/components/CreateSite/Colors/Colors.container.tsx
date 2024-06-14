@@ -3,7 +3,17 @@ import { TColorsContainerProps } from "./Colors.types";
 import ColorsView from "./Colors.view";
 
 const ColorsContainer: React.FC<TColorsContainerProps> = props => {
-  return <ColorsView {...props} />;
+  function handleUserColors() {}
+
+  function handleSaveColors() {}
+
+  return (
+    <ColorsView
+      {...props}
+      handleUserColors={handleUserColors}
+      handleSaveColors={handleSaveColors}
+    />
+  );
 };
 
 export { ColorsContainer };

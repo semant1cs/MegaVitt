@@ -1,8 +1,9 @@
 @import "@reactStyles/vars.scss";
 
 .content {
-  display: grid;
-  grid-template-columns: minmax(500px, 40%) 1fr;
+  gap: 60px;
+  display: flex;
+  flex-direction: column;
 
   &__fonts {
     gap: 30px;
@@ -21,5 +22,12 @@
   &__save {
     color: $grayscale-800;
     background-color: $primary-5;
+  }
+}
+
+@media (min-width: $sm) {
+  .content {
+    display: grid;
+    grid-template-columns: minmax(320px, 35%) 1fr;
   }
 }
