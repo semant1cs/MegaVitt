@@ -10,5 +10,6 @@ import { EventModule } from '../event/event.module';
   controllers: [SiteController],
   imports: [SequelizeModule.forFeature([Site, User]), EventModule],
   providers: [SiteService],
+  exports: [SiteService]
 })
 export class SiteModule {}

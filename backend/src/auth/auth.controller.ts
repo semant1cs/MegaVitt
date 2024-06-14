@@ -23,7 +23,7 @@ export class AuthController {
   @Post('signUp')
   @HttpCode(HttpStatus.OK)
   @Public()
-  signUp(@Body() dto: SignUpDto, @Req() request: Request, response: Response): Promise<UserRegisterResponse> {
+  signUp(@Body() dto: SignUpDto, @Req() request: Request, response: Response) {
     return this.authService.signUp(dto, request, response);
   }
 

@@ -16,7 +16,6 @@ import Role from './role/entities/role.entity';
 import { RoleModule } from './role/role.module';
 import Site from './site/entities/site.entity';
 import { FileUploadModule } from './file-upload/file-upload.module';
-import { DynamicAvatarDestinationMiddleware } from './file-upload/destination-middlewares/avatar-destination-middleware.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TemplateModule } from './template/template.module';
 import { PresetFontsModule } from './preset-fonts/preset-fonts.module';
@@ -60,6 +59,5 @@ import PresetColor from './preset-colors/entities/preset-color.entity';
     PresetColorsModule,
   ],
   controllers: [],
-  providers: [DynamicAvatarDestinationMiddleware],
 })
 export class AppModule {}
