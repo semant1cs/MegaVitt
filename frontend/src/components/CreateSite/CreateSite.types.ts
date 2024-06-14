@@ -23,6 +23,24 @@ export type TSiteForm = {
   html?: string;
 };
 
+export type TSiteFormRequired = {
+  title: string;
+  domen: string;
+  font: string;
+  colors: {
+    main: string;
+    mainContrast: string;
+    text: string;
+    backgroundSection: string;
+    backgound: string;
+    error: string;
+    success: string;
+    warning: string;
+    header: string;
+  };
+  html: string;
+};
+
 export type TCommonCreatorProps = {
   initialForm: TSiteForm;
   handleSaveForm(form: TSiteForm): void;

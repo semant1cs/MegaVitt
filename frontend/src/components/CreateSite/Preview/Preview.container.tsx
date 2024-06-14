@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo, useEffect } from "react";
 import type { TPreviewContainerProps } from "./Preview.type";
 import PreviewView from "./Preview.view";
 
-const PreviewContainer: React.FC<TPreviewContainerProps> = ({ initialForm, ...props }) => {
+const PreviewContainer: React.FC<TPreviewContainerProps> = memo(({ initialForm, ...props }) => {
   const customStyles = {
-    "--custom-font-family": initialForm.font || "sans-serif",
+    "--custom-font-family": initialForm.font || "Open Sans",
     "--custom-main-color": initialForm.colors?.main || "#0060E6",
     "--custom-mainContrast-color": initialForm.colors?.mainContrast || "#FFFFFF",
     "--custom-text-color": initialForm.colors?.text || "#000000",
@@ -23,6 +23,6 @@ const PreviewContainer: React.FC<TPreviewContainerProps> = ({ initialForm, ...pr
       customStyles={customStyles}
     />
   );
-};
+});
 
 export { PreviewContainer };
