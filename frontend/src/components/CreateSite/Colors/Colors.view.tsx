@@ -8,9 +8,9 @@ import Preview from "../Preview";
 import TextFieldContainer from "@ui/TextField/TextFieldContainer";
 import TextFieldLabel from "@ui/TextField/TextFieldLabel";
 import TextFieldInner from "@ui/TextField/TextFieldInner";
-import { TextField } from "@mui/material";
 import { COLOR_NAME_BY_LABEL } from "../CreateSite.config";
 import { TSiteFormRequired } from "../CreateSite.types";
+import TextField from "@ui/TextField";
 
 const ColorsView: React.FC<TColorsViewProps> = ({
   form,
@@ -41,6 +41,8 @@ const ColorsView: React.FC<TColorsViewProps> = ({
 
                   <TextFieldInner>
                     <TextField
+                      id={key}
+                      name={key}
                       type="color"
                       value={value}
                       onChange={e => handleSetColor(e.target.value, key)}
