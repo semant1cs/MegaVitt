@@ -1,8 +1,8 @@
 import { TSiteForm, TSiteFormRequired } from "./CreateSite.types";
 
 export const DEFAULT_SITE_SETTINGS: TSiteForm = {
-  title: "Новый сайт",
-  domen: "http://example.ru",
+  title: "",
+  domen: "",
   font: "Open Sans",
   colors: {
     main: "#0060E6",
