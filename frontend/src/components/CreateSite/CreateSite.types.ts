@@ -48,3 +48,16 @@ export type TCommonCreatorProps = {
 };
 
 export type TStepPage = "Initialization" | "Fonts" | "Colors" | "Creator";
+
+export type TUserFonts = {
+  id?: number;
+  name: string;
+  fontName: string;
+};
+
+export type TUserColors = {
+  id?: number;
+  name: string;
+  mainColor: string;
+  backgroundColor: string;
+};

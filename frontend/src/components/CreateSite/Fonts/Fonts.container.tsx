@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { TFontsContainerProps } from "./Fonts.types";
 import FontsView from "./Fonts.view";
+import { site } from "@store/SiteStore";
 
 const FontsContainer: React.FC<TFontsContainerProps> = memo(props => {
   const setterForm = props.initialForm;
@@ -40,10 +41,14 @@ const FontsContainer: React.FC<TFontsContainerProps> = memo(props => {
   }, []);
 
   /** Получение списка шрифтов пользователя */
-  function handleUserFonts() {}
+  async function handleUserFonts() {
+    await site.getUserFonts();
+  }
 
   /** Сохраненение шрифта пользователя */
-  function handleSaveFonts() {}
+  async function handleSaveFonts() {
+    await site.saveFonts({ name: "Название шрифта", fontName: form.font || "Open Sans" });
+  }
 
   /** Нажатие на предыдущий шаг */
   function handlePrevStep() {

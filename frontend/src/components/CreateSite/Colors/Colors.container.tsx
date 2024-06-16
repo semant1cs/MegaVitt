@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { TColorsContainerProps } from "./Colors.types";
 import ColorsView from "./Colors.view";
+import { site } from "@store/SiteStore";
 
 const ColorsContainer: React.FC<TColorsContainerProps> = memo(props => {
   const setterForm = props.initialForm;
@@ -40,10 +41,18 @@ const ColorsContainer: React.FC<TColorsContainerProps> = memo(props => {
   }, []);
 
   /** Получение списка шрифтов пользователя */
-  function handleUserColors() {}
+  async function handleUserColors() {
+    await site.getUserColors();
+  }
 
   /** Сохраненение шрифта пользователя */
-  function handleSaveColors() {}
+  async function handleSaveColors() {
+    await site.saveColors({
+      name: "Название цветов",
+      mainColor: form.colors?.main || "#0060E6",
+      backgroundColor: "#FFFFFF",
+    });
+  }
 
   /** Нажатие на предыдущий шаг */
   function handlePrevStep() {
