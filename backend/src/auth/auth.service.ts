@@ -111,7 +111,7 @@ export class AuthService {
   async getProfileUser(id: string) {
     return await this.userService.findOneById(id, {
       attributes: { exclude: ['password'] },
-      include: ['roles', 'presetFonts', 'presetColors'],
+      include: ['roles', 'presetFonts', 'presetColors', 'sites'],
     });
   }
 }
