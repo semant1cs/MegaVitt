@@ -23,15 +23,15 @@ const InitializationContainer: FC<TInitializationContainerProps> = observer(prop
   }, [setterForm]);
 
   useEffect(() => {
-    if (form.domen && !auth.initialUserState?.username) return;
+    if (form.link && !auth.initialUserState?.username) return;
 
-    const newDomen =
+    const newLink =
       `user/${auth.initialUserState?.username}/` +
       Math.floor(Math.random() * Math.floor(Math.random() * Date.now())) +
       Date.now() +
       Math.floor(100000 + Math.random() * 900000);
 
-    handleSetInput(newDomen, "domen");
+    handleSetInput(newLink, "link");
   }, [auth.initialUserState]);
 
   /** Эффект для установки лисенера для установки окна о том, что пользователь покидает страницу */
@@ -56,7 +56,7 @@ const InitializationContainer: FC<TInitializationContainerProps> = observer(prop
 
   /** Нажатие на следующий шаг */
   function handleNextStep() {
-    if (form.title === "") {
+    if (form.name === "") {
       layout.setToaster(["Введите название сайта"]);
       return;
     }

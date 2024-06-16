@@ -41,6 +41,17 @@
   gap: 15px;
   display: grid;
   grid-template-columns: auto auto;
+
+  &:has(.sites__empty) {
+    display: flex;
+  }
+
+  &__empty {
+    width: 100%;
+    @include title_1();
+    text-align: center;
+    color: $grayscale-100;
+  }
 }
 
 @media (min-width: $sm) {

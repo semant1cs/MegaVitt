@@ -1,35 +1,46 @@
 @import "@reactStyles/vars.scss";
 
-.creator{
-  gap: 100px;
-  padding: 50px;
+.container {
+  flex-direction: row;
+  background-color: $grayscale-0;
+}
+
+.creator {
+  gap: 30px;
+  width: 262px;
   display: flex;
+  min-width: 262px;
+  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.elements{
-  gap: 20px;
+.elements {
+  gap: 30px;
+  width: 100%;
+  height: 100%;
   display: flex;
-  border-radius: 10px;
   padding: 20px;
+  align-items: center;
   flex-direction: column;
   background-color: $grayscale-200;
 }
 
 .canvas {
   flex-grow: 1;
+  border: 2px solid $grayscale-200;
 
   &__app {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-wrap: wrap;
     overflow-y: auto;
     background-color: $grayscale-0;
   }
 }
 
-.text{
+.text {
   width: fit-content;
   height: fit-content;
 }

@@ -8,7 +8,7 @@ import LayoutHeader from "@layout/Header";
 import { useNavigate } from "react-router-dom";
 
 /** Вьюха для страницы "Мои сайты" */
-const AllSitesView: FC<TAllSitesViewProps> = ({ cards }) => {
+const AllSitesView: FC<TAllSitesViewProps> = ({ cards, ...props }) => {
   const navigate = useNavigate();
 
   return (
@@ -32,14 +32,16 @@ const AllSitesView: FC<TAllSitesViewProps> = ({ cards }) => {
         </div>
 
         <section className={styles.sites}>
-          {cards
-            ? cards.map(card => (
-                <Card
-                  card={card}
-                  key={card.id}
-                />
-              ))
-            : null}
+          {cards?.length ? (
+            cards.map(card => (
+              <Card
+                card={card}
+                key={card.id}
+              />
+            ))
+          ) : (
+            <p className={styles.sites__empty}>Для начала создайте сайт</p>
+          )}
         </section>
       </LayoutBody>
     </>

@@ -1,9 +1,13 @@
 import { ComponentProps } from "react";
-import type { TCommonCreatorProps } from "../CreateSite.types";
+import type { TCommonCreatorProps, TSiteForm } from "../CreateSite.types";
 
 export type TCreatorContainerProps = TCommonCreatorProps;
 
-export type TCreatorViewProps = TCreatorContainerProps & {};
+export type TCreatorViewProps = TCreatorContainerProps & {
+  form: TSiteForm;
+  handlePrevStep(): void;
+  handleNextStep(): void;
+};
 
 export type TVirtualDOMNode = {
   tagName: string;

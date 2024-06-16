@@ -32,26 +32,25 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(
 
               <TextFieldInner>
                 <TextField
-                  value={form.title || ""}
+                  value={form.name || ""}
                   placeholder={"Новый сайт"}
-                  onChange={e => handleSetInput(e.target.value, "title")}
+                  onChange={e => handleSetInput(e.target.value, "name")}
                 />
               </TextFieldInner>
             </TextFieldContainer>
 
-            <TextFieldContainer className={styles.inputs__input}>
+            {/* <TextFieldContainer className={styles.inputs__input}>
               <TextFieldLabel>Адрес страницы</TextFieldLabel>
 
               <TextFieldInner>
                 <TextField
-                  value={form.domen || ""}
+                  value={form.link || ""}
                   disabled={true}
                   placeholder={"https://example.ru"}
-                  // onChange={e => handleSetInput(e.target.value, "domen")}
                   onChange={() => {}}
                 />
               </TextFieldInner>
-            </TextFieldContainer>
+            </TextFieldContainer> */}
           </div>
         </div>
 

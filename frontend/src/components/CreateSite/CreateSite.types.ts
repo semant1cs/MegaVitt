@@ -6,8 +6,8 @@ export type TCreateSiteViewProps = TCreateSiteContainerProps & {
 };
 
 export type TSiteForm = {
-  title?: string;
-  domen?: string;
+  name?: string;
+  link?: string;
   font?: string;
   colors?: {
     main?: string;
@@ -24,8 +24,8 @@ export type TSiteForm = {
 };
 
 export type TSiteFormRequired = {
-  title: string;
-  domen: string;
+  name: string;
+  link: string;
   font: string;
   colors: {
     main: string;

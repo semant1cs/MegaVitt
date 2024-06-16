@@ -58,7 +58,6 @@ class AuthStore {
     layout.showLoader(true);
 
     try {
-      // const {data: responseData} = await authAxiosInstance.post(logOutURL);
       sessionStorage.removeItem("userToken");
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
@@ -75,28 +74,7 @@ class AuthStore {
     try {
       const { data: responseData } = await authAxiosInstance.get(getProfileURL);
 
-      /** Моковые данные. Потом убрать */
-      const sites: UserState["sites"] = [
-        {
-          id: 123,
-          title: "Название сайта",
-          image_url: "",
-          url_link: "https://localhost/123",
-        },
-        {
-          id: 234,
-          title: "Название сайта",
-          image_url: "",
-          url_link: "https://localhost/123",
-        },
-        {
-          id: 2344,
-          title: "Название сайта",
-          image_url: "",
-          url_link: "https://localhost/123",
-        },
-      ];
-      this.updateInitialUserState({ ...responseData, sites: sites });
+      this.updateInitialUserState(responseData);
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
     } finally {

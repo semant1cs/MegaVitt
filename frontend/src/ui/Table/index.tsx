@@ -327,7 +327,7 @@ function CustomTable(props: CustomTableProps) {
                       <Avatar sx={{ bgcolor: blueGrey[500] }}>
                         {row.avatar !== null ? (
                           <img
-                            src={`http://localhost:3002/${row.avatar}.png`}
+                            src={`http://localhost:3000/${row.avatar}.png`}
                             style={{ width: 40, height: 40 }}
                           />
                         ) : null}

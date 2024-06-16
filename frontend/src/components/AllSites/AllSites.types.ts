@@ -1,30 +1,29 @@
 export type UserState = {
   id?: string;
-  roles?: UserRole[];
-  username?: string;
   email?: string;
-
-  /** Моковые данные. Потом убрать */
+  avatar?: string;
+  username?: string;
+  roles?: UserRole[];
   sites?: UserSite[];
 };
 
 export type UserRole = {
   id: string;
-  description: string;
   value: string;
+  description: string;
 };
 
 /** Моковые данные. Потом убрать */
 export type UserSite = {
   id: number;
-  title: string;
-  image_url: string;
-  url_link: string;
+  name: string;
+  link: string;
+  preview: string;
+  build_ref: string;
 };
 
 export type TAllSitesContainerProps = {};
 export type TAllSitesViewProps = {
-  userName?: string;
   cards?: UserSite[];
 };
 
