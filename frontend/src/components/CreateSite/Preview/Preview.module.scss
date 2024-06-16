@@ -20,7 +20,7 @@
   display: flex;
   padding: 30px 55px;
   flex-direction: column;
-  background-color: var(--custom-backgound-color);
+  background-color: var(--custom-background-color);
 }
 
 .block {
@@ -145,10 +145,12 @@
 
     h5 {
       font-size: 14px;
+      color: var(--custom-text-color);
     }
 
     p {
       font-size: 12px;
+      color: var(--custom-text-color);
     }
   }
 }

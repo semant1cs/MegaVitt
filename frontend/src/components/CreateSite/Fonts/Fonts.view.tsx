@@ -6,8 +6,19 @@ import styles from "./Fonts.module.scss";
 import Preview from "../Preview";
 import Button from "@ui/Button";
 import { Select, SelectItem } from "@ui/Select";
+import { DEFAULT_FONTS } from "../CreateSite.config";
+import { randomId } from "@utils/getRandomId";
 
-const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts, handleChangeStep, ...props }) => {
+const FontsView: React.FC<TFontsViewProps> = ({
+  form,
+  handleSetFont,
+  handlePrevStep,
+  handleNextStep,
+  handleUserFonts,
+  handleSaveFonts,
+  handleChangeStep,
+  ...props
+}) => {
   return (
     <LayoutBody
       variant="light"
@@ -45,15 +56,25 @@ const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts
             </Button>
           </div>
 
-          <Select value="value">
-            <SelectItem value="value">Праф</SelectItem>
-            <SelectItem value="value2">Прафsfsrg</SelectItem>
-            <SelectItem value="value3">Прафfrs</SelectItem>
-            <SelectItem value="value4">Прафwa</SelectItem>
+          <Select
+            value={form.font}
+            className={styles.fonts}
+            style={{ fontFamily: form.font }}
+            onChange={(e, value) => handleSetFont(value)}
+          >
+            {DEFAULT_FONTS.map(f => (
+              <SelectItem
+                value={f.value}
+                key={randomId()}
+                style={{ fontFamily: f.value }}
+              >
+                {f.label}
+              </SelectItem>
+            ))}
           </Select>
         </div>
 
-        <Preview initialForm={props.initialForm} />
+        <Preview initialForm={form} />
       </div>
 
       <div className={createStyles.buttons}>
@@ -62,7 +83,7 @@ const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts
           color="secondary"
           variant="contained"
           className={createStyles.buttons__button}
-          onClick={() => handleChangeStep("Initialization")}
+          onClick={handlePrevStep}
         >
           Назад
         </Button>
@@ -72,7 +93,7 @@ const FontsView: React.FC<TFontsViewProps> = ({ handleUserFonts, handleSaveFonts
           color="primary"
           variant="contained"
           className={createStyles.buttons__button}
-          onClick={() => handleChangeStep("Colors")}
+          onClick={handleNextStep}
         >
           Следующий шаг
         </Button>

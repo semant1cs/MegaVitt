@@ -5,8 +5,23 @@ import { TColorsViewProps } from "./Colors.types";
 import LayoutBody from "@layout/Body";
 import Button from "@ui/Button";
 import Preview from "../Preview";
+import TextFieldContainer from "@ui/TextField/TextFieldContainer";
+import TextFieldLabel from "@ui/TextField/TextFieldLabel";
+import TextFieldInner from "@ui/TextField/TextFieldInner";
+import { COLOR_NAME_BY_LABEL } from "../CreateSite.config";
+import { TSiteFormRequired } from "../CreateSite.types";
+import TextField from "@ui/TextField";
 
-const ColorsView: React.FC<TColorsViewProps> = ({ handleUserColors, handleSaveColors, handleChangeStep, ...props }) => {
+const ColorsView: React.FC<TColorsViewProps> = ({
+  form,
+  handleNextStep,
+  handlePrevStep,
+  handleSetColor,
+  handleUserColors,
+  handleSaveColors,
+  handleChangeStep,
+  ...props
+}) => {
   return (
     <LayoutBody
       variant="light"
@@ -18,7 +33,24 @@ const ColorsView: React.FC<TColorsViewProps> = ({ handleUserColors, handleSaveCo
         <div className={styles.content__colors}>
           <h3 className={createStyles.subtitle}>Установите цвета по умолчанию</h3>
 
-          <div className={styles.inputs}></div>
+          <div className={styles.inputs}>
+            {form.colors &&
+              Object.entries(form.colors).map(([key, value]) => (
+                <TextFieldContainer key={key}>
+                  <TextFieldLabel>{COLOR_NAME_BY_LABEL[key as keyof TSiteFormRequired["colors"]]}</TextFieldLabel>
+
+                  <TextFieldInner>
+                    <TextField
+                      id={key}
+                      name={key}
+                      type="color"
+                      value={value}
+                      onChange={e => handleSetColor(e.target.value, key)}
+                    />
+                  </TextFieldInner>
+                </TextFieldContainer>
+              ))}
+          </div>
 
           <div className={styles.buttons}>
             <Button
@@ -43,7 +75,7 @@ const ColorsView: React.FC<TColorsViewProps> = ({ handleUserColors, handleSaveCo
           </div>
         </div>
 
-        <Preview initialForm={props.initialForm} />
+        <Preview initialForm={form} />
       </div>
 
       <div className={createStyles.buttons}>

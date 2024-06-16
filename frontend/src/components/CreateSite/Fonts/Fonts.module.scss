@@ -12,16 +12,42 @@
   }
 }
 
+.fonts {
+  font-weight: 400;
+}
+
 .buttons {
   gap: 20px;
   display: flex;
 
-  &__fonts {
-  }
-
   &__save {
     color: $grayscale-800;
     background-color: $primary-5;
+  }
+}
+
+.modal {
+  flex-grow: 1;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__wrapper {
+    gap: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__inputs {
+    gap: 30px;
+    width: 100%;
+    display: flex;
+
+    &__input {
+      flex-grow: 1;
+    }
   }
 }
 

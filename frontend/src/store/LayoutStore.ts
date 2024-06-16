@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { ReactElement } from "react";
 
 export interface ToasterMessage {
   text: string;
@@ -6,7 +7,7 @@ export interface ToasterMessage {
 }
 
 class LayoutStore {
-  canShowModal: boolean = false;
+  modalContent?: ReactElement;
   canShowLoader: boolean = false;
   toasterMessages: ToasterMessage[] = [];
 
@@ -18,8 +19,12 @@ class LayoutStore {
     this.canShowLoader = flag;
   }
 
-  showModal(flag: boolean) {
-    this.canShowModal = flag;
+  showModal(content: ReactElement) {
+    this.modalContent = content;
+  }
+
+  hideModal() {
+    this.modalContent = void 0;
   }
 
   setToaster(messages: string[]) {

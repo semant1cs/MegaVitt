@@ -14,13 +14,31 @@ export type TSiteForm = {
     mainContrast?: string;
     text?: string;
     backgroundSection?: string;
-    backgound?: string;
+    background?: string;
     error?: string;
     success?: string;
     warning?: string;
     header?: string;
   };
   html?: string;
+};
+
+export type TSiteFormRequired = {
+  title: string;
+  domen: string;
+  font: string;
+  colors: {
+    main: string;
+    mainContrast: string;
+    text: string;
+    backgroundSection: string;
+    background: string;
+    error: string;
+    success: string;
+    warning: string;
+    header: string;
+  };
+  html: string;
 };
 
 export type TCommonCreatorProps = {
@@ -30,3 +48,16 @@ export type TCommonCreatorProps = {
 };
 
 export type TStepPage = "Initialization" | "Fonts" | "Colors" | "Creator";
+
+export type TUserFonts = {
+  id: number | string;
+  name: string;
+  fontName: string;
+};
+
+export type TUserColors = {
+  id: number | string;
+  name: string;
+  mainColor: string;
+  backgroundColor: string;
+};

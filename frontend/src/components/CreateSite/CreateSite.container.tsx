@@ -2,19 +2,31 @@ import { site } from "@store/SiteStore";
 import Initialization from "./Initialization";
 import Creator from "@components/CreateSite/Creator";
 import CreateSiteView from "./CreateSite.view";
-import React, { useCallback, useState, type ReactElement } from "react";
+import React, { useCallback, useEffect, useState, type ReactElement } from "react";
 import Fonts from "./Fonts";
 import Colors from "./Colors";
 import type { TCommonCreatorProps, TCreateSiteContainerProps, TSiteForm, TStepPage } from "./CreateSite.types";
 import LayoutHeader from "@layout/Header";
+import { observer } from "mobx-react-lite";
+import { auth } from "@store/AuthStore";
 
-const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = props => {
+const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = observer(props => {
   const [initialForm, setInitialForm] = useState<TSiteForm>(site.initialSiteState);
   const [stepPage, setStepPage] = useState<TStepPage>("Initialization");
 
-  /** Функция для сохранения формы */
-  const handleSaveForm = useCallback((form: TSiteForm): void => site.updateInitialSiteState(form), []);
+  useEffect(() => {
+    if (!sessionStorage.getItem("userToken")) return;
 
+    (async () => await auth.getProfile())();
+  }, []);
+
+  /** Хендлер для сохранения формы */
+  const handleSaveForm = useCallback((form: TSiteForm): void => {
+    setInitialForm(form);
+    site.updateInitialSiteState(form);
+  }, []);
+
+  /** Хендлер для смены шага */
   const handleChangeStep = useCallback((step: TStepPage): void => setStepPage(step), []);
 
   /** Основные пропсы для компонентов */
@@ -58,6 +70,6 @@ const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = props => {
   }, [stepPage]);
 
   return <CreateSiteView currentStepPage={currentStepPage} />;
-};
+});
 
 export default CreateSiteContainer;
