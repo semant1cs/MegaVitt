@@ -9,18 +9,23 @@ export type TNode = {
   children: (TNode | string)[];
 };
 
-export type EventHandler = (event: Event) => void;
-
 class VirtualDOM {
   vDom: TNode | string | null = null;
   dom: ReactElement | null = null;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      vDom: true,
+      dom: true,
+      createDOMNode: false,
+      createVNode: false,
+      appendChild: false,
+      parseHTMLElementToTNode: false,
+      getAllAttributes: false,
+    });
   }
 
   updateDom(state: ReactElement) {
-    // Здесь должен быть код обновления DOM с помощью patchNode
     this.dom = state;
   }
 
@@ -46,9 +51,7 @@ class VirtualDOM {
     const attributes: { [key: string]: any } = {};
 
     Array.from(element.attributes).forEach(attr => {
-      // Нужно, если мы хотим переделать атрибуты в пропсы реакта
       attributes[attr.name] = attr.value.includes(";") ? parseAttributeValue(attr.value) : attr.value;
-      // attributes[attr.name] = attr.value;
     });
 
     return attributes;
@@ -65,10 +68,9 @@ class VirtualDOM {
   }
 
   public createDOMNode(vNode: TNode | string): ReactElement {
-    const stack: { element: ReactElement; children: (TNode | string)[] }[] = [];
-
     if (typeof vNode === "string") return React.createElement("span", { key: randomId() }, [vNode]);
 
+    const stack: { element: ReactElement; children: (TNode | string)[] }[] = [];
     const rootElement = React.createElement(vNode.tagName, vNode.props, []);
     stack.push({ element: rootElement, children: vNode.children });
 
@@ -116,6 +118,41 @@ class VirtualDOM {
     }
 
     this.updateVDom(tree);
+  }
+
+  parseHTMLElementToTNode(element: HTMLElement): TNode {
+    const stack: { element: HTMLElement; parent: TNode | null }[] = [{ element, parent: null }];
+    const root: TNode = { tagName: "", props: {}, children: [] };
+
+    while (stack.length) {
+      const { element, parent } = stack.pop()!;
+      const tagName = element.tagName.toLowerCase();
+      const props: ComponentProps<keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>> = {};
+      const children: (TNode | string)[] = [];
+
+      for (let i = 0; i < element.attributes.length; i++) {
+        const attribute = element.attributes[i];
+        props[attribute.name] = attribute.value;
+      }
+
+      for (let i = element.children.length - 1; i >= 0; i--) {
+        const childElement = element.children[i];
+        if (childElement instanceof HTMLElement) {
+          stack.push({ element: childElement, parent: root });
+        } else {
+          children.unshift(childElement.textContent || "");
+        }
+      }
+
+      const node: TNode = { tagName, props, children };
+      if (parent) {
+        parent.children.push(node);
+      } else {
+        Object.assign(root, node);
+      }
+    }
+
+    return root;
   }
 
   //   public appendChild(parent: TNode | null | string, child: TNode | string): void {
@@ -167,43 +204,6 @@ class VirtualDOM {
 
   //     return document.createElement(node.tagName, mergedProps);
   //   }
-
-  parseHTMLElementToTNode(element: HTMLElement): TNode {
-    const stack: { element: HTMLElement; parent: TNode | null }[] = [{ element, parent: null }];
-    const root: TNode = { tagName: "", props: {}, children: [] };
-
-    while (stack.length) {
-      const { element, parent } = stack.pop()!;
-      const tagName = element.tagName.toLowerCase();
-      const props: ComponentProps<keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>> = {};
-      const children: (TNode | string)[] = [];
-
-      // Парсинг атрибутов элемента
-      for (let i = 0; i < element.attributes.length; i++) {
-        const attribute = element.attributes[i];
-        props[attribute.name] = attribute.value;
-      }
-
-      // Добавление дочерних элементов в стек для обработки
-      for (let i = element.children.length - 1; i >= 0; i--) {
-        const childElement = element.children[i];
-        if (childElement instanceof HTMLElement) {
-          stack.push({ element: childElement, parent: root });
-        } else {
-          children.unshift(childElement.textContent || "");
-        }
-      }
-
-      const node: TNode = { tagName, props, children };
-      if (parent) {
-        parent.children.push(node);
-      } else {
-        Object.assign(root, node);
-      }
-    }
-
-    return root;
-  }
 }
 
 export default new VirtualDOM();

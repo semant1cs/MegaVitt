@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import styles from "./Creator.module.scss";
 import { TCreatorViewProps } from "./Creator.types";
 import { randomId } from "../../../utils/getRandomId";
@@ -12,15 +12,8 @@ import { layout } from "@store/LayoutStore";
 import authAxiosInstance from "@api/auth-api-instance";
 import getErrorMessage from "@utils/getErrorMessage";
 import { renderToString } from "react-dom/server";
-
-const appStyles: React.CSSProperties = {
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  flexWrap: "wrap",
-  overflowY: "auto",
-  backgroundColor: "#ffffff",
-};
+import { useNavigate } from "react-router-dom";
+import { DEFAULT_SITE_SETTINGS } from "../CreateSite.config";
 
 const CreatorView: FC<TCreatorViewProps> = observer(({ form, handleNextStep, handlePrevStep, ...props }) => {
   function handleOnDragStart(event: React.DragEvent<HTMLElement>) {
@@ -79,23 +72,39 @@ const CreatorView: FC<TCreatorViewProps> = observer(({ form, handleNextStep, han
     VirtualDomStore.appendChild(droppableProps, virtualDraggable);
   }
 
+  const appStyles = useMemo(
+    () => ({
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      overflowY: "auto",
+      backgroundColor: "#ffffff",
+    }),
+    [],
+  );
+
   useEffect(() => {
     if (!VirtualDomStore.vDom) {
+      const vDomProps = {
+        id: "app",
+        // style: appStyles,
+        onDrop: handleOnDragEnd,
+        className: styles.canvas__app,
+        onDragOver: handleOnDragOver,
+        onDragEnter: handleOnDragEnter,
+        onDragLeave: handleOnDragLeave,
+      };
+
       VirtualDomStore.updateVDom({
         tagName: "div",
-        props: {
-          id: "app",
-          style: appStyles,
-          onDrop: handleOnDragEnd,
-          className: styles.canvas__app,
-          onDragOver: handleOnDragOver,
-          onDragEnter: handleOnDragEnter,
-          onDragLeave: handleOnDragLeave,
-        },
+        props: vDomProps,
         children: [],
       });
     }
-  }, []);
+  }, [appStyles]);
+
+  const navigate = useNavigate();
 
   async function handleSaveSite() {
     layout.showLoader(true);
@@ -108,6 +117,8 @@ const CreatorView: FC<TCreatorViewProps> = observer(({ form, handleNextStep, han
 
     try {
       const { data: responseData } = await authAxiosInstance.post("sites", formToSave);
+      props.handleSaveForm(DEFAULT_SITE_SETTINGS);
+      navigate("/cabinet");
     } catch (error) {
       layout.setToaster(await getErrorMessage(error));
       throw error;
