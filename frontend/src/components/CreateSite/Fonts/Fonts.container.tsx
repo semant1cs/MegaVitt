@@ -2,6 +2,8 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { TFontsContainerProps } from "./Fonts.types";
 import FontsView from "./Fonts.view";
 import { site } from "@store/SiteStore";
+import { layout } from "@store/LayoutStore";
+import { ModalContent, ModalHeader } from "@layout/Modal";
 
 const FontsContainer: React.FC<TFontsContainerProps> = memo(props => {
   const setterForm = props.initialForm;
@@ -43,6 +45,14 @@ const FontsContainer: React.FC<TFontsContainerProps> = memo(props => {
   /** Получение списка шрифтов пользователя */
   async function handleUserFonts() {
     await site.getUserFonts();
+
+    layout.showModal(
+      <>
+        <ModalHeader></ModalHeader>
+
+        <ModalContent></ModalContent>
+      </>,
+    );
   }
 
   /** Сохраненение шрифта пользователя */

@@ -8,10 +8,10 @@ import styles from "./Layout.module.scss";
 const Layout: FC<PropsWithChildren<TLayoutProps>> = props => {
   return (
     <div className={styles.layout}>
-      {props.children}
       <LayoutModal />
       <LayoutLoader />
       <LayoutToaster />
+      {props.children}
     </div>
   );
 };
