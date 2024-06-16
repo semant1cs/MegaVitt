@@ -1,9 +1,18 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { TColorsContainerProps } from "./Colors.types";
 import ColorsView from "./Colors.view";
-import { site } from "@store/SiteStore";
+import { observer } from "mobx-react-lite";
+import authAxiosInstance from "@api/auth-api-instance";
+import getErrorMessage from "@utils/getErrorMessage";
+import type { TSiteFormRequired } from "../CreateSite.types";
+import { layout } from "@store/LayoutStore";
+import SaveColorsModal from "./SaveColorsModal";
+import { DEFAULT_SITE_SETTINGS } from "../CreateSite.config";
+import UserColorsModal from "./UserColorsModal";
 
-const ColorsContainer: React.FC<TColorsContainerProps> = memo(props => {
+const INITIAL_COLORS: TSiteFormRequired["colors"] = DEFAULT_SITE_SETTINGS["colors"];
+
+const ColorsContainer: React.FC<TColorsContainerProps> = observer(props => {
   const setterForm = props.initialForm;
 
   const [form, setForm] = useState(setterForm);
@@ -40,18 +49,42 @@ const ColorsContainer: React.FC<TColorsContainerProps> = memo(props => {
     setForm(prev => ({ ...prev, colors: { ...prev.colors, [label]: value } }));
   }, []);
 
-  /** Получение списка шрифтов пользователя */
+  /** Получение списка цветов пользователя */
   async function handleUserColors() {
-    await site.getUserColors();
+    layout.showLoader(true);
+
+    try {
+      const { data: responseData } = await authAxiosInstance.get("preset-colors");
+
+      layout.showModal(
+        <UserColorsModal
+          userColors={responseData}
+          handleSetColor={handleSetColor}
+        />,
+      );
+    } catch (error) {
+      layout.setToaster(await getErrorMessage(error));
+      throw error;
+    } finally {
+      layout.showLoader(false);
+    }
   }
 
-  /** Сохраненение шрифта пользователя */
+  /** Сохраненение цветов пользователя */
   async function handleSaveColors() {
-    await site.saveColors({
-      name: "Название цветов",
-      mainColor: form.colors?.main || "#0060E6",
-      backgroundColor: "#FFFFFF",
-    });
+    layout.showModal(
+      <SaveColorsModal
+        main={form?.colors?.main || INITIAL_COLORS["main"]}
+        mainContrast={form?.colors?.mainContrast || INITIAL_COLORS["mainContrast"]}
+        text={form?.colors?.text || INITIAL_COLORS["text"]}
+        backgroundSection={form?.colors?.backgroundSection || INITIAL_COLORS["backgroundSection"]}
+        background={form?.colors?.background || INITIAL_COLORS["background"]}
+        error={form?.colors?.error || INITIAL_COLORS["error"]}
+        success={form?.colors?.success || INITIAL_COLORS["success"]}
+        warning={form?.colors?.warning || INITIAL_COLORS["warning"]}
+        header={form?.colors?.header || INITIAL_COLORS["header"]}
+      />,
+    );
   }
 
   /** Нажатие на предыдущий шаг */

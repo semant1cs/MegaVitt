@@ -1,6 +1,6 @@
-import { TSiteForm, TSiteFormRequired } from "./CreateSite.types";
+import { TSiteFormRequired } from "./CreateSite.types";
 
-export const DEFAULT_SITE_SETTINGS: TSiteForm = {
+export const DEFAULT_SITE_SETTINGS: TSiteFormRequired = {
   title: "",
   domen: "",
   font: "Open Sans",
@@ -9,7 +9,7 @@ export const DEFAULT_SITE_SETTINGS: TSiteForm = {
     mainContrast: "#FFFFFF",
     text: "#000000",
     backgroundSection: "#F2F2F4",
-    backgound: "#FFFFFF",
+    background: "#FFFFFF",
     error: "#FF0000",
     success: "#4CBC24",
     warning: "#FFC700",
@@ -39,7 +39,7 @@ export const COLOR_NAME_BY_LABEL: { [keys in keyof TSiteFormRequired["colors"]]:
   mainContrast: "Основной контраст",
   text: "Текст",
   backgroundSection: "Поверхность",
-  backgound: "Фон",
+  background: "Фон",
   error: "Ошибка",
   success: "Успех",
   warning: "Предупреждение",

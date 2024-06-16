@@ -1,4 +1,4 @@
-import type { TCommonCreatorProps, TSiteForm } from "../CreateSite.types";
+import type { TCommonCreatorProps, TSiteForm, TUserFonts } from "../CreateSite.types";
 
 export type TFontsContainerProps = TCommonCreatorProps;
 export type TFontsViewProps = TFontsContainerProps & {
@@ -7,5 +7,14 @@ export type TFontsViewProps = TFontsContainerProps & {
   handleNextStep(): void;
   handleUserFonts(): void;
   handleSaveFonts(): void;
-  handleSetFont(e: React.MouseEvent<HTMLLIElement, MouseEvent>, value: string): void;
+  handleSetFont(value: string): void;
+};
+
+export type TUserFontsModalProps = {
+  userFonts: TUserFonts[];
+  handleSetFont(value: string): void;
+};
+
+export type TSaveFontModalProps = {
+  font: string;
 };

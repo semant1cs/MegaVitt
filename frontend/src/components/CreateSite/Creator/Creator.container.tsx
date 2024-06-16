@@ -10,7 +10,7 @@ const CreatorContainer: FC<TCreatorContainerProps> = props => {
     <>
       <LayoutHeader />
 
-      <CreatorView />
+      <CreatorView {...props} />
     </>
   );
 };

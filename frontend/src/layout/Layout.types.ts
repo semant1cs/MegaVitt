@@ -11,9 +11,19 @@ export type TLayoutBodyProps = {
 };
 
 export type TLayoutModalProps = {};
-export type TModalHeaderProps = {};
-export type TModalContentProps = {};
-export type TModalFooterProps = {};
+
+export type TModalProps = {
+  className?: string;
+};
+export type TModalHeaderProps = {
+  className?: string;
+};
+export type TModalContentProps = {
+  className?: string;
+};
+export type TModalFooterProps = {
+  className?: string;
+};
 
 export type TLayoutLoaderProps = {};
 export type TLayoutToasterProps = {};

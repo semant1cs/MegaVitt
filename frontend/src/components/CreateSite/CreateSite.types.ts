@@ -14,7 +14,7 @@ export type TSiteForm = {
     mainContrast?: string;
     text?: string;
     backgroundSection?: string;
-    backgound?: string;
+    background?: string;
     error?: string;
     success?: string;
     warning?: string;
@@ -32,7 +32,7 @@ export type TSiteFormRequired = {
     mainContrast: string;
     text: string;
     backgroundSection: string;
-    backgound: string;
+    background: string;
     error: string;
     success: string;
     warning: string;
@@ -50,12 +50,13 @@ export type TCommonCreatorProps = {
 export type TStepPage = "Initialization" | "Fonts" | "Colors" | "Creator";
 
 export type TUserFonts = {
-  id?: number;
+  id: number | string;
   name: string;
   fontName: string;
 };
+
 export type TUserColors = {
-  id?: number;
+  id: number | string;
   name: string;
   mainColor: string;
   backgroundColor: string;

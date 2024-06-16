@@ -59,8 +59,8 @@ const FontsView: React.FC<TFontsViewProps> = ({
           <Select
             value={form.font}
             className={styles.fonts}
-            onChange={handleSetFont}
             style={{ fontFamily: form.font }}
+            onChange={(e, value) => handleSetFont(value)}
           >
             {DEFAULT_FONTS.map(f => (
               <SelectItem

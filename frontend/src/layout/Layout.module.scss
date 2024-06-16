@@ -128,18 +128,20 @@
   right: 0;
   bottom: 0;
   display: flex;
-  z-index: 10000000;
-  position: absolute;
+  position: fixed;
+  z-index: 10000;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
 
   &__wrapper {
-    width: 60vw;
     height: 60vh;
     padding: 15px;
+    display: flex;
     border-radius: 10px;
+    flex-direction: column;
     background-color: $grayscale-0;
+    width: clamp(300px, 600px, 90vw);
   }
 
   &__header {
