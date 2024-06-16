@@ -1,8 +1,11 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import type { TInitializationContainerProps } from "./Initialization.types";
 import InitilalizationView from "./Initilalization.view";
+import { layout } from "@store/LayoutStore";
+import { auth } from "@store/AuthStore";
+import { observer } from "mobx-react-lite";
 
-const InitializationContainer: FC<TInitializationContainerProps> = props => {
+const InitializationContainer: FC<TInitializationContainerProps> = observer(props => {
   const setterForm = props.initialForm;
 
   const [form, setForm] = useState(setterForm);
@@ -18,6 +21,18 @@ const InitializationContainer: FC<TInitializationContainerProps> = props => {
     setForm(setterForm);
     setInitialForm(setterForm);
   }, [setterForm]);
+
+  useEffect(() => {
+    if (form.domen && !auth.initialUserState?.username) return;
+
+    const newDomen =
+      `user/${auth.initialUserState?.username}/` +
+      Math.floor(Math.random() * Math.floor(Math.random() * Date.now())) +
+      Date.now() +
+      Math.floor(100000 + Math.random() * 900000);
+
+    handleSetInput(newDomen, "domen");
+  }, [auth.initialUserState]);
 
   /** Эффект для установки лисенера для установки окна о том, что пользователь покидает страницу */
   useEffect(() => {
@@ -41,6 +56,11 @@ const InitializationContainer: FC<TInitializationContainerProps> = props => {
 
   /** Нажатие на следующий шаг */
   function handleNextStep() {
+    if (form.title === "") {
+      layout.setToaster(["Введите название сайта"]);
+      return;
+    }
+
     props.handleSaveForm(form);
     props.handleChangeStep("Fonts");
   }
@@ -53,6 +73,6 @@ const InitializationContainer: FC<TInitializationContainerProps> = props => {
       handleNextStep={handleNextStep}
     />
   );
-};
+});
 
 export { InitializationContainer };

@@ -8,10 +8,17 @@ import Colors from "./Colors";
 import type { TCommonCreatorProps, TCreateSiteContainerProps, TSiteForm, TStepPage } from "./CreateSite.types";
 import LayoutHeader from "@layout/Header";
 import { observer } from "mobx-react-lite";
+import { auth } from "@store/AuthStore";
 
 const CreateSiteContainer: React.FC<TCreateSiteContainerProps> = observer(props => {
   const [initialForm, setInitialForm] = useState<TSiteForm>(site.initialSiteState);
   const [stepPage, setStepPage] = useState<TStepPage>("Initialization");
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("userToken")) return;
+
+    (async () => await auth.getProfile())();
+  }, []);
 
   /** Хендлер для сохранения формы */
   const handleSaveForm = useCallback((form: TSiteForm): void => {

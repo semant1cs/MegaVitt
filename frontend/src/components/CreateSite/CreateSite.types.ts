@@ -54,7 +54,6 @@ export type TUserFonts = {
   name: string;
   fontName: string;
 };
-
 export type TUserColors = {
   id?: number;
   name: string;

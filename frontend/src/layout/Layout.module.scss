@@ -119,6 +119,19 @@
   }
 }
 
+/** Modal */
+
+.modal {
+  &__header {
+  }
+
+  &__content {
+  }
+
+  &__footer {
+  }
+}
+
 @media (min-width: $sm) {
   .header {
     padding: 0 24px;

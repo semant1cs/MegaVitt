@@ -45,8 +45,10 @@ const InitilalizationView: FC<TInitializationViewProps> = observer(
               <TextFieldInner>
                 <TextField
                   value={form.domen || ""}
+                  disabled={true}
                   placeholder={"https://example.ru"}
-                  onChange={e => handleSetInput(e.target.value, "domen")}
+                  // onChange={e => handleSetInput(e.target.value, "domen")}
+                  onChange={() => {}}
                 />
               </TextFieldInner>
             </TextFieldContainer>
